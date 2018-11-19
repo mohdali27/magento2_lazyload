@@ -1,0 +1,13 @@
+<?php
+$_helper = $this->helper('Webapp\Lazyload\Helper\Data');
+$imageLoader = $_helper->getImageLoader();
+?>
+<script type="text/javascript">
+    require(['jquery', 'Webapp_Lazyload/js/jquery_lazyload'], function($) {
+        $("img.lazy").lazyload({
+            effect: "fadeIn",
+            effectspeed: 1000,
+            imageloader: "<?php echo $imageLoader ?>"
+        });
+    });
+</script>

@@ -1,0 +1,32 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Customer "Remember Me" template
+ */
+
+/** @var \Magento\Persistent\Block\Form\Remember $block */
+$_helper = $this->helper('Webapp\Rememberme\Helper\Data');
+?>
+<div id="remember-me-box" class="field choice persistent">
+        <input type="checkbox" name="login[rememberme]" class="checkbox" id="rememberme" <?php if ($_helper->getCookieloginChk()){ ?>checked="checked"<?php } ?> title="<?php /* @escapeNotVerified */ echo __('Rememberme on this computer') ?>">
+    <label for="rememberme" class="label"><span>Remember Me</span></label>
+    <span class="tooltip wrapper">
+        <a class="link tooltip toggle" href="#" data-toggle="tooltip" data-placement="right" title="Rememberme on this computer">What's this?</a>
+        
+    </span>
+</div>
+<style type="text/css">
+   input[type=checkbox] {
+    margin: 3px 0 0;
+    float: left;
+    margin-top: 1px \9;
+    line-height: normal;
+   }
+
+</style>
