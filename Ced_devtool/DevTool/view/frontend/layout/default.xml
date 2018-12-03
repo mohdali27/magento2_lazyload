@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_DevTool
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CedCommerce (http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Ced_DevTool::css/devtool.css"/>
+    </head>
+	<body>		
+        <referenceContainer name="before.body.end">			
+			<block class="Ced\DevTool\Block\DevTool" name="devtool" template="devtool.phtml">
+				 <block class="Ced\DevTool\Block\DevTool\Data" name="devtool.request" template="devtool/request.phtml" group="devtool">
+                    <arguments>
+                        <argument name="css_class" xsi:type="string">request</argument>
+                        <argument name="title" translate="true" xsi:type="string">Request</argument>
+                    </arguments>
+                </block>
+                <block class="Ced\DevTool\Block\DevTool\Data" name="devtool.models" template="devtool/models.phtml" group="devtool">
+                    <arguments>
+                        <argument name="css_class" xsi:type="string">models</argument>
+                        <argument name="title" translate="true" xsi:type="string">Models</argument>
+                    </arguments>
+                </block>
+                 <block class="Ced\DevTool\Block\DevTool\Data" name="devtool.collections" template="devtool/collections.phtml" group="devtool">
+                    <arguments>
+                        <argument name="css_class" xsi:type="string">collections</argument>
+                        <argument name="title" translate="true" xsi:type="string">Collections</argument>
+                    </arguments>
+                </block>
+                <block class="Ced\DevTool\Block\DevTool\Data" name="devtool.events" template="devtool/events.phtml" group="devtool">
+                    <arguments>
+                        <argument name="css_class" xsi:type="string">events</argument>
+                        <argument name="title" translate="true" xsi:type="string">Observer Events</argument>
+                    </arguments>
+                </block>
+				<block class="Ced\DevTool\Block\DevTool\Data" name="devtool.systemtasks" template="devtool/systemtasks.phtml" group="devtool">
+                    <arguments>
+                        <argument name="css_class" xsi:type="string">systemtasks</argument>
+                        <argument name="title" translate="true" xsi:type="string">System Tasks</argument>
+                    </arguments>
+                </block>
+				<block class="Ced\DevTool\Block\DevTool\Data" name="devtool.preferences" template="devtool/preferences.phtml" group="devtool">
+                    <arguments>
+                        <argument name="css_class" xsi:type="string">preferences</argument>
+                        <argument name="title" translate="true" xsi:type="string">All Preferences/Rewrites</argument>
+                    </arguments>
+                </block>
+				<block class="Ced\DevTool\Block\DevTool\Data" name="devtool.blockhandles" template="devtool/blockhandles.phtml" group="devtool">
+                    <arguments>
+                        <argument name="css_class" xsi:type="string">blockhandles</argument>
+                        <argument name="title" translate="true" xsi:type="string">Handles,Blocks And Templates</argument>
+                    </arguments>
+                </block>
+                <block class="Ced\DevTool\Block\DevTool\Data" name="devtool.sqlqueries" template="devtool/sqlqueries.phtml" group="devtool">
+                    <arguments>
+                        <argument name="css_class" xsi:type="string">sqlqueries</argument>
+                        <argument name="title" translate="true" xsi:type="string">SQL Queries</argument>
+                    </arguments>
+                </block>
+                <block class="Ced\DevTool\Block\DevTool\Data" name="devtool.phpinfo" template="devtool/phpinfo.phtml" group="devtool">
+                    <arguments>
+                        <argument name="css_class" xsi:type="string">phpinfo</argument>
+                        <argument name="title" translate="true" xsi:type="string">PHP Info</argument>
+                    </arguments>
+                </block>
+				<!--
+                <block class="Ced\DevTool\Block\DevTool\Data" name="devtool.mergedlayout" template="devtool/mergedlayout.phtml" group="devtool">
+                    <arguments>
+                        <argument name="css_class" xsi:type="string">mergedlayout</argument>
+                        <argument name="title" translate="true" xsi:type="string">Merged Layout</argument>
+                    </arguments>
+                </block>
+				-->
+            </block>
+        </referenceContainer>      
+    </body>
+</page>

@@ -1,0 +1,133 @@
+<?php
+if($block->canShowDevTool()):
+ if ($detailedInfoGroup = $block->getGroupChildNames('devtool', 'getChildHtml')):?>
+    <div class="product info detailed ced-devtools">
+        <a href="#" id="devtool-togle">
+                    
+                </a>
+        <div class="ced-devtools-wrp">
+            <div class="devtool-header">
+                
+                <div class="devtool-head-wrp">
+                    <!-- <img src="<?php //echo $block->getViewFileUrl('images/bug.png'); ?>"> -->
+                    <h3>
+                        DEVELOPER DEBUG TOOL
+                    </h3>
+                </div>
+            </div>
+            <?php $layout = $block->getLayout(); ?>
+            <div class="product data items" data-mage-init='{"tabs":{"openedState":"active"}}'>
+                <?php foreach ($detailedInfoGroup as $name):?>
+                    <?php
+                        $html = $layout->renderElement($name);
+                        if (!trim($html)) {
+                            continue;
+                        }
+                        $alias = $layout->getElementAlias($name);
+                        $label = $block->getChildData($alias, 'title');
+    					$class = $block->getChildData($alias, 'css_class');
+                    ?>
+                    <div class="data item title dev-tool-item  dev-tool-<?php echo $class; ?>"
+                         aria-labeledby="tab-label-<?php echo $alias;?>-title"
+                         data-role="collapsible" id="tab-label-<?php echo $alias;?>">
+                        <a class="data switch devtool-switch"
+                           tabindex="-1"
+                           data-toggle="switch"
+                           href="#<?php echo $alias; ?>"
+                           id="tab-label-<?php echo $alias;?>-title">
+                            <?php echo $label; ?>
+                        </a>
+                    </div>
+                    <!-- <div class="data item content dev-tool-content" id="<?php echo $alias; ?>" data-role="content">
+                        <?php echo $html; ?>
+                    </div> -->
+                <?php endforeach;?>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        require([
+            "jquery"
+        ], function($){
+               $("#devtool-togle").click(function(){
+                    $(".ced-devtools").toggleClass("active");
+                    $('.devtool-overlay').toggleClass('active')
+                    $('.ced-devtools > a').addClass('active');
+                    //alert('ghsdfjgg');
+                });
+                $(document).on('click', ".devtool-overlay", function(){
+                    $('.dev-tool-content.active').removeClass('active');
+                    $(".ced-devtools").removeClass("active");
+                    $(".devtool-overlay").removeClass("active");
+                    $('.ced-devtools > a').removeClass('active');
+                    //alert('ghsdfjgg');
+                });
+                $('.devtool-switch').click(function(){
+                    $('.dev-tool-content.active').removeClass('active');
+                    
+                    var href =$(this).attr('href');
+                    href = href.replace('#','');
+                    
+                    document.getElementById(href).className += ' active';
+                });
+                /*
+                $('#devtool-phpinfo td').each(function(index,element){
+                    var classes = $(element).attr('class').split(',');
+                    classes = classes.replace(',',' ');
+                    $(element).attr('class',classes);
+
+                });
+                */
+                $elements = document.getElementById('devtool-phpinfo').getElementsByTagName('td');
+                for(var index in $elements){
+                    if(typeof $elements[index] != 'undefined' && typeof $elements[index] != 'function')
+                    {
+                        element = $elements[index];
+                        //console.log(element);
+                        //console.log(element);
+                        //console.log(element.className);
+                        if(typeof element.innerHTML != 'undefined'){
+                            var htm = element.innerHTML.split(',').join(', ');
+                            element.innerHTML = htm;
+                         }
+                       
+                    }
+                }
+        }); 
+    </script>
+<?php endif;
+endif;
+?>
+
+
+
+
+
+
+<?php
+if($block->canShowDevTool()):
+ if ($detailedInfoGroup = $block->getGroupChildNames('devtool', 'getChildHtml')):?>
+    
+            <?php $layout = $block->getLayout(); ?>
+            <div class="product data items dev-contnet-tool" data-mage-init='{"tabs":{"openedState":"active"}}'>
+                <?php foreach ($detailedInfoGroup as $name):?>
+                    <?php
+                        $html = $layout->renderElement($name);
+                        if (!trim($html)) {
+                            continue;
+                        }
+                        $alias = $layout->getElementAlias($name);
+                        $label = $block->getChildData($alias, 'title');
+                        $class = $block->getChildData($alias, 'css_class');
+                    ?>
+                    <div class="data item content dev-tool-content dev-contnet-<?php echo $class; ?>" id="<?php echo $alias; ?>" data-role="content">
+                        <?php echo $html; ?>
+                    </div>
+                <?php endforeach;?>
+            </div>
+       
+<?php endif;
+endif;
+?>
+
+<div class="devtool-overlay"></div>

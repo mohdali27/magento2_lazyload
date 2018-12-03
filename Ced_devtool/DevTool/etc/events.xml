@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_DevTool
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CedCommerce (http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="model_load_after">
+        <observer name="ced_devtool_model_load_after" instance="Ced\DevTool\Model\Everymodelload" />
+    </event>
+     <event name="core_collection_abstract_load_before">
+        <observer name="ced_devtool_core_collection_abstract_load_before" instance="Ced\DevTool\Model\Everycollectionload" />
+    </event>
+     <event name="eav_collection_abstract_load_before">
+        <observer name="ced_devtool_eav_collection_abstract_load_before" instance="Ced\DevTool\Model\Everyeavcollectionload" />
+    </event>
+    <event name="controller_action_postdispatch">
+        <observer name="ced_devtool_controller_action_postdispatch" instance="Ced\DevTool\Model\Controllercall" />
+    </event>
+	<event name="view_block_abstract_to_html_before">
+        <observer name="ced_devtool_get_block_name" instance="Ced\DevTool\Model\Setblockname" />
+    </event>
+</config>

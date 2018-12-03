@@ -1,0 +1,66 @@
+<?php
+/**
+ * Activo Extensions
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Activo Commercial License
+ * that is available through the world-wide-web at this URL:
+ * http://extensions.activo.com/license_professional
+ *
+ * @copyright   Copyright (c) 2017 Activo Extensions (http://extensions.activo.com)
+ * @license     Commercial
+ */
+$importFolder = $this->getMediaDir();
+
+?>
+<div id="messages" style="display: none; margin: 5px 0;">
+    <div class="messages"><div class="message message-success" id="ajax-status"></div></div>        
+</div>
+<form action="<?php echo $this->getUrl('*/*/upload') ?>" class="dropzone" enctype="multipart/form-data" id="activoDropzoneForm">
+    <input name="form_key" type="hidden" value="<?php echo $block->getFormKey(); ?>" />
+    <div class="fallback">
+        <input name="file" type="file" multiple />
+    </div>
+</form>
+
+<p>
+    Drag and drop image files here. They will be uploaded into your Bulk Images <strong>upload folder</strong>
+    at <code><?php echo $importFolder; ?></code>. <br/>
+    After the files are uploaded they will be imported automatically. Please make sure you drop all images related to a specific product at once...
+</p>
+
+<script type="text/javascript">
+    requirejs(['dropzoneMin'], function (Dropzone) {
+        Dropzone.options.activoDropzoneForm = {
+            init: function () {
+                this.on("queuecomplete", function () {
+                    var ajaxStatus = jQuery('#ajax-status'),
+                            ajaxStatusContainer = jQuery('#messages');
+                    ajaxStatus.text('Performing new images import...');
+                    ajaxStatusContainer.toggle();
+                    jQuery.ajax("<?php echo $this->getUrl('*/*/import') ?>", {
+                        data: {form_key: window.FORM_KEY},
+                        showLoader: true,
+                        success: function (response) {
+                            var msg;
+                            if (response.status == 'ok') {
+                                msg = 'Import process finished. Processed ' + response.numImages + ' images, imported ' + response.numImageMatches + ' images for ' + response.numSkuMatches + ' SKUs...';
+                                ajaxStatus.removeClass('message-error error');
+                                ajaxStatus.addClass('message-success success');
+                            } else {
+                                ajaxStatus.removeClass('message-success success');
+                                ajaxStatus.addClass('message-error error');
+                                msg = 'Error importing images! ' + response.errors;
+                            }
+                            ajaxStatus.text(msg);
+                            setTimeout(function () {
+                                ajaxStatusContainer.fadeToggle();
+                            }, 10000);
+                        }
+                    });
+                });
+            }
+        };
+    });
+</script>

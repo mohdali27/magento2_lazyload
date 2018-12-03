@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomOrderNumber
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2017-2018 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="cron_sequence_daily" instance="Bss\CustomOrderNumber\Cron\Sequence" method="cronDaily">
+            <schedule>0 0 * * *</schedule>
+        </job>
+        <job name="cron_sequence_weekly" instance="Bss\CustomOrderNumber\Cron\Sequence" method="cronWeekly">
+            <schedule>0 0 * * 1</schedule>
+        </job>
+        <job name="cron_sequence_monthly" instance="Bss\CustomOrderNumber\Cron\Sequence" method="cronMonthly">
+            <schedule>0 0 1 * *</schedule>
+        </job>
+        <job name="cron_sequence_yearly" instance="Bss\CustomOrderNumber\Cron\Sequence" method="cronYearly">
+            <schedule>0 0 1 1 *</schedule>
+        </job>
+    </group>
+</config>

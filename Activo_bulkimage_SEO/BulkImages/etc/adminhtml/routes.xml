@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Activo Extensions
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Activo Commercial License
+ * that is available through the world-wide-web at this URL:
+ * http://extensions.activo.com/license_professional
+ *
+ * @copyright   Copyright (c) 2017 Activo Extensions (http://extensions.activo.com)
+ * @license     Commercial
+ */
+-->
+ 
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="bulkimages" frontName="bulkimages">
+            <module name="Activo_BulkImages" before="Magento_Adminhtml" />
+        </route>
+    </router>
+</config>

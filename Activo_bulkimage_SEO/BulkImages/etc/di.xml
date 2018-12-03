@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Activo Extensions
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Activo Commercial License
+ * that is available through the world-wide-web at this URL:
+ * http://extensions.activo.com/license_professional
+ *
+ * @copyright   Copyright (c) 2017 Activo Extensions (http://extensions.activo.com)
+ * @license     Commercial
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">    
+
+    <type name="Activo\BulkImages\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Activo\BulkImages\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">activoBulkimagesLogHandler</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Activo\BulkImages\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+    
+</config>

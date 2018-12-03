@@ -1,0 +1,62 @@
+<?php
+$product = $block->getCurrentProduct();
+$ratingSummary = $block->getRatingSummary();
+$review = $block->getReviews();
+$format = $block->getDateFormat() ? : \IntlDateFormatter::SHORT;
+
+?>
+<script type="application/ld+json">
+    {
+    "@context": "http://schema.org",
+    "@type": "Product",
+    "image": "<?php echo $block->getProductImage(); ?>",
+    "name": "<?php echo $product->getName(); ?>",
+    "url": "<?php echo $product->getProductUrl(); ?>",
+    "description": "<?php echo $product->getShortDescription(); ?>",
+    "sku": "<?php echo $product->getSku(); ?>",
+    <?php if ($block->getBrand()): ?>
+        "brand": {
+        "@type": "Thing",
+        "name": "<?php echo $block->getBrand(); ?>"
+        },
+    <?php endif; ?>
+    <?php if (!is_null($ratingSummary)): ?>
+        "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "<?php echo $ratingSummary['ratingValue'] ?>",
+        "reviewCount": "<?php echo $ratingSummary['reviewCount'] ?>"
+        },
+    <?php endif; ?>
+    "offers": {
+    "@type": "Offer",
+    "availability": "<?php echo $block->getAvailability(); ?>",
+    "price": "<?php echo $block->getPrice(); ?>",
+    "priceCurrency": "<?php echo $block->getCurrencyCode(); ?>"
+    }
+    <?php if ($review): ?>
+        ,"review": [
+        <?php foreach ($review as $rating): ?>
+            {
+            "@type": "Review",
+            "author": "<?php echo $block->escapeHtml($rating['author']); ?>",
+            "datePublished": "<?php echo $block->formatDate($rating['datePublished'], $format); ?>",
+            "description": "<?php echo $block->escapeHtml($rating['description']); ?>",
+            "name": "<?php echo $block->escapeHtml($rating['name']); ?>",
+            "reviewRating": {
+            "@type": "Rating",
+            "bestRating": "<?php echo $rating['bestRating']; ?>",
+            "ratingValue": "<?php echo $rating['ratingValue']; ?>",
+            "worstRating": "<?php echo $rating['worstRating']; ?>"
+            }
+            <?php if ($rating === end($review)) : ?>
+                }
+            <?php else: ?>
+                },
+            <?php endif; ?>
+        <?php endforeach; ?>
+        ]
+    <?php endif; ?>
+    }
+</script>
+<!-- AdvancedSeo by Activo -->
+

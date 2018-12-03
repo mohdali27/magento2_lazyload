@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomOrderNumber
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2017-2018 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_order_place_before">
+        <observer name="bss_custom_order" instance="Bss\CustomOrderNumber\Observer\OrderObserver" />
+    </event>
+    <event name="sales_order_invoice_save_before">
+        <observer name="bss_custom_invoice" instance="Bss\CustomOrderNumber\Observer\InvoiceObserver" />
+    </event>
+    <event name="sales_order_shipment_save_before">
+        <observer name="bss_custom_shipment" instance="Bss\CustomOrderNumber\Observer\ShipmentObserver" />
+    </event>
+    <event name="sales_order_creditmemo_save_before">		
+        <observer name="bss_custom_creditmemo" instance="Bss\CustomOrderNumber\Observer\CreditmemoObserver" />
+    </event>
+</config>
