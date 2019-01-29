@@ -1,0 +1,29 @@
+<?php $commissionValue = $block->getCommission(); 
+	$currencySymbol = $block->getCurrencySymbol();
+?>
+<div class="admin__fieldset-wrapper opened">
+	<div class="admin__fieldset-wrapper-content">
+        <fieldset class="admin__fieldset">
+			<table class="admin__table-secondary">
+		        <tbody>
+		            <tr>
+		                <th><?php echo __('Total Sale');?></th>
+		                <td><?php echo $currencySymbol.$commissionValue['total_sale']; ?></td>
+		            </tr>
+		            <tr>
+		                <th><?php echo __('Total Seller Sale'); ?></th>
+		                <td><?php echo $currencySymbol.$commissionValue['actual_seller_amt']; ?></td>
+		            </tr>
+		            <tr>
+		                <th><?php echo __('Total Admin Sale') ?></th>
+		                <td><?php echo $currencySymbol.$commissionValue['total_comm']; ?></td>
+		            </tr>
+		            <tr>
+		                <th><?php echo __('Current Commission %') ?></th>
+		                <td><?php echo $commissionValue['current_val']; ?>%</td>
+		            </tr>
+		        </tbody>
+		    </table>    
+		</fieldset>
+	</div>
+</div>

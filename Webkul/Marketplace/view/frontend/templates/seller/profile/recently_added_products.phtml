@@ -1,0 +1,93 @@
+<?php  
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+// @codingStandardsIgnoreFile
+$helper = $this->helper('Webkul\Marketplace\Helper\Data');
+$partner = $block->getProfileDetail();
+$shopUrl = $block->escapeHtml($partner['shop_url']);
+$sellerId = $partner->getSellerId();
+$sellerProductCount = $helper->getSellerProCount($sellerId);
+?>
+<?php $products = $block->getBestsellProducts(); ?>
+<?php if (count($products)) { ?>
+    <div class="wk-mp-profile-block wk-mp-products-recently-added">
+        <div class="block block-account">   
+            <div class="block-title">   
+                <strong><span><h4><?php echo __("Recently Added Products") ?></h4></span></strong>
+            </div>
+        </div>
+        <?php				
+        $products = $block->getBestsellProducts();
+        $_helper = $this->helper('Magento\Catalog\Helper\Output');
+        $viewMode = 'grid';
+        $image = 'category_page_grid';
+        $showDescription = false;
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+        ?>
+        <div class="page-products page-with-filter fieldset wk-mp-fieldset" <?php if($products->count()){ echo 'style="padding: 0;"';}?>>
+            <?php
+            $_helper = $this->helper('Magento\Catalog\Helper\Output');
+            ?>
+            <div class="products wrapper grid products-grid onsellerprofilewekul">
+                <?php $iterator = 1; ?>
+                <ol class="products list items product-items">
+                    <?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
+                    <?php foreach ($products as $_product): ?>
+                        <?php /* @escapeNotVerified */ echo($iterator++ == 1) ? '<li class="item product product-item">' : '</li><li class="item product product-item">' ?>
+                        <div class="product-item-info" data-container="product-grid">
+                            <?php
+                            $productImage = $block->getImage($_product, $image);
+                            ?>
+                            <?php // Product Image ?>
+                            <a href="<?php /* @escapeNotVerified */ echo $_product->getProductUrl() ?>" class="product photo product-item-photo" tabindex="-1">
+                                <?php echo $productImage->toHtml(); ?>
+                            </a>
+                            <div class="product details product-item-details">
+                                <?php
+                                    $_productNameStripped = $block->stripTags($_product->getName(), null, true);
+                                ?>
+                                <strong class="product name product-item-name">
+                                    <a class="product-item-link"
+                                    href="<?php /* @escapeNotVerified */ echo $_product->getProductUrl() ?>">
+                                        <?php 
+       $collection_productname = $_helper->productAttribute($_product, $_product->getName(), 'name'); 
+       $collection_productname = substr($collection_productname,0,20);
+?>
+                                                    <?php /* @escapeNotVerified */ echo $collection_productname;?> 
+                                    </a>
+                                </strong>
+                                <a class="product-item-inner"
+                                    href="<?php /* @escapeNotVerified */ echo $_product->getProductUrl() ?>">
+                                    <div class="product actions product-item-actions">
+                                        <button class="action tocart primary">
+                                            <span>
+                                                <span>
+                                                    <?php echo __('View Detail')?>
+                                                </span>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <?php echo($iterator == count($products)+1) ? '</li>' : '' ?>
+                    <?php endforeach; ?>
+                </ol>
+            </div>
+        </div>
+        <div class="wk-mp-collection-view-btn">
+            <a href="<?php echo $helper->getRewriteUrl('marketplace/seller/collection/shop/'.$shopUrl);?>" title="<?php echo __('View Collection')?>">
+                <?php echo __('View All %1 Products', $sellerProductCount)?>
+            </a>
+        </div>
+    </div>
+<?php } ?>
+<?php echo $block->getChildHtml()?>

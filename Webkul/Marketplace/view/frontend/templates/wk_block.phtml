@@ -1,0 +1,402 @@
+<?php 
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+// @codingStandardsIgnoreFile
+
+$helper = $this->helper('Webkul\Marketplace\Helper\Data');
+$product = $block->getProduct();
+$sellerId = '';
+$marketplaceProduct = $helper->getSellerProductDataByProductId($product['entity_id']);
+foreach ($marketplaceProduct as $value) {
+    $sellerId = $value['seller_id'];
+}
+
+$cardType = $helper->getDisplayCardType();
+?>
+<?php if ($sellerId!=""): ?>
+    <?php 
+        $captchenable = $helper->getCaptchaEnable();
+        $sellerInfo = $helper->getSellerInfo($sellerId);
+        $shopTitle = $sellerInfo['shop_title'];
+        $shopUrl = $sellerInfo['shop_url'];
+        $logo = $sellerInfo['logo_pic'];
+        $productCount = $sellerInfo['product_count'];
+        $companyLocality = trim($sellerInfo['company_locality']);
+        $companyLocality = $block->escapeHtml($companyLocality);
+        if (!$shopTitle) {
+            $shopTitle = $shopUrl;
+        }
+
+        if ($productCount > 1) {
+            $productLabel = __("%1 Products", $productCount);
+        } else {
+            $productLabel = __("%1 Product", $productCount);
+        }
+
+        if ($logo == "") {
+            $logo = "noimage.png";
+        }
+
+        $logo = $helper->getMediaUrl().'avatar/'.$logo;
+        $shopTitle = $block->escapeHtml($shopTitle);
+        $feeds = $helper->getFeedTotal($sellerId);
+        $rating = $helper->getSelleRating($sellerId);
+        $collectionPageUrl = $helper->getRewriteUrl('marketplace/seller/collection/shop/'.$shopUrl);
+        $profilePageUrl = $helper->getRewriteUrl('marketplace/seller/profile/shop/'.$shopUrl);
+    ?>
+    <div class="wk-seller-block wk-block no-display" id="mp-wk-block">
+        <div class="wk-seller-card-container wk-card-type<?php echo $cardType; ?>">
+            <?php if ($cardType == 2): ?>
+                <div class="wk-seller-card-details-block">
+                    <div class="wk-seller-card-details-img-block">
+                        <a href="<?php echo $profilePageUrl; ?>" title="<?php echo __('Visit Shop') ?>" target="_blank">
+                            <img src="<?php echo $logo; ?>">
+                        </a>
+                    </div>
+                    <div class="wk-seller-card-details-content-block">
+                        <div class="wk-seller-card-row">
+                            <div class="wk-seller-shop-title">
+                                <a href="<?php echo $profilePageUrl; ?>" title="<?php echo __('Visit Shop') ?>" id="profileconnect" target="_blank">
+                                    <?php echo $shopTitle; ?>
+                                </a>
+                            </div>
+                            <?php if ($rating > 0) :?>
+                                <div class="wk-seller-rating-block">
+                                    <div class="wk-seller-rating-number">
+                                        <?php echo number_format($rating, 1); ?>
+                                    </div>
+                                    <div class="wk-seller-rating-summery">
+                                        <div class="wk-seller-rating wk-mp-design-inner">
+                                            <div style="padding: 5px 0;">
+                                                <span>
+                                                    <?php
+                                                    $review_percentage = (($rating*100)/5);
+                                                    echo $review_percentage."% ".__('positive feedback')." (".__('%1 ratings',number_format($feeds['feedcount'])).") ";
+                                                    ?>
+                                                </span>
+                                            </div>
+                                            <div class="wk-mp-row">
+                                                <div class="mpfeedback">
+                                                    <div class="price">
+                                                        <span class="wk-ordertitle-label"><?php echo __('Price') ?> </span><span>:</span>
+                                                        <div class="ratingslider-box">
+                                                            <div class="rating" style="width:<?php echo ceil($feeds['price']);?>%;"></div>
+                                                        </div>
+                                                        <span>&nbsp;(<?php echo round(($feeds['price']/20), 1, PHP_ROUND_HALF_UP) ?>/5)</span>
+                                                        <div class="clear"></div>
+                                                    </div>
+                                                    <div class="value">
+                                                        <span class="wk-ordertitle-label"><?php echo __('Value') ?> </span><span>:</span>
+                                                        <div class="ratingslider-box" >
+                                                            <div class="rating" style="width:<?php echo ceil($feeds['value']);?>%;"></div>
+                                                        </div>
+                                                        <span>&nbsp;(<?php echo round(($feeds['value']/20), 1, PHP_ROUND_HALF_UP)?>/5)</span>
+                                                        <div class="clear"></div>
+                                                    </div>
+                                                    <div class="quality">
+                                                        <span class="wk-ordertitle-label"><?php echo __('Quality') ?> </span><span>:</span>
+                                                        <div class="ratingslider-box">
+                                                            <div class="rating" style="width:<?php echo ceil($feeds['quality']);?>%;"></div>
+                                                        </div>
+                                                        <span>&nbsp;(<?php echo round(($feeds['quality']/20), 1, PHP_ROUND_HALF_UP)?>/5)</span>
+                                                        <div class="wk-clear"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                        <?php if ($companyLocality != ""): ?>
+                            <div class="wk-seller-card-row">
+                                <a class="wk-seller-location-link" title="<?php echo __($companyLocality); ?>" href="<?php echo  $helper->getRewriteUrl('marketplace/seller/location/shop/'.$shopUrl)."?loc=".$companyLocality?>" target="_blank">
+                                    <?php echo __($companyLocality); ?>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+
+                        <div class="wk-seller-card-row">
+                            <span class="wk-ask-question-link"><a id="askque"><?php echo __('Contact Seller') ?></a></span>
+                            <?php echo $block->getChildHtml();?>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="wk-seller-card-product-block">
+                    <?php if ($productCount > 0): ?>
+                        <div class="wk-seller-card-product-container">
+                            <?php $collection = $helper->getSellerProductCollection($sellerId, $product['entity_id'], $productCount); ?>
+                            <?php foreach ($collection as $_product): ?>
+                                <div class="wk-seller-card-product">
+                                    <a href="<?php echo $_product->getProductUrl(); ?>" target="_blank" title="<?php echo $_product->getName(); ?>">
+                                        <img src="<?php echo $helper->getImageUrl($_product); ?>">
+                                    </a>
+                                </div>
+                            <?php endforeach; ?>
+                            <?php if ($productCount > 5): ?>
+                                <div class="wk-seller-card-product">
+                                    <a href="<?php echo $collectionPageUrl; ?>" target="_blank">
+                                        <span><?php echo __("View All %1 Products", $productCount); ?></span>
+                                    </a>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            <?php else: ?>
+                <div class="wk-seller-card-row">
+                    <span class="wk-block-font-bold-up"><?php echo __('Sold By')?></span>
+                </div>
+                <div class="wk-seller-card-row">
+                    <span class="wk-block-title-css">
+                        <a href="<?php echo $profilePageUrl; ?>" title="<?php echo __('Visit Shop') ?>" id="profileconnect" target="_blank">
+                            <?php echo $shopTitle; ?>
+                        </a>
+                    </span>
+                </div>
+                <?php if ($companyLocality != ""): ?>
+                    <div class="wk-seller-card-row">
+                        <a class="wk-seller-location-link" title="<?php echo __($companyLocality); ?>" href="<?php echo  $helper->getRewriteUrl('marketplace/seller/location/shop/'.$shopUrl)."?loc=".$companyLocality?>" target="_blank">
+                            <?php echo __($companyLocality); ?>
+                        </a>
+                    </div>
+                <?php endif; ?>
+                <div class="wk-seller-card-row">
+                    <?php if ($rating > 0) :?>
+                        <div class="wk-seller-card-col">
+                            <div class="wk-seller-rating-block">
+                                <div class="wk-seller-rating-number">
+                                    <?php echo number_format($rating, 1); ?>
+                                </div>
+                                <div class="wk-seller-rating-summery">
+                                    <div class="wk-seller-rating wk-mp-design-inner">
+                                        <div style="padding: 5px 0;">
+                                            <span>
+                                                <?php
+                                                $review_percentage = (($rating*100)/5);
+                                                echo $review_percentage."% ".__('positive feedback')." (".__('%1 ratings',number_format($feeds['feedcount'])).") ";
+                                                ?>
+                                            </span>
+                                        </div>
+                                        <div class="wk-mp-row">
+                                            <div class="mpfeedback">
+                                                <div class="price">
+                                                    <span class="wk-ordertitle-label"><?php echo __('Price') ?> </span><span>:</span>
+                                                    <div class="ratingslider-box">
+                                                        <div class="rating" style="width:<?php echo ceil($feeds['price']);?>%;"></div>
+                                                    </div>
+                                                    <span>&nbsp;(<?php echo round(($feeds['price']/20), 1, PHP_ROUND_HALF_UP) ?>/5)</span>
+                                                    <div class="clear"></div>
+                                                </div>
+                                                <div class="value">
+                                                    <span class="wk-ordertitle-label"><?php echo __('Value') ?> </span><span>:</span>
+                                                    <div class="ratingslider-box" >
+                                                        <div class="rating" style="width:<?php echo ceil($feeds['value']);?>%;"></div>
+                                                    </div>
+                                                    <span>&nbsp;(<?php echo round(($feeds['value']/20), 1, PHP_ROUND_HALF_UP)?>/5)</span>
+                                                    <div class="clear"></div>
+                                                </div>
+                                                <div class="quality">
+                                                    <span class="wk-ordertitle-label"><?php echo __('Quality') ?> </span><span>:</span>
+                                                    <div class="ratingslider-box">
+                                                        <div class="rating" style="width:<?php echo ceil($feeds['quality']);?>%;"></div>
+                                                    </div>
+                                                    <span>&nbsp;(<?php echo round(($feeds['quality']/20), 1, PHP_ROUND_HALF_UP)?>/5)</span>
+                                                    <div class="wk-clear"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                    <div class="wk-seller-card-col">
+                        <a class="wk-seller-product-count" href="<?php echo $collectionPageUrl; ?>" target="_blank">
+                            <?php echo $productLabel; ?>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="wk-seller-card-row">
+                    <span class="wk-ask-question-link"><a id="askque"><?php echo __('Contact Seller') ?></a></span>
+                    <?php echo $block->getChildHtml();?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+    <div class="ask-que">
+        <div id="wk-mp-ask-data">
+            <div class="wk-mp-modals-wrapper">
+                <aside tabindex="0" data-type="popup" data-role="modal" class="modal-popup modal-slide _inner-scroll wk-mp-model-popup">
+                    <div tabindex="0" data-role="focusable-start"></div>
+                    <div data-role="focusable-scope" class="modal-inner-wrap">
+                        <header class="modal-header">
+                            <h4 class="modal-title"><?php echo __('Contact Seller') ?></h4>
+                            <button type="button" data-role="closeBtn" class="action-close wk-close">
+                                <span>Close</span>
+                            </button>
+                            <span  class="wk-clear" ></span>
+                        </header>
+                        <?php
+                        if ($helper->isCustomerLoggedIn()) {
+                            $readonly = "readonly='readonly'";
+                        } else {
+                            $readonly = '';
+                        }
+                        ?>
+                        <form id="ask-form" method="post" action="#" class="fieldset">
+                            <div class="modal-body form-list field required" data-bind="scope: 'customer'">
+                                <label class="label"><?php echo __('Your Name') ?> :</label>
+                                <input type="text" name="name" class="queryemail wk-contact_input_fields required-entry" data-bind="value: customer().fullname" <?php echo $readonly?>/>
+                                <label class="label"><?php echo __('Your Email') ?> :</label>
+                                <input type="text" name="email" class="queryemail required-entry validate-email wk-contact_input_fields" data-bind="value: customer().email" <?php echo $readonly?>/>
+                                <label class="label"><?php echo __('Subject') ?> :</label>
+                                <input type="text" name="subject" class="wk-contact_input_fields required-entry"/>
+                                <label class="label"><?php echo __('Your Query') ?> :</label>
+                                <textarea  name="ask" class="queryquestion wk-contact_input_fields required-entry" style="width:100%;"></textarea>
+                                <input type="hidden" name="seller-id" value="<?php echo $sellerId;?>"/>
+                                <input type="hidden" name="product-id" value="<?php echo $product['entity_id'];?>" />
+                                <?php 
+                                if ($captchenable) {?>
+                                    <label class="label"><?php echo __('Please enter desired result') ?></label>
+                                    <div>
+                                        <span>
+                                            <label for="wk-mp-captcha"><span id="wk-mp-captchalable1"><?php echo rand(1,20)?></span> + <span id="wk-mp-captchalable2"><?php echo rand(1,20)?></span> =</label>
+                                        </span>
+                                        <input type="text" class="required-entry wk-contact_input_fields" name="wk-mp-captcha" id="wk-mp-captcha" />
+                                    </div>
+                                <?php
+                                }?>
+                            </div>
+                            <div class="modal-footer">
+                                <span class="error"></span>
+                                <span class="errormail"></span>
+                                <input type="reset" value="<?php echo __('Reset') ?>" id="resetbtn" class="wk-btn wk-btn_default"/>
+                                <input type="submit" value="<?php echo __('Submit') ?>" id="askbtn" class="wk-btn wk-btn-primary clickask"/>
+                                <span class="wk-clear"></span>
+                            </div>
+                        </form>
+                        <script type="text/x-magento-init">
+                        {
+                            "*": {
+                                "Magento_Ui/js/core/app": {
+                                    "components": {
+                                        "customer": {
+                                            "component": "Magento_Customer/js/view/customer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        </script>
+                    </div>
+                    <div tabindex="0" data-role="focusable-end"></div>
+                </aside>
+            </div>
+        </div>
+    </div>
+    <script>
+        require([
+            "jquery",
+            "mage/mage"
+        ], function($) {
+            var askDataForm = $('#ask-form');
+            var cardType = <?php echo $cardType; ?>;
+            
+            askDataForm.mage('validation', {});
+            if (cardType == 2) {
+                $('.product-info-main').before($('#mp-wk-block'));
+            } else {
+                $('.product-info-main').append($('#mp-wk-block'));
+            }
+            $('#mp-wk-block').show();
+
+            $('body').append($('#wk-mp-ask-data'));
+
+            $(".wk-seller-rating-number" ).mouseover(function() {
+                  $( ".wk-seller-rating" ).show();
+            }).mouseout(function() {
+                $( ".wk-seller-rating" ).hide();
+              });
+
+            $('#askque').click(function() {
+                $('#ask-form input,#ask-form textarea').removeClass('mage-error');
+                $('.page-wrapper').css('opacity','0.4');
+                $('.wk-mp-model-popup').addClass('_show');
+                $('#wk-mp-ask-data').show();
+            });
+            $('.wk-close').click(function() {
+                $('.page-wrapper').css('opacity','1');
+                $('#resetbtn').trigger('click');
+                $('#wk-mp-ask-data').hide();
+                $('#ask-form .validation-failed').each(function() {
+                    $(this).removeClass('validation-failed');
+                });
+                $('#ask-form .validation-advice').each(function() {
+                    $(this).remove();
+                });
+            });
+            $('#askbtn').click(function() {
+                if (askDataForm.valid()!=false) {
+                    var thisthis = $(this);
+                    if (thisthis.hasClass("clickask")) {
+                        <?php if ($captchenable) { ?>
+                            var total = parseInt($('#wk-mp-captchalable1').text()) + parseInt($('#wk-mp-captchalable2').text());
+                            var wk_mp_captcha = $('#wk-mp-captcha').val();
+                            if (total != wk_mp_captcha) {
+                                $('#wk-mp-captchalable1').text(Math.floor((Math.random()*10)+1));
+                                $('#wk-mp-captchalable2').text(Math.floor((Math.random()*100)+1));
+                                $('#wk-mp-captcha').val('');
+                                $('#wk-mp-captcha').addClass('mage-error');
+                                $(this).addClass('mage-error');
+                                $('#ask_form .errormail').text("<?php echo __(' Wrong verification number. ') ?>").slideDown('slow').delay(2000).slideUp('slow');
+                            } else {
+                                thisthis.removeClass('clickask');
+                                $('#wk-mp-ask-data').addClass('mail-procss');
+                                $.ajax({
+                                    url:'<?php echo $block->getUrl("marketplace/seller/sendmail", ["_secure" => $this->getRequest()->isSecure()]) ?>',
+                                    data:$('#ask-form').serialize(),
+                                    type:'post',
+                                    dataType:'json',
+                                    success:function(d) {
+                                        thisthis.addClass('clickask');
+                                        $('#wk-mp-ask-data').removeClass('mail-procss')
+                                        alert("<?php echo __('Your mail has been sent.') ?>..");
+                                        $('.wk-close,#resetbtn').trigger('click');
+                                    }
+                                });
+                            }
+                        <?php } else { ?>
+                            thisthis.removeClass('clickask');
+                                $('#wk-mp-ask-data').addClass('mail-procss');
+                                $.ajax({
+                                    url:'<?php echo $block->getUrl("marketplace/seller/sendmail", ["_secure" => $this->getRequest()->isSecure()]) ?>',
+                                    data:$('#ask-form').serialize(),
+                                    type:'post',
+                                    dataType:'json',
+                                    success:function(d) {
+                                        thisthis.addClass('clickask');
+                                        $('#wk-mp-ask-data').removeClass('mail-procss')
+                                        alert("<?php echo __('Your mail has been sent.') ?>..");
+                                        $('.wk-close,#resetbtn').trigger('click');
+                                    }
+                                });
+                            <?php
+                        } ?>
+                    }
+                    return false;
+                }
+            });
+        });
+    </script>
+<?php endif; ?>

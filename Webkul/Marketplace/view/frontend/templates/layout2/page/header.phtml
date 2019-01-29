@@ -1,0 +1,122 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+/** @var $block \Webkul\Marketplace\Block\Page\Header */
+$helper = $this->helper('Webkul\Marketplace\Helper\Data');
+?>
+<?php switch ($block->getShowPart()):
+    case 'logo': ?>
+        <a
+            href="<?php /* @escapeNotVerified */ echo $block->getBaseUrl() ?>"
+            class="wk-mp-logo">
+            <span class="wk-mp-logo-img-wrapper">
+                <img class="wk-mp-logo-img" src="<?php echo $block->getSellerDashboardLogoSrc()?>" alt="<?php echo $block->escapeHtml(__('Seller Panel')) ?>"/>
+            </span>
+        </a>
+    <?php break; ?>
+    <?php case 'user': ?>
+        <?php
+        $logo = $block->getSellerLogo();
+        $logo = $helper->getMediaUrl().'avatar/'.$logo;
+        ?>
+        <div class="wk-mp-user wk-mp__action-dropdown-wrap">
+            <a
+                href="#"
+                onlick="return false;"
+                class="wk-mp__action-dropdown"
+                title="<?php echo $block->escapeHtml(__('My Account')) ?>"
+                data-mage-init='{"dropdown":{}}'
+                data-toggle="dropdown">
+                <span class="wk-mp-seller-header-logo-wrapper">
+                    <img class="wk-mp-seller-header-logo" src="<?php echo $logo?>" alt="<?php echo $block->escapeHtml(__('Seller Panel')) ?>"/>
+                </span>
+                <span class="wk-mp__action-dropdown-text">
+                    <span class="wk-mp-user-account-text">
+                        <span class="wk-mp-user-account-text-wrapper">
+                            <?php echo $block->escapeHtml($block->getSellerShopName()); ?>
+                        </span>
+                    </span>
+                </span>
+            </a>
+            <ul class="wk-mp__action-dropdown-menu">
+                <li class="wk-mp-dropdown-menu-settings">
+                    <a
+                        href="<?php /* @escapeNotVerified */ echo $block->getUrl('marketplace/account/editprofile') ?>"
+                        <?php /* @escapeNotVerified */ echo $block->getUiId('user', 'account', 'settings')?>
+                        title="<?php echo $block->escapeHtml(__('Account Setting')) ?>">
+                        <?php /* @escapeNotVerified */ echo __('Account Setting') ?>
+                    </a>
+                </li>
+                <li class="wk-mp-dropdown-menu-buyer">
+                    <a
+                        href="<?php /* @escapeNotVerified */ echo $block->getUrl('customer/account'); ?>"
+                        title="<?php echo $block->escapeHtml(__('Buyer Dashboard')); ?>"
+                        target="_blank" class="store-front">
+                        <?php /* @escapeNotVerified */ echo __('Buyer Dashboard'); ?>
+                    </a>
+                </li>
+                <li class="wk-mp-dropdown-menu-logout">
+                    <a
+                        href="<?php /* @escapeNotVerified */ echo $block->getUrl('customer/account/logout') ?>"
+                        class="wk-mp-account-logout"
+                        title="<?php echo $block->escapeHtml(__('Logout')) ?>">
+                        <?php /* @escapeNotVerified */ echo __('Logout') ?>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    <?php break; ?>
+    <?php case 'seller.notifications': ?>
+        <?php $totalCount = $block->getAllNotificationCount(); ?>
+        <div class="wk-mp-notification wk-mp__action-dropdown-wrap">
+            <a 
+                onlick="return false;"
+                href="#" 
+                class="wk-mp__action-dropdown"
+                <?php if($totalCount): ?> data-mage-init='{"dropdown":{}}' <?php endif; ?> >
+                <span class="wk-mp-notification-icon"></span>
+                <?php if($totalCount): ?>
+                    <?php if($totalCount > 5): ?>
+                        <span class="wk-mp-notification-count">5+</span>
+                    <?php else: ?>
+                        <span class="wk-mp-notification-count">
+                            <?php echo $totalCount; ?>
+                        </span>
+                    <?php endif; ?>
+                <?php endif; ?>
+            </a>
+            <?php if($totalCount): ?>
+                <ul class="wk-mp__action-dropdown-menu">
+                    <?php foreach ($block->getAllNotification() as $notification) {
+                        echo $block->getNotificationInfo($notification);
+                    } ?>
+                    <li>
+                        <small>
+                            <a href="<?php echo $block->getUrl('marketplace/account/notification')?>">
+                                <?php echo __("View All")?>
+                            </a>
+                        </small>
+                    </li>
+                </ul>
+            <?php endif; ?>
+        </div>
+    <?php break; ?>    
+    <?php case 'seller.home': ?>
+        <div class="wk-mp-home wk-mp__action-dropdown-wrap">
+            <a 
+                href="<?php echo $block->getUrl('')?>" 
+                class="wk-mp__action-dropdown">
+            </a>
+        </div>
+    <?php break; ?>
+    <?php case 'other': ?>
+        <?php echo $block->getChildHtml(); ?>
+    <?php break; ?>
+<?php endswitch; ?>

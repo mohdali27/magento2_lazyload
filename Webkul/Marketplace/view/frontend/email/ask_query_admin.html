@@ -1,0 +1,50 @@
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<!--@subject Seller Query  : {{var subject}}  @-->
+<!--@vars {
+"var this.getUrl($store, 'customer/account/')":"Customer Account URL",
+"var customer.email":"Customer Email",
+"var customer.name":"Customer Name"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">{{trans "%customer_name," customer_name=$myvar1}}</p>
+            <p>
+                {{trans "A question has been ask by seller please revert back to him as soon as possible."}}
+            </p>
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            <table class="query-details">
+                <tr>
+                    <td class="query-details">
+                        <h3>{{trans "Seller's Name"}}</h3>
+                        <p>{{var myvar2|raw}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="query-details">
+                        <h3>{{trans "Seller's Question"}}</h3>
+                        <p>{{var myvar3|raw}}</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

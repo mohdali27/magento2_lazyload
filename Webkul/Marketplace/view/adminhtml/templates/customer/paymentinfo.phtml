@@ -1,0 +1,25 @@
+<?php $paymentInfo = $block->getPaymentInfo() ?>
+<div class="admin__fieldset-wrapper opened">
+    <div class="admin__fieldset-wrapper-title">
+        <strong class="title">
+            <span data-bind="text: label"><?php echo __('Payment Information') ?></span>
+        </strong>
+    </div>
+    <?php if($paymentInfo != ''): ?>
+        <div class="admin__fieldset-wrapper-content">
+            <fieldset class="admin__fieldset">
+                <address>
+                   <?php echo $paymentInfo; ?>
+                </address>   
+            </fieldset>
+        </div>
+    <?php else: ?>
+        <div class="admin__fieldset-wrapper-content">
+            <fieldset class="admin__fieldset">
+                <address>
+                   <?php echo __('Payment Information not filled by the Seller yet.'); ?>
+                </address>   
+            </fieldset>
+        </div>
+    <?php endif; ?>      
+</div>

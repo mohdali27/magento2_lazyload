@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Webkul_Marketplace::marketplace" title="Marketplace Management" module="Webkul_Marketplace" sortOrder="10" resource="Webkul_Marketplace::marketplace"/>
+
+        <add id="Webkul_Marketplace::product" title="Manage Product" module="Webkul_Marketplace" sortOrder="1" parent="Webkul_Marketplace::menu" action="marketplace/product" resource="Webkul_Marketplace::product"/>
+
+        <add id="Webkul_Marketplace::seller" title="Manage Seller" module="Webkul_Marketplace" sortOrder="1" parent="Webkul_Marketplace::menu" action="marketplace/seller" resource="Webkul_Marketplace::seller"/>
+
+        <add id="Webkul_Marketplace::commission" title="Manage Commission" module="Webkul_Marketplace" sortOrder="1" parent="Webkul_Marketplace::menu" action="marketplace/commission" resource="Webkul_Marketplace::commission"/>
+
+        <add id="Webkul_Marketplace::transaction" title="Sellers Transaction" module="Webkul_Marketplace" sortOrder="1" parent="Webkul_Marketplace::menu" action="marketplace/transaction" resource="Webkul_Marketplace::transaction"/>
+
+        <add id="Webkul_Marketplace::feedback" title="Manage Feedback" module="Webkul_Marketplace" sortOrder="1" parent="Webkul_Marketplace::menu" action="marketplace/feedback" resource="Webkul_Marketplace::feedback"/>
+
+        <add id="Webkul_Marketplace::menu" title="Menu" module="Webkul_Marketplace" sortOrder="10" parent="Webkul_Marketplace::marketplace" dependsOnModule="Webkul_Marketplace" resource="Webkul_Marketplace::marketplace"/>
+    </menu>
+</config>

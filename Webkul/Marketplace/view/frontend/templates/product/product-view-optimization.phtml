@@ -1,0 +1,18 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+// @codingStandardsIgnoreFile
+
+$product_id=$this->getRequest()->getParam('id');
+$getValues = $block->getGoogleoptimizerFieldsValues();
+?>
+<input type="hidden" name="google_experiment[experiment_script]" value="<?php echo $getValues['experiment_script']?>">
+<input type="hidden" name="google_experiment[code_id]" value="<?php echo $getValues['code_id']?>">

@@ -1,0 +1,268 @@
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+#seller-pay-block {
+  display: inline-block;
+  width: 98.5%;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+#wk-total-sellerprice{
+  font-size: 16px;
+}
+#seller-pay-block tr {
+  border-bottom: 1px solid #eee;
+}
+#seller-pay-block td {
+  padding: 10px;
+  vertical-align: top;
+}
+.wk-category{
+    overflow: auto;
+    clear: both;
+    display: block;
+}
+#wk-category-label{
+    background: #B8E8B7;
+    border: 1px solid #008000;
+    border-radius: 7px;
+    padding: 0 4px;
+    display: inline-block;
+}
+.wk-cat-container{
+    position: relative;
+}
+.wk-plus{
+    background: url("../images/elbow-plus.gif") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 18px;
+    width: 15px;
+    float:left;
+    cursor:pointer;
+}
+.wk-plusend{    background: url("../images/elbow-end-plus.gif") no-repeat scroll 0 0 transparent;    display: block;    height: 18px;    width: 15px;    float:left;    cursor:pointer;}
+.wk-minus,
+.wk-minusend{
+    background: url("../images/elbow-end-minus.gif") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 18px;
+    width: 15px;
+    float:left;
+    cursor:pointer;
+}
+.wk-no{
+    background: url("../images/elbow-end.gif") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 18px;
+    width: 15px;
+    float:left;
+}
+.wk-foldersign{
+    background: url("../images/leaf.gif") no-repeat scroll 0 0 transparent;
+    display: block;
+    float: left;
+    height: 15px;
+    margin-left: 5px;
+    margin-top: 3px;
+    width: 16px;
+}
+.wk-node-loader{
+    background: url("../images/loading.gif") no-repeat scroll 0 0 #FFFFFF;
+    display: block;
+    height: 17px;
+    left: 15px;
+    position: absolute;
+    width: 17px;
+}
+/*Notification style*/
+
+.wk-notification-link{
+    position: relative;
+}
+#menu-webkul-marketplace-menu .submenu li span {
+    padding-right: 20px;
+    display: inline-block;
+}
+.wk-notification-block{
+    position: absolute;
+    right: 0;
+    top: -2px;
+}
+.wk-notification-block:hover{
+    background: none;
+}
+
+.wk-notification-block .notify-point {
+    background-color: #FFFFFF;
+    border-width: 1px 0px 0px 1px;
+    border-style: solid;
+    border-color:#b0b3b5;
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    left: -8px;
+    top: 17px;
+    transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+}
+
+.wk-notifications-action:hover{
+    background: none!important;
+}
+/*.notifications-action.active:hover{
+    background: #ffffff!important;
+}*/
+.wk-notification-block.active {
+    z-index: 500;
+}
+.wk-notification-block .wk-notification-count{
+    background-color: #e22626;
+    border-radius: 1em;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    left: 50%;
+    margin-left: .3em;
+    margin-top: -1.1em;
+    /*padding: .3em .5em;*/
+    padding: .2em .3em;
+    position: absolute;
+    top: 25%;
+}
+.wk-notifications-action {
+    color: #41362f;
+    height: 3.3rem;
+    padding: 0.75rem 2rem 0.65rem;
+}
+.marketplace-dropdown{
+    padding-right: 3.3rem;
+    border: 1px solid transparent;
+    border-bottom: none;
+    border-radius: 0;
+    box-shadow: none;
+    color: #41362f;
+    display: inline-block;
+    font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: -.025em;
+    padding: 0.7rem 3.3rem 0.8rem 1.5rem;
+    position: relative;
+    vertical-align: baseline;
+    z-index: 2;
+    height: 10px;
+}
+.wk-notification-block .marketplace-dropdown-menu {
+    padding: 1rem 0 0;
+    width: 32rem;
+}
+.marketplace-dropdown-wrap .marketplace-dropdown-menu {
+    left: auto;
+    right: 0;
+}
+
+.marketplace-dropdown-menu {
+    background-color: #ffffff;
+    border: 1px solid #b0b3b5;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    display: none;
+    line-height: 1.36;
+    margin-top: -1px;
+    min-width: 120%;
+    padding: 0.5rem 1rem;
+    position: absolute;
+    top: -55%;
+    transition: all 0.15s ease;
+    z-index: 1;
+    left: 55px;
+    border-radius: 4px;
+}
+.marketplace-dropdown-menu > li {
+    display: block;
+}
+.wk-notifications-entry {
+    line-height: 1.36;
+    padding: 1.2rem 2rem 0.8rem;
+    position: relative;
+    transition: background-color 0.1s linear;
+    transition: border-right 0.1s ease;
+    border-bottom: 1px solid #bbbbbb;
+    margin-bottom: 0rem!important;
+}
+.wk-notifications-entry:hover{
+    border-right: 0.4rem solid #eb5202;
+}
+.wk-notifications-entry:last-child{
+    border-bottom: none;
+}
+.wk-notifications-entry-title {
+    color: #632e18;
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: .7rem;
+    margin-right: 1em;
+}
+.wk-notifications-entry ._cutted {
+    cursor: pointer;
+}
+.wk-notifications-entry-description {
+    color: #333333;
+    font-size: 1.1rem;
+    margin-bottom: .8rem;
+    width: 90%;
+}
+.wk-notifications-entry-description-start {
+    padding: 0px!important;
+    font-size: 1.3rem!important;
+    font-weight: 600!important;
+    color: #41363C!important;
+}
+.wk-notifications-entry-description-start:hover{
+    background: #E3E3E3!important;
+}
+.wk-notifications-entry-description-start .wk-focus{
+    color: #ea7900;
+}
+.wk-notifications-entry-time {
+    color: #777777;
+    font-size: 1.1rem;
+}
+.wk-notifications-close {
+    line-height: 1;
+    padding: 1rem;
+    position: absolute;
+    right: 0;
+    top: .6rem;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+}
+.wk-notifications-close:hover{
+    background: none!important;
+    border: none;
+}
+/*review css start*/
+.mpfeedback .ratingslider-box {
+    background: url("../images/rating-sprite.png") repeat-x scroll 0 103% transparent;
+    float: left;
+    margin-left: 3%;
+    height: 20px;
+    width: 70px;
+}
+.mpfeedback .ratingslider-box .rating {
+    background: url("../images/rating-sprite.png") repeat-x scroll 0 4px transparent;
+    height: 20px;
+    float: left;
+}
+/*review css end*/

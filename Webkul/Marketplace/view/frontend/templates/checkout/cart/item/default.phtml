@@ -1,0 +1,46 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+// @codingStandardsIgnoreFile
+?>
+<?php 
+$_item = $block->getItem();
+$product = $_item->getProduct();
+$helper = $this->helper('Webkul\Marketplace\Helper\Data');
+$_product=$product;
+$seller_id = '';
+$marketplaceProduct = $helper->getSellerProductDataByProductId($_product['entity_id']);
+foreach ($marketplaceProduct as $value) {
+    $seller_id = $value['seller_id'];
+}
+if($seller_id!=""){
+    $rowsocial = $helper->getSellerDataBySellerId($seller_id);
+    $shoptitle = '';
+    $shop_url = '';
+    foreach ($rowsocial as $value) {
+        $shoptitle = $value['shop_title'];
+        $shop_url = $value['shop_url'];
+        if(!$shoptitle){
+            $shoptitle = $value->getShopUrl();
+        }
+    }
+    $shoptitle = $block->escapeHtml($shoptitle);
+    ?>
+    <div class="wk-seller-block wk-block" id="mp-wk-block">
+        <div>
+            <span class="wk-block-font-bold-up"><?php echo __('Sold By')?></span>
+            <span class="wk-block-title-css">
+                <a href="<?php echo $helper->getRewriteUrl('marketplace/seller/profile/shop/'.$shop_url);?>" title="<?php echo __('Visit Shop') ?>" id="profileconnect"><?php echo $shoptitle; ?></a>
+            </span>
+        </div>
+    </div>
+<?php 
+} ?>

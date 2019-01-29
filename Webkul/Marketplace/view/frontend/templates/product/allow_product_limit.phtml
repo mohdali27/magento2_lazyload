@@ -1,0 +1,37 @@
+<?php 
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Webkul\Marketplace\Block\Product\Create */
+
+$helper = $this->helper('Webkul\Marketplace\Helper\Data');
+$globalProductLimitQty = $helper->getGlobalProductLimitQty();
+$productId=$this->getRequest()->getParam('id');
+if ($productId) {	
+	$productColl = $block->getProduct($productId);
+	$productTypeId = $productColl['type_id'];
+	$mpProductCartLimit = $productColl['mp_product_cart_limit'];
+} else {
+	$productTypeId = $this->getRequest()->getParam('type');
+	$mpProductCartLimit = '';
+}
+if ($productTypeId != 'downloadable' && $productTypeId != 'virtual') {
+?>
+<div class="field">
+	<label class="label"><?php echo __('Allowed Product Qty on Product Purchase for Customer') ?>:</label>
+	<div class="control">
+		<input type="text" class="input-text validate-number" name="product[mp_product_cart_limit]" id="mp_product_cart_limit" value="<?php echo $mpProductCartLimit; ?>"/>
+		<span><?php echo __("By default %1 qty will be allowed for customer to add in cart.", $globalProductLimitQty);?></span>
+	</div>
+</div>
+<?php
+} ?>

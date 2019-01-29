@@ -1,0 +1,74 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Webkul\Marketplace\Block\Product\Create */
+
+$product_id=$this->getRequest()->getParam('id');
+$crosssellProducts = [];
+if ($product_id) {    
+    $productColl = $block->getProduct($product_id);
+    $crosssellProductColl = $productColl->getProductLinks();
+    foreach ($crosssellProductColl as $key => $value) {
+        if ($value['link_type'] == 'crosssell') {
+            $productBySku = $block->getProductBySku($value['linked_product_sku']);
+            array_push($crosssellProducts, $productBySku->getId());
+        }
+    }
+}
+?>
+<div id="crosssell-product-block">
+    <h3 class="title">
+        <?php /* @noEscape */ echo __('Cross-Sell Products'); ?>
+    </h3>
+    <?php /* @noEscape */ echo __('These "impulse-buy" products appear next to the shopping cart as cross-sells to the items already in the shopping cart.'); ?>
+    <div id="crosssell-product-block-loader" class="admin__data-grid-outer-wrap" style="display:block;">
+        <div class="admin__data-grid-loading-mask">
+            <div class="spinner">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+        </div>
+    </div>
+    <div id="crosssell-product-block-wrapper" style="display:none;">
+        <?php echo $block->getChildHtml(); ?>        
+    </div>
+    <script id="crosssell-product-template" type="text/x-magento-template">
+	    <div id="crosssell-product-record<%- data.id %>">
+	        <input name="links[crosssell][<%- data.index %>][id]" type="hidden" value="<%- data.id %>">
+			<input name="links[crosssell][<%- data.index %>][name]" type="hidden" value="<%- data.name %>">
+			<input name="links[crosssell][<%- data.index %>][status]" type="hidden" value="<%- data.status %>">
+			<input name="links[crosssell][<%- data.index %>][attribute_set]" type="hidden" value="<%- data.attribute_set %>">
+			<input name="links[crosssell][<%- data.index %>][sku]" type="hidden" value="<%- data.sku %>">
+			<input name="links[crosssell][<%- data.index %>][price]" type="hidden" value="<%- data.price %>">
+			<input name="links[crosssell][<%- data.index %>][thumbnail]" type="hidden" value="<%- data.thumbnail %>">
+			<input name="links[crosssell][<%- data.index %>][position]" type="hidden" value="<%- data.position %>">
+			<input name="links[crosssell][<%- data.index %>][record_id]" type="hidden" value="<%- data.record_id %>">
+		</div>
+    </script>
+</div>
+<?php
+$formData = [
+    'crosssellProductId' => '#wk-bodymain',
+    'templateId' => '#crosssell-product-template',
+    'gridCheckbox' => '.admin__control-checkbox',
+    'crosssellProducts' => $this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode($crosssellProducts)
+];
+$serializedFormData = $this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode($formData);
+?>
+
+<script type="text/x-magento-init">
+    {
+        "#crosssell-product-block": {
+            "crosssellProduct": <?php /* @noEscape */ echo $serializedFormData; ?>
+        }
+    }
+</script>

@@ -1,0 +1,61 @@
+<?php  
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ 
+// @codingStandardsIgnoreFile
+
+$helper = $this->helper('Webkul\Marketplace\Helper\Data');
+$partner=$block->getProfileDetail();
+if ($partner['shop_url']) {
+    if ($helper->getActiveColorPicker()) { ?> 
+        <style>
+            .page-main{
+                background-image:none;
+                background-color:<?php echo $block->escapeHtml($partner['background_width']);?>;
+            }
+        </style>
+    <?php } ?>
+    <div class="wk_mp_design">
+        <?php echo $block->getChildHtml("marketplace_seller_top_block")?>
+        <div class="wk-mp-collection-container">
+            <?php echo $this->getChildHtml('marketplace_sellerprofile_recently_added_products')?>
+            <div class="wk-mp-profile-block" id="about-us">
+                <div class="wk-mp-aboutus-title">
+                    <?php echo __("About Us")?>
+                </div>
+                <div class="wk-mp-aboutus-data">
+                    <?php echo $partner['company_description'];?>
+                    <?php echo $block->getChildHtml("marketplace_seller_description")?>
+                </div>
+            </div>
+            <?php echo $this->getChildHtml('marketplace_sellerprofile_rating')?>
+            <?php if ($helper->getSellerPolicyApproval()) { ?>	
+                <div class="wk-mp-profile-block" id="wk-mp-policy-block">
+                    <div class="wk-mp-policy-block wk-mp-shipping-policy" id="shipping-policy">
+                        <div class="wk-mp-policy-block-title">
+                            <?php echo __("Shipping Policy")?>
+                        </div>
+                        <div class="wk-mp-policy-block-data">
+                            <?php echo $partner['shipping_policy'];?>
+                        </div>
+                    </div>
+                    <div class="wk-mp-policy-block wk-mp-return-policy" id="return-policy">
+                        <div class="wk-mp-policy-block-title">
+                            <?php echo __("Return Policy")?>
+                        </div>
+                        <div class="wk-mp-policy-block-data">
+                            <?php echo $partner['return_policy'];?>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+<?php }  ?>

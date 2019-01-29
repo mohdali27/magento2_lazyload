@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="seller-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Webkul_Marketplace::css/wk_block.css"/>
+        <css src="Webkul_Marketplace::css/style.css"/>
+        <css src="Webkul_Marketplace::css/product.css"/>
+        <css src="Webkul_Marketplace::css/layout.css"/>
+    </head>
+    <body>
+        <referenceBlock name="seller.page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">New Credit Memo</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="seller.content">
+            <block class="Webkul\Marketplace\Block\Order\View"  name="marketplace_order_creditmemo_create" template="Webkul_Marketplace::order/creditmemo/new.phtml" cacheable="false">
+                <block class="Webkul\Marketplace\Block\Order\Items" name="marketplace_order_new_creditmemo_items" template="Webkul_Marketplace::order/creditmemo/new/items.phtml">
+                    <block class="Magento\Theme\Block\Html\Pager" name="marketplace_order_item_pager"/>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

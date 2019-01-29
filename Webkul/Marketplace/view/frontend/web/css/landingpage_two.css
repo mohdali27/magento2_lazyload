@@ -1,0 +1,242 @@
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+.page-title-wrapper {
+    display: none;
+}
+.column.main {
+    min-height: 0!important;
+}
+#wk-termsconditions-box, .profileurl {
+    display: inline-block;
+}
+.wk-mp-header h1 {
+    text-transform: uppercase!important;
+    padding-top: 14%!important;
+    font-size: 37px!important;
+    margin-bottom: 0!important;
+    color: #F4EFEF!important;
+}
+.wk-mp-header h2 {
+    margin: 10px 0!important;
+    font-size: 26px!important;
+    font-weight: 600!important;
+    color: #E7E4E4!important;
+}
+.wk-mp-banner {
+    background-size: cover;
+    display: inline-block;
+    width: 100%;
+}
+.wk-list-container-registration {
+    background-color: #f0f0f0;
+    padding: 30px;
+}
+.wk-mp-landingpage .form.create.account .fieldset {
+    margin-bottom: 0;
+    min-height: auto;
+    padding: 0;
+    background: transparent;
+    border: none;
+    width: 100%;
+}
+.wk-list-container-registration .control {
+    width: 100%!important;
+}
+.wk-list-container-registration .actions-toolbar {
+    border: none;
+    padding: 0;
+    background: transparent;
+}
+.wk-list-container-registration form {
+    width: 100%!important;
+    min-width: 100%!important;
+}
+.wk-list-container-feature-label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #6B6767;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+.wk-mp-landingpage .form.create.account {
+    width: 100%;
+    min-width: 100%;
+    color: #807E7E;
+}
+.wk-mp-landingpage .form.create.account .legend, .newsletter, br {
+    display: none!important;
+}
+.wk-mp-landingpage .form.create.account .fieldset {
+    margin-bottom: 0;
+}
+.wk-mp-landingpage .form.create.account .info .field,
+.wk-mp-landingpage .form.create.account .account .password,
+.wk-mp-landingpage .form.create.account .account .confirmation {
+    width: 48%;
+    padding-right: 1%;
+    float: left;
+}
+.wk-mp-landingpage .form.create.account .field {
+    margin-bottom: 10px;
+}
+.wk-mp-landingpage .form.create.account .account .password,
+.wk-mp-landingpage .form.create.account .account .confirmation {
+    margin-bottom: 30px;
+}
+.wk-mp-landingpage .form.create.account .account input[type=email]{
+    width: 97%;
+}
+.wk-mp-landingpage .primary {
+    text-transform: uppercase;
+}
+#wk-vender-login-box a {
+    font-weight: 700;
+    color: red;
+}
+.wk-text-transform-left {
+    text-align: left;
+}
+@media(min-width: 1001px) {
+    .wk-mp-landingpage .wk-list-container {
+        padding: 1%;
+        float:left;
+        width: 35%;
+    }
+    .wk-mp-header {
+        width: 61%!important;
+    }
+    .wk-mp-header-container {
+        padding: 100px 85px!important;
+        text-align: left;
+    }
+}
+.wk-mp-banner img {
+    width: auto!important;
+}
+#password-strength-meter-container {
+    display: none;
+}
+.wk-mp-icon-seperator {
+    width: 5%;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 2%;
+}
+.wk-mp-icon {
+    display: inline-block;
+    width: 75%!important;
+}
+.wk-mp-icon-wraper {
+    display: inline-block;
+    width: 13%!important;
+    vertical-align: top;
+}
+.wk-marketplace-label-span {
+    display: inline-block;
+    text-transform: none!important;
+    font-size: 14px!important;
+    width: 100%;
+    font-weight: 600!important;
+    color: #919191!important;
+    word-break: break-word;
+}
+.wk-marketplace-label {
+    font-weight: 600;
+    letter-spacing: normal!important;
+    padding-top: 5.3%!important;
+    text-transform: uppercase!important;
+    font-size: 30px!important;
+    color: #4F9DD5!important;
+}
+.wk-text-transform-center {
+    text-align: center;
+}
+.wk-list-container-wrapper {
+    padding: 3% 0;
+    width: 85%;
+    display: inline-block;
+}
+.wk-mp-landingpage .wk-icon-check-span {
+    font-size: 20px;
+    font-weight: 600;
+    color: #807E7E;
+    vertical-align: top;
+}
+.wk-layout2-box-container {
+    width: 250px;
+    height: 300px;
+    background-color: #DCF2F5;
+    float: left;
+    margin: 10px;
+}
+.wk-layout2-box-span-container {
+    padding: 25px 0;
+    display: inline-block;
+    font-size: 20px;
+    color: #4F9DD5;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+}
+.wk-layout2-box-span {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 60px;
+    margin: 0 75px;
+}
+.wk-layout2-box-span-image {
+    background-image: url('../images/landingpage1/icon/sell-page-2-sprite.png');
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    margin: 25px;
+}
+.wk-layout2-box-span-image-ask {
+    background-position: 200px 0px;
+}
+.wk-layout2-box-span-image-quickpay {
+    background-position: 150px 0px;
+}
+.wk-layout2-box-span-image-order {
+    background-position: 100px 0px;
+}
+.wk-layout2-box-span-image-badges {
+    background-position: 50px 0px;
+}
+.wk-layout2-box-span-image-verified {
+    background-position: 0px 75px;
+}
+.wk-layout2-box-span-image-profile {
+    background-position: 200px 75px;
+}
+.wk-layout2-box-span-image-media {
+    background-position: 100px 75px;
+}
+.wk-icon-div {
+    padding: 25px;
+    font-weight: 600;
+    color: #919191;
+    text-align: center;
+}
+#wantptr {
+    display: inline-block!important;
+}
+.wk-list-container #register-form-now {
+    width: 100%!important;
+}
+.wk-mp-landingpage #register-form-now .form.create.account .info .field,
+.wk-mp-landingpage #register-form-now .form.create.account .account .password,
+.wk-mp-landingpage #register-form-now .form.create.account .account .confirmation {
+    width: 100%!important;
+    padding-right:0!important;
+    float: none!important;
+}

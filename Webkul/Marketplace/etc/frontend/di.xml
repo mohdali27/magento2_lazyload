@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Url\SecurityInfo">
+        <arguments>
+            <argument name="secureUrlList" xsi:type="array">
+                <item name="marketplace" xsi:type="string">/marketplace/mui</item>
+                <item name="marketplace_product" xsi:type="string">/marketplace/product</item>
+                <item name="marketplace_order" xsi:type="string">/marketplace/order</item>
+                <item name="marketplace_transaction" xsi:type="string">/marketplace/transaction</item>
+                <item name="marketplace_account" xsi:type="string">/marketplace/account</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="\Magento\Catalog\Model\ResourceModel\Product\Collection">
+        <plugin name="Webkul_Marketplace::afterIsEnabledFlat"
+                type="Webkul\Marketplace\Model\Plugin\ResourceModel\Product\Collection"
+                sortOrder="12" />
+    </type>
+    <type name="Magento\Customer\CustomerData\Customer">
+        <plugin name="Webkul_Marketplace::customer_section_data"
+                type="Webkul\Marketplace\Plugin\CustomerData\Customer"
+                sortOrder="1" />
+    </type>
+    <type name="\Magento\Catalog\Model\Indexer\Category\Flat\State">
+        <plugin name="Webkul_Marketplace::afterIsFlatEnabled"
+                type="Webkul\Marketplace\Model\Plugin\Indexer\Category\Flat\State"
+                sortOrder="12" />
+    </type>
+    <type name="\Magento\Framework\Search\Adapter\Mysql\Adapter">
+        <plugin name="Webkul_Marketplace::aroundQuery"
+                type="Webkul\Marketplace\Plugin\Framework\Search\Adapter\Mysql\Adapter"
+                sortOrder="1" />
+    </type>
+    <type name="\Magento\CatalogSearch\Model\Adapter\Aggregation\Checker\Query\CatalogView">
+        <plugin name="Webkul_Marketplace::aroundQuery"
+                type="Webkul\Marketplace\Plugin\CatalogSearch\Model\Adapter\Aggregation\Checker\Query\CatalogView"
+                sortOrder="1" />
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="marketplace_transactions_listing_data_source" xsi:type="string">Webkul\Marketplace\Model\ResourceModel\Sellertransaction\FrontGrid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Webkul\Marketplace\Model\ResourceModel\Sellertransaction\FrontGrid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">marketplace_sellertransaction</argument>
+            <argument name="eventPrefix" xsi:type="string">marketplace_transaction_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">transaction_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\Marketplace\Model\ResourceModel\Sellertransaction</argument>
+        </arguments>
+    </type>
+    <virtualType name="Webkul\Marketplace\Block\Collection\Navigation\Category" type="Webkul\Marketplace\Block\Collection\Navigation">
+        <arguments>
+            <argument name="filterList" xsi:type="object">categoryFilterList</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Catalog\Model\Product\CopyConstructor\Composite">
+        <arguments>
+            <argument name="constructors" xsi:type="array">
+                <item name="crossSell" xsi:type="string">Magento\Catalog\Model\Product\CopyConstructor\CrossSell</item>
+                <item name="upSell" xsi:type="string">Magento\Catalog\Model\Product\CopyConstructor\UpSell</item>
+                <item name="related" xsi:type="string">Magento\Catalog\Model\Product\CopyConstructor\Related</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Catalog\Model\Product\Copier">
+        <arguments>
+            <argument name="copyConstructor" xsi:type="object">Magento\Catalog\Model\Product\CopyConstructor\Composite</argument>
+        </arguments>
+    </type>
+
+    <preference for="Magento\Customer\Controller\Account\CreatePost" type="Webkul\Marketplace\Controller\Rewrite\Customer\Account\CreatePost"/>
+</config>

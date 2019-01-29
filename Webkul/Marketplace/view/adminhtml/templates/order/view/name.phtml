@@ -1,0 +1,57 @@
+<?php if ($_item = $block->getItem()): ?>
+    <div id="order_item_<?php /* @escapeNotVerified */ echo $_item->getId() ?>_title"
+         class="product-title">
+        <?php echo $block->escapeHtml($_item->getName()) ?>
+    </div>
+
+    <div class="product-sku-block">
+        <span><?php /* @escapeNotVerified */ echo __('SKU') ?>:</span> <?php echo implode('<br />', $this->helper('Magento\Catalog\Helper\Data')->splitSku($block->escapeHtml($block->getSku()))); ?>
+
+        <!-- Marketplace seller Name -->
+        <br/>
+        <?php
+            $productOptions = $_item->getProductOptions();
+            if(isset($productOptions['info_buyRequest']) && array_key_exists('mpassignproduct_id', $productOptions['info_buyRequest'])){
+                $userInfo = $block->getUserInfo($productOptions['info_buyRequest']['mpassignproduct_id'], 1);
+            }else{
+                $userInfo = $block->getUserInfo($_item->getProductId(), 0);
+            }
+            if($userInfo!=''){ ?>
+                <strong> 
+                    <?php echo __('By Seller') ?>:
+                </strong> 
+                <a href=<?php echo $block->getCustomerUrl($userInfo['id']);?>>
+                    <?php echo $userInfo['name']?>
+                </a>
+                <?php
+            } ?> 
+        <!-- end -->
+    </div>
+
+    <?php if ($block->getOrderOptions()): ?>
+        <dl class="item-options">
+            <?php foreach ($block->getOrderOptions() as $_option): ?>
+                <dt><?php /* @escapeNotVerified */ echo $_option['label'] ?>:</dt>
+                <dd>
+                    <?php if (isset($_option['custom_view']) && $_option['custom_view']): ?>
+                        <?php /* @escapeNotVerified */ echo $block->getCustomizedOptionValue($_option); ?>
+                    <?php else: ?>
+                        <?php $_option = $block->getFormattedOption($_option['value']); ?>
+                        <?php /* @escapeNotVerified */ echo $_option['value']; ?><?php if (isset($_option['remainder']) && $_option['remainder']): ?><span id="<?php /* @escapeNotVerified */ echo $_dots = 'dots' . uniqid()?>"> ...</span><span id="<?php /* @escapeNotVerified */ echo $_id = 'id' . uniqid()?>"><?php /* @escapeNotVerified */ echo $_option['remainder'] ?></span>
+                            <script>
+                                require(['prototype'], function() {
+                                    $('<?php /* @escapeNotVerified */ echo $_id ?>').hide();
+                                    $('<?php /* @escapeNotVerified */ echo $_id ?>').up().observe('mouseover', function(){$('<?php /* @escapeNotVerified */ echo $_id ?>').show();});
+                                    $('<?php /* @escapeNotVerified */ echo $_id ?>').up().observe('mouseover', function(){$('<?php /* @escapeNotVerified */ echo $_dots?>').hide();});
+                                    $('<?php /* @escapeNotVerified */ echo $_id ?>').up().observe('mouseout',  function(){$('<?php /* @escapeNotVerified */ echo $_id ?>').hide();});
+                                    $('<?php /* @escapeNotVerified */ echo $_id ?>').up().observe('mouseout',  function(){$('<?php /* @escapeNotVerified */ echo $_dots ?>').show();});
+                                });
+                            </script>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </dd>
+            <?php endforeach; ?>
+        </dl>
+    <?php endif; ?>
+    <?php echo $block->escapeHtml($_item->getDescription()) ?>
+<?php endif; ?>

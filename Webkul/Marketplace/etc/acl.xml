@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Webkul_Marketplace::marketplace" title="Marketplace Management" sortOrder="10" >
+                    <resource id="Webkul_Marketplace::menu" title="Menu" sortOrder="10">
+                        <resource id="Webkul_Marketplace::product" title="Manage Product" sortOrder="10" />
+                        <resource id="Webkul_Marketplace::seller" title="Manage Sellers" sortOrder="10" />
+                        <resource id="Webkul_Marketplace::commission" title="Manage Commission" sortOrder="11" />
+                        <resource id="Webkul_Marketplace::transaction" title="Manage Transaction" sortOrder="12" />
+                        <resource id="Webkul_Marketplace::feedback" title="Manage Feedback" sortOrder="13" />
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Webkul_Marketplace::config_marketplace" title="Marketplace Configuration Section" sortOrder="50" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

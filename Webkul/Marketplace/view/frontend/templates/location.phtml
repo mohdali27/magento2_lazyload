@@ -1,0 +1,28 @@
+<?php 
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$paramData = $this->getRequest()->getParams();
+if (empty($paramData['loc'])) {
+	$helper = $this->helper('Webkul\Marketplace\Helper\Data');
+	$partner = $block->getProfileDetail();
+	$locsearch = $partner['company_locality'];
+	$paramData['loc'] = $locsearch;
+}
+?>
+<div class="wk_mp_design">
+	<?php echo $block->getChildHtml("marketplace_seller_top_block")?>
+	<div class="wk-mp-collection-container">
+		<iframe width="100%" height="550" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="//maps.google.com/maps?q=<?php echo $paramData['loc'];?>&amp;output=embed"></iframe>
+		<br />
+		<small>
+			<a href="//maps.google.com/maps?q=<?php echo $this->escapeHtml($paramData['loc']);?>" class="wk_loc_inf"><?php echo __('View Larger Map') ?></a>
+		</small>
+	</div>
+</div>

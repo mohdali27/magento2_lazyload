@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <marketplace>
+            <general_settings>
+                <percent>20</percent>
+                <seller_approval>1</seller_approval>
+            </general_settings>
+            <layout_settings>
+                <is_separate_panel>0</is_separate_panel>
+            </layout_settings>
+            <product_settings>
+                <product_approval>1</product_approval>
+                <product_edit_approval>1</product_edit_approval>
+                <global_product_limit>5</global_product_limit>
+                <allow_for_seller>simple</allow_for_seller>
+            </product_settings>
+            <landingpage_settings>
+                <banner>sell-page-banner.png</banner>
+                <feature_icon1>icon-register-yourself.png</feature_icon1>
+                <feature_icon1_label>Register Yourself</feature_icon1_label>
+                <feature_icon2>icon-add-products.png</feature_icon2>
+                <feature_icon2_label>Add Products</feature_icon2_label>
+                <feature_icon3>icon-start-selling.png</feature_icon3>
+                <feature_icon3_label>Start Selling</feature_icon3_label>
+                <feature_icon4>icon-collect-revenues.png</feature_icon4>
+                <feature_icon4_label>Generate Revenues</feature_icon4_label>
+                <displaybannerLayout2>1</displaybannerLayout2>
+                <bannerLayout2>sell-page-1-hero-banner.jpg</bannerLayout2>
+                <bannercontentLayout2><![CDATA[<h1>Have you got something exciting</h1><h2>Come On! Sell with us.</h2>]]></bannercontentLayout2>
+                <marketplacebuttonLayout2>Open your shop</marketplacebuttonLayout2>
+                <displaybannerLayout3>1</displaybannerLayout3>
+                <bannerLayout3>sell-page-2-hero-banner.jpg</bannerLayout3>
+                <bannercontentLayout3><![CDATA[<h1>Sell with us</h1><h2>We are largest growing community to sell online, Come and Join us.</h2>]]></bannercontentLayout3>
+                <marketplacebuttonLayout3>Open your shop</marketplacebuttonLayout3>
+                <feature_icon1_layout3>sell-page-2-setup-1.png</feature_icon1_layout3>
+                <feature_icon1_label_layout3>Create an Account</feature_icon1_label_layout3>
+                <feature_icon2_layout3>sell-page-2-setup-2.png</feature_icon2_layout3>
+                <feature_icon2_label_layout3>Customize your Profile</feature_icon2_label_layout3>
+                <feature_icon3_layout3>sell-page-2-setup-3.png</feature_icon3_layout3>
+                <feature_icon3_label_layout3>Add your Details</feature_icon3_label_layout3>
+                <feature_icon4_layout3>sell-page-2-setup-4.png</feature_icon4_layout3>
+                <feature_icon4_label_layout3>Add your Product Listing</feature_icon4_label_layout3>
+                <feature_icon5_layout3>sell-page-2-setup-5.png</feature_icon5_layout3>
+                <feature_icon5_label_layout3>Sell your Product and Earn Profits</feature_icon5_label_layout3>
+                <marketplacelabel1Layout3>Really easy to setup and customize</marketplacelabel1Layout3>
+                <marketplacelabel2Layout3>Why to sell with us</marketplacelabel2Layout3>
+                <marketplacelabel3Layout3><![CDATA[Open your online shop & Explore a new world of market with more then millions of shoppers]]></marketplacelabel3Layout3>
+                <allow_seller_registration_block>1</allow_seller_registration_block>
+                <pageLayout>1</pageLayout>
+            </landingpage_settings>
+            <email>
+                <seller_approve_notification_template>marketplace_email_seller_approve_notification_template</seller_approve_notification_template>
+                <becomeseller_request_notification_template>marketplace_email_becomeseller_request_notification_template</becomeseller_request_notification_template>
+                <seller_disapprove_notification_template>marketplace_email_seller_disapprove_notification_template</seller_disapprove_notification_template>
+                <seller_deny_notification_template>marketplace_email_seller_deny_notification_template</seller_deny_notification_template>
+                <product_deny_notification_template>marketplace_email_product_deny_notification_template</product_deny_notification_template>
+                <new_product_notification_template>marketplace_email_new_product_notification_template</new_product_notification_template>
+                <askproductquery_seller_template>marketplace_email_askproductquery_seller_template</askproductquery_seller_template>
+                <askquery_seller_template>marketplace_email_askquery_seller_template</askquery_seller_template>
+                <askquery_admin_template>marketplace_email_askquery_admin_template</askquery_admin_template>
+                <product_approve_notification_template>marketplace_email_product_approve_notification_template</product_approve_notification_template>
+                <product_disapprove_notification_template>marketplace_email_product_disapprove_notification_template</product_disapprove_notification_template>
+                <order_placed_notification_template>marketplace_email_order_placed_notification_template</order_placed_notification_template>
+                <order_invoiced_notification_template>marketplace_email_order_invoiced_notification_template</order_invoiced_notification_template>
+                <seller_transaction_notification_template>marketplace_email_seller_transaction_notification_template</seller_transaction_notification_template>
+                <low_stock_template>marketplace_email_low_stock_template</low_stock_template>
+            </email>
+
+            <layered_navigation>
+                <admin_name>Admin</admin_name>
+            </layered_navigation>
+        </marketplace>
+    </default>
+</config>

@@ -1,0 +1,86 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Customoption
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<?php /** @var $block \Webkul\Customoption\Block\Options */ ?>
+<?php   
+    $helper = $this->helper('Webkul\Customoption\Helper\Data');
+    if ($this->getRequest()->getParam('type') != 'grouped' && $helper->isActive()) {
+?>
+        <div class="fieldset-wrapper" id="product-custom-options-wrapper" data-block="product-custom-options">
+            <div class="fieldset-wrapper-title">
+                <strong class="title">
+                    <span><?php /* @escapeNotVerified */ echo __('Custom Options') ?></span>
+                </strong>
+            </div>
+            <div class="fieldset-wrapper-content" id="product-custom-options-content" data-role="product-custom-options-content">
+                <fieldset class="fieldset">
+                    <div class="messages">
+                        <div class="message message-warning" id="dynamic-price-warning" style="display: none;">
+                            <div class="message-inner">
+                                <div class="message-content"><?php /* @escapeNotVerified */ echo __('We can\'t save custom-defined options for bundles with dynamic pricing.') ?></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="product_options_container" class="sortable-wrapper">
+                        <div id="product_options_container_top"></div>
+                        <?php echo $block->getOptionsBoxHtml() ?>
+                    </div>
+
+                    <div class="actions">
+                        <button id="add_new_custom_defined_option" title="Add New Option" type="button" class="action-default scalable add wk-mp-btn" data-ui-id="admin-product-options-add-button">
+                            <span><?php echo __('Add New Option'); ?></span>
+                        </button>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <?php 
+            $data = [
+                'productType' => $this->getRequest()->getParam('type')
+            ];
+        ?>
+        <script>
+            window.customOptions = <?php /* @escapeNotVerified */ echo \Zend_Json::encode($data); ?>;
+        </script>
+        <script>
+            require(['jquery'], function($){
+                var priceType = $('#price_type');
+                var priceWarning = $('#dynamic-price-warning');
+                if (priceType && priceType.val() == 0 && priceWarning) {
+                    priceWarning.show();
+                    $('#add_new_custom_defined_option').hide();
+                }
+                if (window.customOptions.productType == 'bundle') {
+                    $(priceType).on('change', function() {
+                        if (priceType.val() == 1) {
+                            $('#add_new_custom_defined_option').hide();
+                            $('#product_options_container_top').empty();
+                        } else {
+                            $('#add_new_custom_defined_option').show();
+                        }
+                    });
+                }
+                $('#product_options_container_top').delegate('.wkcheckjs', 'blur', function() {
+                    var input = $(this).val();
+                    var value = String(input)
+                        .replace(/&/g, '&amp;')
+                        .replace(/"/g, '&quot;')
+                        .replace(/'/g, '&#39;')
+                        .replace(/</g, '&lt;')
+                        .replace(/>/g, '&gt;');
+                    $(this).val(value);
+                });
+            });
+        </script>
+<?php
+    }
+?>					

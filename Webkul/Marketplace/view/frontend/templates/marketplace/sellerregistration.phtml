@@ -1,0 +1,85 @@
+<?php 
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+// @codingStandardsIgnoreFile
+
+
+$helper = $this->helper('Webkul\Marketplace\Helper\Data');
+if ($helper->getPageLayout() == 2) {
+    $termsConditionUrl  =   $helper->getTermsConditionUrlLayout2();
+} else {
+    $termsConditionUrl  =   $helper->getTermsConditionUrlLayout3();
+}
+?>
+
+<div class="field required profileurlarea" id="wantptrarea"> 
+<label class="label"> <?php echo _('Tell us more about your business/company ');?></label>
+<div class="control">
+
+<textarea class="input-text" required="" placeholder="Where have you come from?  What made you start developing your products. Have you any nice quotes from customers? How do we get hold of you? email or telephone" name="profileurlarea" id="profileurlarea" ></textarea>
+
+</div>
+
+</div>
+
+<div class="field required profileurl" id="wantptr"> 
+    <label class="label">
+        <?php echo __('Shop URL');?>
+    </label>
+    <div class="control" id="wk-mp-become-seller-box-wrapper" data-role="wk-mp-become-seller-box-wrapper">
+        <input type="hidden" name="is_seller" value='1'/>
+        <input type="text" class="input-text required-entry" name="profileurl" id="profileurl" data-role="shop-url" placeholder="<?php echo __('Shop URL For Your Marketplace Shop');?>" title="<?php echo __('Shop URL For Your Marketplace Shop');?>" value=""/>
+        <div id="wk-load" class="no-display">
+            <img height="16px" width="16px" src="<?php echo $this->getViewFileUrl('Webkul_Marketplace::images/ajax-loader-tr.gif');?>" />
+        </div>
+    </div>
+
+    <div id="wk-load" class="no-display">
+        <img height="16px" width="16px" src="<?php echo $this->getViewFileUrl('Webkul_Marketplace::images/ajax-loader-tr.gif');?>" />
+    </div>
+</div>
+<div class="field required" id="wk-termsconditions-box"> 
+    <div class="input-box">
+        <input type="checkbox" name="wk_termsconditions" class="checkbox required-entry validation-failed" id="wk-termsconditions">
+	    <label for="wk-termsconditions"><?php echo __('Yes, I agree to ')?><a href="<?php echo $termsConditionUrl; ?>" title="Click here" target="_blank"><?php echo __('Flamingaroo Terms and Conditions for Sellers')?></a></label>
+	</div>
+</div>
+<div id="wk-vender-login-box"> 
+    <?php if ($helper->getIsSeparatePanel()) { ?>
+        <a href="<?php echo $block->getUrl("marketplace/account/login", ["_secure" => $this->getRequest()->isSecure()])?>">
+            <?php echo __('Already have account! click here to login')?>
+        </a>
+    <?php } else { ?>
+        <a href="<?php echo $block->getUrl("marketplace/account/dashboard", ["_secure" => $this->getRequest()->isSecure()])?>">
+            <?php echo __('Already have account! click here to login')?>
+        </a>
+    <?php } ?>
+</div>
+
+
+<?php
+$formData = [
+    'ajaxSaveUrl' => $block->getUrl("marketplace/seller/usernameverify", ["_secure" => $this->getRequest()->isSecure()]),
+    'successMessage' => __("Congratulations! Shop name is available."),
+    'errorMessage' => __("Sorry! But this shop name is not available, please set another shop name."),
+    'loaderImage' => $this->getViewFileUrl('Webkul_Marketplace::images/ajax-loader-tr.gif'),
+    'button' => 'button.submit'
+];
+$serializedFormData = $this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode($formData);
+?>
+
+<script type="text/x-magento-init">
+    {
+        "#form-validate": {
+            "verifySellerShop": <?php /* @noEscape */ echo $serializedFormData; ?>
+        }
+    }
+</script>

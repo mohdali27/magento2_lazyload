@@ -1,0 +1,92 @@
+<?php 
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+// @codingStandardsIgnoreFile
+
+$partner=array();
+$helper = $this->helper('Webkul\Marketplace\Helper\Data');
+$partner = $helper->getSeller();
+$isPartner = $helper->isSeller();
+$order_id = $this->getRequest()->getParam('order_id');
+if($isPartner == 1){ ?>
+	<div class="wk-mp-design">
+		<fieldset class="fieldset info wk-mp-fieldset">
+			<legend class="legend"><span><?php echo __('Creditmemo List') ?></span></legend>
+			<div class="order-details-items ordered">
+			    <div class="table-wrapper order-items">
+				    <table class="data table table-order-items" summary="<?php echo __('Creditmemo List') ?>">
+					    <thead>
+					    	<tr>
+					            <th class="col price"><?php echo __('Credit Memos #') ?></th>
+					            <?php if ($helper->getSellerProfileDisplayFlag()) { ?>
+					            <th class="col price"><?php echo __('Bill To Name') ?></th>
+					            <?php } ?>
+					            <th class="col price"><?php echo __('Created At') ?></th>
+					            <th class="col price"><?php echo __('Status') ?></th>
+					            <th class="col price"><?php echo __('Amount') ?></th>
+					            <th class="col price"><?php echo __('Action') ?></th>
+					        </tr>
+					    </thead>
+					    <tbody>
+					    	<?php 
+					    	$i = 0;
+					    	$order = $block->getOrder();
+							foreach($block->getCollection() as $creditmemo){
+								$i++;						
+								$creditmemo_id = $creditmemo['entity_id'];
+								?>
+						    	<tr class="border">
+						            <td class="col price" data-th="<?php echo __('Credit Memos #') ?>">
+										<?php echo $creditmemo['increment_id'];?>
+						    		</td>
+						    		<?php if ($helper->getSellerProfileDisplayFlag()) { ?>
+							    		<td class="col price" data-th="<?php echo __('Bill To Name') ?>">
+											<?php echo $order->getCustomerName();?>
+							    		</td>
+						    		<?php } ?>
+						    		<td class="col price" data-th="<?php echo __('Created At') ?>">
+										<?php echo $block->formatDate($creditmemo->getCreatedAt());?>
+						    		</td>
+						    		<td class="col price" data-th="<?php echo __('Status') ?>">
+										<?php echo __('Refunded');?>
+						    		</td>
+						    		<td class="col price" data-th="<?php echo __('Amount') ?>">
+										<?php echo $order->formatPrice($creditmemo->getGrandTotal());?>
+						    		</td>
+						    		<td class="col price" data-th="<?php echo __('Action') ?>">
+										<a href="<?php echo $block->getUrl('marketplace/order_creditmemo/view', ['order_id'=>$order_id,'creditmemo_id'=>$creditmemo_id, '_secure' => $this->getRequest()->isSecure()]); ?>">
+											<?php echo __('View'); ?>
+										</a>
+						    		</td>		
+						    	</tr>
+						    	<?php
+						    }?>
+					    </tbody>
+					</table>
+				</div>
+			</div>
+			<?php if ($block->getPagerHtml()): ?>
+		        <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+		    <?php endif ?>	
+		</fieldset>
+	</div>
+	<div class="buttons-set">
+		<p class="back-link">
+			<a href="javascript:;" onclick="javascript: window.history.back();" class="left">&laquo; <?php echo __('Back') ?></a>
+		</p>
+	</div>
+	<?php 
+}else{ ?>
+	<h2 class="wk-mp-error_msg">
+		<?php echo __("To Become Seller Please Contact to Admin."); ?>
+	</h2>
+	<?php
+} ?>

@@ -1,0 +1,20 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+$name = $block->getNameInLayout();
+foreach ($block->getChildNames($name) as $childName) {
+    echo $block->getChildBlock($childName)->setItem($block->getItem())->toHtml();
+}
+?>

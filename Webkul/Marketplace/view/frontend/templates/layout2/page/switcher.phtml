@@ -1,0 +1,26 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<?php if (count($block->getStores())>1 || count($block->getGroups())>1 || $block->getCurrencyCount()>1): ?>
+    <diV class="panel wrapper">
+        <diV class="panel header">
+            <?php if (count($block->getStores())>1): ?>
+                <?php echo $block->getChildHtml('seller_store_language'); ?>
+            <?php endif; ?>
+            <?php if (count($block->getGroups())>1): ?>
+                <?php echo $block->getChildHtml('seller_store_switcher'); ?>
+            <?php endif; ?>
+            <?php if ($block->getCurrencyCount()>1): ?>
+                <?php echo $block->getChildHtml('seller_store_settings_currency'); ?>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php endif; ?>

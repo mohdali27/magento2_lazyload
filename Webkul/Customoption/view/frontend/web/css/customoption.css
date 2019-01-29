@@ -1,0 +1,112 @@
+.wk-mp-design .admin__collapsible-block-wrapper.fieldset-wrapper {
+    border-bottom: 1px solid #ccc;
+    padding: 0;
+    border: 1px solid #cac3b4;
+    border-radius: 2px;
+    margin-bottom: 5px;
+    padding: 0;
+}
+.wk-mp-design .admin__collapsible-block-wrapper.fieldset-wrapper .fieldset-wrapper-title {
+    border: 0 none;
+    margin: 0;
+    background: #f7f3eb;
+    padding: 0 18px;
+    border: 0;
+    border-bottom: 1px solid #cccbca;
+    min-height: 39px;
+    position: relative;
+}
+.wk-mp-design #product_options_container_top thead tr.headings{
+    background-color: inherit!important; 
+}
+
+.wk-mp-design .fieldset-wrapper-content {
+    padding: 0 10px;
+}
+.wk-mp-design .fieldset-alt > .field {
+    display: table-cell;
+    vertical-align: top;
+    padding-right: 4%;
+}
+.wk-mp-design .fieldset-wrapper-content .fieldset{
+    background: transparent;
+    padding: 9px 0;
+    border: none;
+    border-radius: 0;
+    margin: 0 0 29px;
+}
+.wk-mp-design #product_options_container_top .field-option-title {
+    width: 500px;
+    display: table-cell;
+    vertical-align: top;
+    padding-right: 4%;
+}
+
+.wk-mp-design #product_options_container_top .field-option-input-type {
+    width: 170px;
+}
+.wk-mp-design .fieldset-alt .field-option-req {
+    width: 105px;
+    white-space: nowrap;
+}
+.wk-mp-design .fieldset-alt .field-option-req .control {
+    overflow: visible !important;
+}
+.wk-mp-design .fieldset-wrapper .admin__collapsible-block-wrapper .fieldset-wrapper-title .draggable-handle{
+    position: absolute;
+    left: 4px;
+    width: 8px;
+    height: 14px;
+    line-height: 14px;
+    background: url(../images/draggable-handle-vertical.png) no-repeat 0 0;
+    cursor: ns-resize;
+    color: #b2b0ad;
+}
+.wk-mp-design .data-table tbody tr:nth-child(odd) td {
+    background: #f7f3eb;
+    border-width: 0;
+    padding: 5px 7px;
+    vertical-align: middle;
+}
+.wk-mp-design .data-table tbody tr:nth-child(even) td {
+    padding: 20px 7px;
+}
+.wk-mp-design.fieldset-wrapper .draggable-handle, .wk-mp-design .fieldset .draggable-handle {
+    width: 8px;
+    height: 14px;
+    line-height: 14px;
+    background: url(../images/draggable-handle-vertical.png) no-repeat 0 0;
+    cursor: ns-resize;
+    color: #b2b0ad;
+}
+.wk-mp-design .fieldset-wrapper .fieldset:last-child, .wk-mp-design .fieldset .fieldset:last-child, .wk-mp-design .fieldset .field:last-child {
+    margin-bottom: 0;
+}
+.wk-mp-design .fieldset-wrapper-title .actions{
+    width: 2%;
+}
+.wk-mp-design .fieldset-wrapper-title .actions .action-delete{
+    border: none;
+    border-radius: 0;
+    background: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    text-shadow: none;
+    filter: none;
+}
+.wk-mp-design .fieldset-wrapper-title .actions .action-delete:before{
+    font-family: 'MUI-Icons';
+    font-style: normal;
+    speak: none;
+    font-weight: normal;
+    font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+    content: '\e07f';
+    color: #b7b3ad;
+}
+
+.wk-mp-design .collapse.in, .no-js .collapse {
+    height: auto !important;
+    overflow: visible;
+}

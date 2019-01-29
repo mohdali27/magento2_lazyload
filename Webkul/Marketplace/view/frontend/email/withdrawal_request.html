@@ -1,0 +1,28 @@
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<!--@subject Withdrawal request from Seller  @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">{{trans "Hello"}}</p>
+            <p class="greeting">{{trans "Request to withdraw an amount "}}{{var amount|raw}}{{trans " is received from seller %seller." seller=$seller}}</p>
+            <p>
+                {{trans 'Please check after <a href="%account_url">logging into your account</a>.' account_url=$this.getUrl($store,'admin/',[_nosid:1]) |raw}}
+            </p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

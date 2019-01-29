@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="customer_register_success">
+        <observer name="webkul_marketplace_customer_register_success_observer" instance="Webkul\Marketplace\Observer\CustomerRegisterSuccessObserver" />
+    </event>
+    <event name="catalog_product_delete_after_done">
+        <observer name="webkul_marketplace_catalog_product_delete_after_observer" instance="Webkul\Marketplace\Observer\CatalogProductDeleteAfterObserver" />
+    </event>
+    <event name="customer_delete_commit_after">
+        <observer name="webkul_marketplace_customer_delete_commit_after_observer" instance="Webkul\Marketplace\Observer\CustomerDeleteCommitAfterObserver" />
+    </event>
+    <event name="adminhtml_customer_save_after">
+        <observer name="webkul_marketplace_adminhtml_customer_save_after_observer" instance="Webkul\Marketplace\Observer\AdminhtmlCustomerSaveAfterObserver" />
+    </event>
+    <event name="checkout_submit_all_after">
+        <observer name="webkul_marketplace_sales_order_place_after_observer" instance="Webkul\Marketplace\Observer\SalesOrderPlaceAfterObserver" />
+    </event>
+    <event name="checkout_onepage_controller_success_action">
+        <observer name="webkul_marketplace_sales_order_success_observer" instance="Webkul\Marketplace\Observer\SalesOrderSuccessObserver" />
+    </event>
+    <event name="sales_order_invoice_save_after">
+        <observer name="webkul_marketplace_sales_order_invoice_save_after_observer" instance="Webkul\Marketplace\Observer\SalesOrderInvoiceSaveAfterObserver" />
+    </event>
+    <event name="sales_order_save_commit_after">
+        <observer name="webkul_marketplace_sales_order_save_commit_after_observer" instance="Webkul\Marketplace\Observer\SalesOrderSaveCommitAfterObserver" />
+    </event>
+    <event name="sales_order_creditmemo_save_after">
+        <observer name="webkul_marketplace_sales_order_creditmemo_save_after_observer" instance="Webkul\Marketplace\Observer\SalesOrderCreditmemoSaveAfterObserver" />
+    </event>
+    <event name="checkout_cart_save_before">
+        <observer name="webkul_marketplace_checkout_cart_save_before_observer" instance="Webkul\Marketplace\Observer\CheckoutCartSaveBeforeObserver" />
+    </event>
+    <event name="controller_action_predispatch_checkout_index_index">
+        <observer name="webkul_marketplace_checkout_before_observer" instance="Webkul\Marketplace\Observer\CheckoutBeforeObserver" />
+    </event>
+    <event name="catalog_product_save_after">
+        <observer name="webkul_marketplace_catalog_product_save_after_observer" instance="Webkul\Marketplace\Observer\CatalogProductSaveAfterObserver" />
+    </event>
+    <event name="controller_action_predispatch_customer_account_loginPost">
+        <observer name="seller_login" instance="Webkul\Marketplace\Observer\SellerLoginObserver" />
+    </event>
+</config>

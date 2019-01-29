@@ -1,0 +1,317 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Webkul\Marketplace\Block\Product\Productlist */
+
+$helper = $this->helper('Webkul\Marketplace\Helper\Data');
+$paramData = $this->getRequest()->getParams();
+$filter = '';
+$filterStatus = '';
+$filterDateFrom = '';
+$filterDateTo = '';
+if (isset($paramData['s'])) {
+    $filter = $paramData['s'] != '' ? $paramData['s'] : '';
+}
+if (isset($paramData['status'])) {
+    $filterStatus = $paramData['status'] != '' ? $paramData['status'] : '';
+}
+if (isset($paramData['from_date'])) {
+    $filterDateFrom = $paramData['from_date'] != '' ? $paramData['from_date'] : '';
+}
+if (isset($paramData['to_date'])) {
+    $filterDateTo = $paramData['to_date'] != '' ? $paramData['to_date'] : '';
+}
+$_products_coll = $block->getAllProducts();
+if ($helper->getIsProductApproval() || $helper->getIsProductEditApproval()) {
+    $enabledStatusText = __('Approved');
+    $disabledStatusText = __('Pending');
+} else {
+    $enabledStatusText = __('Enabled');
+    $disabledStatusText = __('Disabled');
+}
+?>
+<div class="wk-mp-design">
+    <fieldset class="fieldset info wk-mp-fieldset">
+        <legend class="legend">
+            <span><?php echo __('Product List') ?></span>
+        </legend>
+        <div class="grid">
+            <div class="hor-scroll">
+                <form action="<?php echo $block->getUrl('marketplace/product/productlist', ['_secure' => $this->getRequest()->isSecure()])?>" method="get" id="form-productlist-filter"  name="formProductlistFilter" data-mage-init='{"validation":{}}'>
+                    <table cellspacing="0" class="border wk-mp-list-table">
+                        <thead>
+                            <tr id="wk-mp-tr-heading">
+                                <th><span><?php echo __('Product Name') ?></span></th>
+                                <th><span><?php echo __('Date') ?></span></th>
+                                <th><span><?php echo __('Product Status') ?></span></th>
+                                <th><span>&nbsp;</span></th>
+                            </tr>
+                        </thead>
+                        <tbody class="wk-mp-body" id="colender-check">
+                            <tr>
+                                <td>
+                                    <input type="text" class="input-text" name="s" placeholder='<?php echo __('Search by product name') ?>' value="<?php echo $filter?>"/>
+                                </td>
+                                <td>
+                                    <span class="wk-mp-td-span">
+                                        <?php echo __('From: ') ?>
+                                        <input name="from_date" id="special-from-date" class="input-text" value="<?php echo $filterDateFrom?>" />
+                                    </span>				    			
+                                    <span class="wk-mp-td-span">
+                                        <?php echo __('To: ') ?>
+                                        <input name="to_date" id="special-to-date" class="input-text" value="<?php echo $filterDateTo?>" />
+                                    </span>
+                                </td>
+                                <td>
+                                    <select name="status" class="input-text">
+                                        <option value=""><?php echo __('All') ?></option>
+                                        <option value="1" <?php if($filterStatus == 1) echo 'selected="selected"'?>>
+                                            <?php echo $enabledStatusText ?>
+                                        </option>
+                                        <option value="2" <?php if($filterStatus == 2) echo 'selected="selected"'?>>
+                                            <?php echo $disabledStatusText ?>
+                                        </option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button class="button" title="Save" type="submit">
+                                        <span><span><span><?php echo __('Submit') ?></span></span></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+                <div data-bind="scope: 'product-list-component'">	
+                <?php if ($_products_coll && count($_products_coll)): ?>
+                    <form action="<?php echo $block->getUrl('marketplace/product/massDelete', ['_secure' => $this->getRequest()->isSecure()]) ?>" method="post" id="form-productlist-massdelete" name="formProductlistMassdelete" data-mage-init='{"validation":{}}'>
+                        <?php echo $block->getBlockHtml('formkey')?>
+                        <button class="button" title="<?php echo __('Delete Products') ?>" type="submit" style="float: left;padding: 5px 5px 5px 0;"  id="mass-delete-butn">
+                            <span><span><?php echo __('Delete Products') ?></span></span>
+                        </button>
+                            <!-- ko template: getTemplate() --><!-- /ko -->
+                        <table cellspacing="0" class="border wk-mp-list-table wk-mp-list-container-table">
+                            <thead>
+                                <tr class="wk-content">
+                                    <th class="wk-check-first-td">
+                                        <span>
+                                            <input type="checkbox" name="mpselecctall" value="all" id="mpselecctall"/>
+                                        </span>
+                                    </th>
+                                    <th class="wk-first-td">
+                                        <span class="label name">
+                                            <?php echo __('Product')?>
+                                        </span>
+                                    </th>
+                                    <th>
+                                        <span class="label pro-status">
+                                            <?php echo __('Type')?>
+                                        </span>
+                                    </th>
+                                    <th>
+                                        <span class="label pro-status">
+                                            <?php echo __('Status')?>
+                                        </span>
+                                    </th>
+                                    <th class="wk-list-th-display">
+                                        <span class="label qty">
+                                            <?php echo __('Qty. Confirmed')?>
+                                        </span>
+                                    </th>
+                                    <th class="wk-list-th-display">
+                                        <span class="label qty">
+                                            <?php echo __('Qty. Pending')?>
+                                        </span>
+                                    </th>	
+                                    <th class="wk-list-th-display">
+                                        <span class="label qty">
+                                            <?php echo __('Qty. Sold')?>
+                                        </span>
+                                    </th>
+                                    <th class="wk-list-th-display1">
+                                        <span class="label">
+                                            <?php echo __('Earned Amount')?>
+                                        </span>
+                                    </th>
+                                    <th>
+                                        <span class="label">
+                                            <?php echo __('Action')?>
+                                        </span>
+                                    </th>			    		
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+                                $i = 0;
+                                foreach($block->getAllProducts() as $products){
+                                    $product = $block->getProductData($products->getMageproductId());
+                                    $i++;
+                                    $image_url = $block->imageHelperObj()->init($product, 'product_page_image_small')
+                                                ->setImageFile($product->getImage())
+                                                ->getUrl();
+                                    $salesdetail=$block->getSalesdetail($products->getMageproductId());
+                                    $isApprovedBefore = $products['is_approved'];
+                                    ?>
+                                    <tr class="wk-row-view <?php echo $class = ($i == count($block->getAllProducts()))? 'wk-last_tr':''?>">
+                                        <td class="wk-check-first-td">
+                                            <span>
+                                                <input type="checkbox" name="product_mass_delete[]" class="mpcheckbox" value="<?php echo $products->getMageproductId(); ?>"/>
+                                            </span>
+                                        </td>
+                                        <td class="wk-first_td">
+                                            <input type="hidden" class="hidden-id" value="<?php echo $products->getMageproductId(); ?>" />
+                                            <div class="label name" title="<?php echo $product->getName(); ?>">
+                                                <div class="wk-pro-divide1">
+                                                    <img src="<?php echo $image_url?>" class="image" />
+                                                </div>
+                                                <div class="wk-pro-divide2">
+                                                    <div style="width:100%;">
+                                                        <?php if($product->getStatus()==1 && $product->getVisibility()!=1) { ?>
+                                                            <a href="<?php echo $product->getProductUrl()?>" target="blank">
+                                                        <?php }?>
+                                                            <?php echo $product->getName();?>
+                                                        <?php if($product->getStatus()==1 && $product->getVisibility()!=1) { ?>
+                                                            </a>
+                                                        <?php }?>
+                                                    </div>
+                                                    <div style="width:100%;float:left;">
+                                                        <?php 
+                                                        if($product->getPrice()*1){
+                                                            echo $block->getFormatedPrice($product->getPrice(), $helper->getCurrencySymbol());
+                                                        }else{
+                                                            echo $helper->getCurrencySymbol().'0.00';
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>		
+                                            <span class="label pro-status">
+                                                <?php echo $product->getTypeId()?>
+                                            </span>
+                                        </td>
+                                        <?php 
+                                        if(($product->getStatus()==2 && !$isApprovedBefore)) {	?>
+                                            <td>		
+                                                <span class="label pro-status">
+                                                    <?php echo $disabledStatusText ?>
+                                                </span>
+                                            </td>
+                                            <td class="wk-list-th-display">
+                                                <span class="label qty">
+                                                    <?php echo __('Pending')?>
+                                                </span>
+                                            </td>
+                                            <td class="wk-list-th-display">
+                                                <span class="label qty">
+                                                    <?php echo __('Pending')?>
+                                                </span>	
+                                            </td>
+                                            <td class="wk-list-th-display">
+                                                <span class="label qty">
+                                                    <?php echo __('Pending')?>
+                                                </span>	
+                                            </td>
+                                            <td class="wk-list-th-display1">
+                                                <span class="label qty">
+                                                    <?php echo __('Pending')?>
+                                                </span>	
+                                            </td>									
+                                        <?php }
+                                        else{ ?>
+                                            <?php if ($product->getStatus() == 2) { ?>
+                                                <td>		
+                                                    <span class="label pro-status">
+                                                        <?php echo $disabledStatusText ?>
+                                                    </span>
+                                                </td>
+                                            <?php } else { ?>
+                                                <td>		
+                                                    <span class="label pro-status">
+                                                        <?php echo $enabledStatusText ?>
+                                                    </span>
+                                                </td>
+                                            <?php } ?>
+                                            <td class="wk-list-th-display">
+                                                <span class="label qty">
+                                                    <?php echo $salesdetail['quantitysoldconfirmed']; ?>
+                                                </span>
+                                            </td>
+                                            <td class="wk-list-th-display">
+                                                <span class="label qty">
+                                                    <?php echo $salesdetail['quantitysoldpending']; ?>
+                                                </span>	
+                                            </td>
+                                            <td class="wk-list-th-display1">
+                                                <span class="label qty">
+                                                    <a href="<?php echo $block->getUrl('marketplace/order/salesdetail/', ['id'=>$product->getId(), '_secure' => $this->getRequest()->isSecure()]); ?>"><?php echo $salesdetail['quantitysold']; ?></a>
+                                                </span>	
+                                            </td>
+                                            <td class="wk-list-th-display">
+                                                <span class="label price">
+                                                    <?php echo $block->getFormatedPrice($salesdetail['amountearned'], $helper->getCurrencySymbol()); ?>
+                                                </span>	
+                                            </td>
+                                            <?php 
+                                        }?>
+                                        <td>
+                                            <span class="label wk-action">
+                                                <img src="<?php echo $this->getViewFileUrl('Webkul_Marketplace::images/icon-edit.png'); ?>" data-url="<?php echo $block->getUrl('marketplace/product/edit', ['id'=>$product->getId(), '_secure' => $this->getRequest()->isSecure()])?>" alt="<?php echo __('Edit')?>" title="<?php echo __('Edit')?>" class="mp-edit"/>
+                                            </span>	
+                                        </td>			    		
+                                    </tr>
+                                    <?php
+                                }?>
+                            </tbody>
+                        </table>
+                    </form>
+                    </div>						
+                <?php else: ?>
+                    <div class="wk-emptymsg">
+                        <?php echo __('No Product Available') ?>
+                    </div>
+                <?php endif ?>					
+            </div>
+        </div>
+        <?php if ($block->getPagerHtml()): ?>
+            <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+        <?php endif ?>	
+    </fieldset>	
+    <div class="buttons-set">
+        <p class="back-link">
+            <a href="javascript:;" onclick="javascript: window.history.back();" class="left">&laquo; <?php echo __('Back') ?></a>
+        </p>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Webkul_Marketplace/js/product/product-date-range": {}
+        }
+    }
+</script>
+<script type="text/x-magento-init">
+        {
+            "*": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "product-list-component": {
+                            "component": "sellerProductList",
+                            "template" : "Webkul_Marketplace/product-list"
+                        }
+                    }
+                }
+            }
+        }
+</script>

@@ -1,0 +1,78 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Webkul\Marketplace\Block\Product\Configurableattribute */
+?>
+<form action="<?php echo $block->getUrl('marketplace/product_attribute/save', ['_secure' => $this->getRequest()->isSecure()]) ?>" method="POST"  id="form-customer-attr-new" data-mage-init='{"validation":{}}'>
+	<div class="wk-mp-design">
+		<fieldset class="info wk-mp-fieldset fieldset" id="associate-product">
+			<legend class="legend">
+				<span><?php echo __('Create Attribute for Configurable Products') ?></span>
+				<button type="reset" class="button wk-mp-btn">
+					<span><span><?php echo __('Reset') ?></span></span>
+				</button>
+				<button class="button wk-mp-btn" title="<?php echo __('Save') ?>" type="submit" id="save-btn">
+					<span><span><?php echo __('Save Attribute') ?></span></span>
+				</button>
+			</legend>			
+			<?php echo $block->getBlockHtml('seller.formkey')?>
+			<?php echo $block->getBlockHtml('formkey')?>
+
+			<div class="fieldset form-list" id="cust">
+				
+				<div class="field required">
+					<label class="label"><?php echo __('Attribute Code') ?> : </label>
+					<div class="control">
+						<input type="text" class="validate-code validate-length maximum-length-30 input-text required-entry" name="attribute_code" id="" />
+					</div>
+				</div>
+				<div class="field required">
+					<label class="label"><?php echo __('Attribute Label') ?> : </label>
+					<div class="control">
+						<input type="text" class="required-entry widthinput input-text" name="attribute_label" id="" />
+					</div>
+				</div>
+				<div class="field required">
+					<label class="label"><?php echo __('Catalog Input Type') ?> : </label>
+					<div class="control">
+						<select id="frontend_input" class=" select validate-select" title="<?php echo __('Catalog Input Type for Store Owner') ?>" name="frontend_input">
+							<option value=""><?php echo __("Please Select"); ?></option>
+							<option value="select"><?php echo __("Dropdown"); ?></option>
+						</select>
+					</div>
+				</div>
+				<div class="field">
+					<label class="label"><?php echo __('Values Required') ?> : </label>
+					<div class="control">
+						<select id="val_required" class="select val_required" title="<?php echo __('Values Required') ?>" name="val_required">
+							<option value="1"><?php echo __("Yes"); ?></option>
+							<option selected="selected" value="0"><?php echo __("No"); ?></option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</form>
+<div class="buttons-set">
+	<p class="back-link">
+		<a href="javascript:;" onclick="javascript: window.history.back();" class="left">&laquo; <?php echo __('Back') ?></a>
+	</p>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "sellerCreateConfigurable": {}
+        }
+    }
+</script>

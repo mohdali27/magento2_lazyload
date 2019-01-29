@@ -1,0 +1,51 @@
+<div id="messages" class="success_profile_msg" style="display:none;margin-bottom:0px;margin-top:2px;">
+	<div class="messages">
+		<div class="message message-success success">
+			<div data-ui-id="messages-message-success">
+				<?php echo __("Shop name is available."); ?>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="messages" class="error_profile_msg" style="display:none;margin-bottom:0px;margin-top:2px;">
+	<div class="messages">
+		<div class="message message-error error">
+			<div data-ui-id="messages-message-error">
+				<?php echo __("Shop name is already exists."); ?>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+    require([
+        "jquery",
+        "mage/mage",
+        "prototype"
+
+    ], function($){
+    	$("input[type='file']").attr('form','customer_form');
+        $("#marketplace_profileurl").keyup(function(){
+            $(this).val($(this).val().replace(/[^a-z^A-Z^0-9\.\-]/g,""));
+        });
+        $("#marketplace_profileurl").on('change',function(){
+        	$('.success_profile_msg').hide();
+        	$('.error_profile_msg').hide();
+        	var profileurl = $(this).val();
+        	var self = $(this);
+        	if(profileurl != ''){
+	        	new Ajax.Request('<?php echo $block->getAjaxCheckUrl() ?>', {
+	                method: 'post',
+	                parameters:{profileurl:profileurl},
+	                onSuccess: function(transport){
+	                	console.log(transport.responseJSON);
+	                	if(transport.responseJSON == 0){
+	                		self.after($('.success_profile_msg').show());
+	                	}else{
+	                		self.after($('.error_profile_msg').show());
+	                	}
+	                }
+	            });
+	        }    
+        });
+    });
+</script>

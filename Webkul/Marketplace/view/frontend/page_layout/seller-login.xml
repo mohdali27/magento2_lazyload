@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_layout.xsd">
+    <container name="root" htmlTag="section" htmlClass="wk-mp-page-wrapper">
+        <container name="after.body.start" as="after.body.start" label="Page Top" before="-"/>
+        <container name="seller.login.header" htmlTag="header" htmlClass="wk-mp-login-header"/>
+        <container name="seller.login.content" htmlTag="div" htmlClass="wk-mp-login-content"/>
+        <container name="seller.login.footer" htmlTag="footer" htmlClass="wk-mp-login-footer"/>
+    </container>
+</layout>

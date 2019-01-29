@@ -1,0 +1,71 @@
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<!--@subject Request To Approve Product  @-->
+<!--@vars {
+"var this.getUrl($store, 'customer/account/')":"Customer Account URL",
+"var customer.email":"Customer Email",
+"var customer.name":"Customer Name"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">{{trans "%customer_name," customer_name=$myvar3}}</p>
+            <p>
+                {{trans "%seller_message" seller_message=$myvar4}}
+            </p>
+        </td>
+    </tr>
+    <tr class="email-summary">
+        <td>
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            <table class="product-details">
+                <thead>
+                    <tr>
+                        <th align="left" width="325" bgcolor="#EAEAEA" style="font-size:13px; padding:5px 9px 6px 9px; line-height:1em;">{{trans "Product Name"}}</th>
+                        <th width="10"></th>
+                        <th align="left" width="325" bgcolor="#EAEAEA" style="font-size:13px; padding:5px 9px 6px 9px; line-height:1em;">{{trans "Category"}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td valign="top" style="font-size:12px; padding:7px 9px 9px 9px; border-left:1px solid #EAEAEA; border-bottom:1px solid #EAEAEA; border-right:1px solid #EAEAEA;">
+                           {{var myvar1}}
+                        </td>
+                        <td>&nbsp;</td>
+                        <td valign="top" style="font-size:12px; padding:7px 9px 9px 9px; border-left:1px solid #EAEAEA; border-bottom:1px solid #EAEAEA; border-right:1px solid #EAEAEA;">
+                           {{var myvar2}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+             <br/>
+               <p>{{trans "Please approve the product as soon as possible."}}</p>
+        </td>
+        <tr>
+            <td bgcolor="#EAEAEA" align="center" style="background:#EAEAEA;text-align:center;">
+                <center>
+                    <p style="font-size:12px;margin:0;">
+                        <strong>{{trans "Thank you"}}</strong>
+                    </p>
+                </center>
+            </td>
+        </tr>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

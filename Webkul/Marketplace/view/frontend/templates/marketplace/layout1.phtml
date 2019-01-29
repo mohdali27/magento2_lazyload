@@ -1,0 +1,247 @@
+<?php  
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+// @codingStandardsIgnoreFile
+
+$helper = $this->helper('Webkul\Marketplace\Helper\Data');
+$marketplacelabel1  =   $block->escapeHtml($helper->getMarketplacelabel1());
+$marketplacelabel2  =   $block->escapeHtml($helper->getMarketplacelabel2());
+$marketplacelabel3  =   $block->escapeHtml($helper->getMarketplacelabel3());
+$marketplacelabel4  =   $block->escapeHtml($helper->getMarketplacelabel4());
+$banner_display     =   $helper->getDisplayBanner();
+$banner_image       =   $helper->getBannerImage();
+$banner_content     =   $helper->getBannerContent();
+$icons_display      =   $helper->getDisplayIcon();
+$icon_image1        =   $helper->getIconImage1();
+$icon_image1_label  =   $block->escapeHtml($helper->getIconImageLabel1());
+$icon_image2        =   $helper->getIconImage2();
+$icon_image2_label  =   $block->escapeHtml($helper->getIconImageLabel2());
+$icon_image3        =   $helper->getIconImage3();
+$icon_image3_label  =   $block->escapeHtml($helper->getIconImageLabel3());
+$icon_image4        =   $helper->getIconImage4();
+$icon_image4_label  =   $block->escapeHtml($helper->getIconImageLabel4());
+$marketplacebutton  =   $helper->getMarketplacebutton();
+$marketplaceprofile =   $helper->getMarketplaceprofile();
+
+$imageHelper = $this->helper(\Magento\Catalog\Helper\Image::class);
+$placeholderImageUrl = $imageHelper->getDefaultPlaceholderUrl('small_image');
+/*order collection*/
+$bestSellersData = $block->getBestSaleSellers();
+$seller_arr = $bestSellersData['0'];
+$sellerProfileArr = $bestSellersData['1'];
+$sellerCountArr = $bestSellersData['2'];
+$sellerAccountUrl = $block->getUrl(
+    'marketplace/account/becomeseller',
+    ["_secure" => $this->getRequest()->isSecure()]
+);
+if (!$helper->isCustomerLoggedIn()) {
+    $sellerAccountUrl = $helper->getSellerRegistrationUrl();
+}
+?>
+<div class="wk-mp-design wk-mp-landingpage wk-mp-landingpage-layout1">
+    <?php if ($banner_display): ?>
+        <div class="wk-mp-banner-container">
+            <div class="wk-mp-banner">
+                <div class="wk-mp-header">
+                    <h1><?php echo $marketplacebutton; ?></h1>
+                    <h2>
+                        <?php echo $block->getCmsFilterContent($banner_content)?>
+                    </h2>
+                    <p>
+                        <a href="<?php echo $sellerAccountUrl?>">
+                            <button class="button wk-mp-landing-button">
+                                <span>
+                                    <span>
+                                        <strong><?php echo $marketplacebutton; ?></strong>
+                                    </span>
+                                </span>
+                            </button>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+    <h1 class="wk-marketplace-label"><?php echo $marketplacelabel1 ?></h1>
+    <?php if ($icons_display) { ?>
+        <div class="wk-mp-icon-container">
+            <div class="wk-mp-icon-wraper">
+                <div class="wk-mp-icon">
+                    <img src="<?php echo $icon_image1 ?>">
+                </div>
+                <span class="wk-marketplace-label-span"><?php echo $icon_image1_label ?></span>
+            </div>
+            <div class="wk-mp-icon-wraper">
+                <div class="wk-mp-icon">
+                    <img src="<?php echo $icon_image2 ?>">
+                </div>
+                <span class="wk-marketplace-label-span"><?php echo $icon_image2_label ?></span>
+            </div>
+            <div class="wk-mp-icon-wraper">
+                <div class="wk-mp-icon">
+                    <img src="<?php echo $icon_image3 ?>">
+                </div>
+                <span class="wk-marketplace-label-span"><?php echo $icon_image3_label ?></span>
+            </div>
+            <div class="wk-mp-icon-wraper">
+                <div class="wk-mp-icon">
+                    <img src="<?php echo $icon_image4 ?>">
+                </div>
+                <span class="wk-marketplace-label-span"><?php echo $icon_image4_label ?></span>
+            </div>
+        </div>
+    <?php } ?>
+    <?php if ($helper->getSellerProfileDisplayFlag()) { ?>
+        <h1 class="wk-marketplace-label"><?php echo $marketplacelabel2 ?></h1>
+
+        <div class="wk-mp-landing-sellers-container">
+            <?php
+            $i = 0;
+            $count = count($seller_arr);
+            foreach ($seller_arr as $seller_id => $products) {
+                $i++;
+                if ($i <= 4) {
+                    $seller_product_count = 0;
+                    $profileurl = 0;
+                    $shoptitle = '';
+                    $logo="noimage.png";
+                    
+                    $seller_product_count = $sellerCountArr[$seller_id];
+
+                    if (isset($sellerProfileArr[$seller_id][0])) {
+                        $profileurl = $sellerProfileArr[$seller_id][0]['profileurl'];
+                        $shoptitle = $sellerProfileArr[$seller_id][0]['shoptitle'];
+                        $logo = $sellerProfileArr[$seller_id][0]['logo'];
+                    }
+                    if (!$shoptitle) {
+                        $shoptitle = $profileurl;
+                    }
+                    $logo = $helper->getMediaUrl().'avatar/'.$logo;
+                    if (!isset($products[0])) {
+                        $products[0] = 0;
+                        $products_name_1 = '';
+                        $products_url_1 = '';
+                        $products_image_url_1 = $placeholderImageUrl;
+                    } else {
+                        $product_1 = $block->_productRepository->getById($products[0]);
+                        $products_name_1 = $product_1->getName();
+                        $products_url_1 = $product_1->getProductUrl();
+                        $products_image_url_1 = $block->imageHelperObj()->init($product_1, 'product_page_image_small')->setImageFile($product_1->getFile())->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(TRUE)->resize(130)->getUrl();
+                    }
+
+                    if (!isset($products[1])) {
+                        $products[1] = 0;
+                        $products_name_2 = '';
+                        $products_url_2 = '';
+                        $products_image_url_2 = $placeholderImageUrl;
+                    } else {
+                        $product_2 = $block->_productRepository->getById($products[1]);
+                        $products_name_2 = $product_2->getName();
+                        $products_url_2 = $product_2->getProductUrl();
+                        $products_image_url_2 = $block->imageHelperObj()->init($product_2, 'product_page_image_small')->setImageFile($product_2->getFile())->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(TRUE)->resize(130)->getUrl();
+                    }
+
+                    if (!isset($products[2])) {
+                        $products[2] = 0;
+                        $products_name_3 = '';
+                        $products_url_3 = '';
+                        $products_image_url_3 = $placeholderImageUrl;
+                    } else {
+                        $product_3 = $block->_productRepository->getById($products[2]);
+                        $products_name_3 = $product_3->getName();
+                        $products_url_3 = $product_3->getProductUrl();
+                        $products_image_url_3 = $block->imageHelperObj()->init($product_3, 'product_page_image_small')->setImageFile($product_3->getFile())->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(TRUE)->resize(260)->getUrl();
+                    }
+                    ?>
+                    <div class="wk-mp-landing-sellers-wraper <?php if($count == $i){ echo "wk_last_seller"; }?>">
+                        <div class="wk-mp-landing-sellers">
+                            <div class="wk-mp-landing-sellers-img1">
+                                <a href="<?php echo $products_url_1?>" title="<?php echo  $products_name_1;?>">
+                                    <img src=<?php echo $products_image_url_1?> />
+                                </a>
+                                <a href="<?php echo $products_url_2?>" title="<?php echo $products_name_2;?>">
+                                    <img src=<?php echo $products_image_url_2;?> />
+                                </a>
+                            </div>
+                            <div class="wk-mp-landing-sellers-img2">
+                                <a href="<?php echo $products_url_3?>" title="<?php echo $products_name_3;?>">
+                                    <img src=<?php echo $products_image_url_3;?> />
+                                </a>
+                            </div>
+                            <div class="wk-mp-landing-sellers-logo">
+                                <a href="<?php echo $helper->getRewriteUrl('marketplace/seller/profile/shop/'.$profileurl);?>" title="<?php echo __("View Seller's Shop") ?>"><img src="<?php echo $logo ?>"></a>
+                            </div>
+                            <div class="wk-mp-landing-sellers-details">
+                                <div>
+                                    <a href="<?php echo $helper->getRewriteUrl('marketplace/seller/profile/shop/'.$profileurl);?>" title="<?php echo __("View Seller's Shop") ?>">
+                                        <strong><?php echo $block->escapeHtml($shoptitle) ?></strong>
+                                    </a>
+                                </div>
+                                <div><?php echo __('%1 Products',$seller_product_count) ?></div>
+                                <a href="<?php echo $helper->getRewriteUrl('marketplace/seller/collection/shop/'.$profileurl);?>">
+                                    <button class="button" title="<?php echo __("View Seller's Collection") ?>">
+                                        <span>
+                                            <span>
+                                                <?php echo __('View All'); ?>
+                                            </span>
+                                        </span>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php
+                }
+            } ?>
+        </div>
+
+        <div class="wk-mp-label3-container">
+            <div class="wk-mp-label3">
+                <h3 class="wk-marketplace-label-about"><?php echo $marketplacelabel3 ?></h3>
+
+                <a href="<?php echo $block->getUrl('marketplace/seller/sellerlist/', ['_secure' => $this->getRequest()->isSecure()]); ?>">
+                    <button class="button wk-mp-landing-button">
+                        <span>
+                            <span>
+                                <?php echo __('View All'); ?>
+                            </span>
+                        </span>
+                    </button>
+                </a>
+            </div>
+        </div>	
+    <?php } ?>
+
+    <h1 class="wk-marketplace-label"><?php echo $marketplacelabel4 ?></h1>
+
+    <div class="wk-mp-landing-about">
+        <?php echo $block->getCmsFilterContent($marketplaceprofile)?>
+    </div>
+
+    <a href="<?php echo $sellerAccountUrl?>">
+        <button class="button wk-mp-landing-button">
+            <span>
+                <span>
+                    <strong><?php echo $marketplacebutton; ?></strong>
+                </span>
+            </span>
+        </button>
+    </a>
+</div>
+<script>
+    require([
+        "jquery",
+        "mage/mage",
+    ], function($){
+        $('.page-title-wrapper').hide();
+        $('.wk-mp-banner').css('background-image','url("<?php echo $banner_image ?>")');
+    });
+</script>

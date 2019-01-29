@@ -1,0 +1,100 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<div id="seller-pay-block">
+	<fieldset class="fieldset admin__fieldset-wrapper">
+		<legend class="legend admin__legend">
+	        <span><?php /* @escapeNotVerified */ echo __('Seller Payment Information') ?></span>
+	    </legend>
+	    <div class="form-inline">
+			<form action="<?php /* @escapeNotVerified */ echo $block->getUrl('marketplace/order/massPayseller') ?>" enctype="multipart/form-data" method="post" id="form-seller-order-pay">
+				<?php echo $block->getBlockHtml('formkey'); ?>
+				<input type="hidden" name="wksellerorderids" id="wksellerorderids" value="" />
+				<input type="hidden" name="seller_id" value="<?php /* @escapeNotVerified */ echo $this->getRequest()->getParam('seller_id')?>" />				
+				<div class="box-left" style="width: 100%;">
+				    <div class="entry-edit">
+				        <div class="fieldset">
+				            <table cellspacing="0" class="form-list" style="width: 100%;">
+					            <tbody>
+						            <tr>
+						                <td class="label"><label><?php /* @escapeNotVerified */ echo __('Seller Name ') ?></label></td>
+						                <td class="value">
+						                	<strong>
+						                		<?php /* @escapeNotVerified */ echo $block->getCustomer()->getName()?>
+						                	</strong>
+						                </td>
+						            </tr>
+						                        <tr>
+						                <td class="label"><label><?php /* @escapeNotVerified */ echo __('Seller Email ') ?></label></td>
+						                <td class="value">
+						                	<strong>
+						                		<?php /* @escapeNotVerified */ echo $block->getCustomer()->getEmail()?>
+						                	</strong>
+						                </td>
+						            </tr>
+						            <tr>
+						                <td class="label"><label><?php /* @escapeNotVerified */ echo __('Total Amount To Be Pay ')?></label></td>
+						                <td class="value">
+						                	<strong>
+						                		<span id="wk-total-sellerprice"></span>
+						                		<div data-bind="scope: 'sellerpay'">
+													<!-- ko template: getTemplate() --><!-- /ko -->
+												</div>
+						                	</strong>
+						                </td>
+						            </tr>
+					            	<tr>
+						                <td class="label"><label><?php /* @escapeNotVerified */ echo __('Add Comment') ?></label></td>
+						                <td class="value">
+						                	<strong>
+						                		<textarea name="seller_pay_reason" class="seller_pay_reason" id="seller_pay_reason" style="width:80%;heigth:5em;"></textarea>
+						                	</strong>
+						                </td>
+						            </tr>
+					            </tbody>
+				            </table>
+				        </div>
+				    </div>
+				</div>
+				<button title="<?php /* @escapeNotVerified */ echo __('Pay') ?>" type="submit" id="save-butn"><span><span><span><?php /* @escapeNotVerified */ echo __('Pay') ?></span></span></span></button>
+			</form>
+		</div>
+	</fieldset>
+</div>
+<?php 
+$getPriceFormat = $this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode(
+	$this->helper('Webkul\Marketplace\Helper\Data')->getPriceFormat()
+); 
+?>
+<script>
+  	require.config({
+		map: {
+			'*': {
+				'Magento_Ui/js/grid/columns/multiselect':  'Webkul_Marketplace/js/grid/columns/multiselect'
+			}
+		}
+  	});
+</script>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "sellerpay": {
+                        "component": "Webkul_Marketplace/js/grid/columns/multiselect",
+                        "template" : "Webkul_Marketplace/pay",
+                        "priceFormat" : <?php /* @escapeNotVerified */ echo $getPriceFormat?>
+                    }
+                }
+            }
+        }
+    }
+</script>

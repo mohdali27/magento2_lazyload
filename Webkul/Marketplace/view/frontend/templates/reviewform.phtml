@@ -1,0 +1,540 @@
+<?php  
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+// @codingStandardsIgnoreFile
+
+$helper = $this->helper('Webkul\Marketplace\Helper\Data');
+$partner = $block->getProfileDetail();
+$shopUrl = $block->escapeHtml($partner['shop_url']);
+$sellerId = $partner->getSellerId();
+$feeds = $block->getFeed();
+if (empty($feeds['feed_price'])) {
+	$feeds['feed_price'] = 0;
+}
+if (empty($feeds['feed_value'])) {
+	$feeds['feed_value'] = 0;
+}
+if (empty($feeds['feed_quality'])) {
+	$feeds['feed_quality'] = 0;
+}
+$widthPriceStar5 = 0;
+$widthPriceStar4 = 0;
+$widthPriceStar3 = 0;
+$widthPriceStar2 = 0;
+$widthPriceStar1 = 0;
+
+$borderPriceStar5 = 0;
+$borderPriceStar4 = 0;
+$borderPriceStar3 = 0;
+$borderPriceStar2 = 0;
+$borderPriceStar1 = 0;
+
+$widthValueStar5 = 0;
+$widthValueStar4 = 0;
+$widthValueStar3 = 0;
+$widthValueStar2 = 0;
+$widthValueStar1 = 0;
+
+$borderValueStar5 = 0;
+$borderValueStar4 = 0;
+$borderValueStar3 = 0;
+$borderValueStar2 = 0;
+$borderValueStar1 = 0;
+
+$widthQualityStar5 = 0;
+$widthQualityStar4 = 0;
+$widthQualityStar3 = 0;
+$widthQualityStar2 = 0;
+$widthQualityStar1 = 0;
+
+$borderQualityStar5 = 0;
+$borderQualityStar4 = 0;
+$borderQualityStar3 = 0;
+$borderQualityStar2 = 0;
+$borderQualityStar1 = 0;
+if ($feeds['feedcount']) {
+	$widthPriceStar5 = ($feeds['price_star_5']*100)/$feeds['feedcount'];
+	if ($widthPriceStar5) {
+		$borderPriceStar5 = 3;
+	}
+	$widthPriceStar4 = ($feeds['price_star_4']*100)/$feeds['feedcount'];
+	if ($widthPriceStar4) {
+		$borderPriceStar4 = 3;
+	}
+	$widthPriceStar3 = ($feeds['price_star_3']*100)/$feeds['feedcount'];
+	if ($widthPriceStar3) {
+		$borderPriceStar3 = 3;
+	}
+	$widthPriceStar2 = ($feeds['price_star_2']*100)/$feeds['feedcount'];
+	if ($widthPriceStar2) {
+		$borderPriceStar2 = 3;
+	}
+	$widthPriceStar1 = ($feeds['price_star_1']*100)/$feeds['feedcount'];
+	if ($widthPriceStar1) {
+		$borderPriceStar1 = 3;
+	}
+	$widthValueStar5 = ($feeds['value_star_5']*100)/$feeds['feedcount'];
+	if ($widthValueStar5) {
+		$borderValueStar5 = 3;
+	}
+	$widthValueStar4 = ($feeds['value_star_4']*100)/$feeds['feedcount'];
+	if ($widthValueStar4) {
+		$borderValueStar4 = 3;
+	}
+	$widthValueStar3 = ($feeds['value_star_3']*100)/$feeds['feedcount'];
+	if ($widthValueStar3) {
+		$borderValueStar3 = 3;
+	}
+	$widthValueStar2 = ($feeds['value_star_2']*100)/$feeds['feedcount'];
+	if ($widthValueStar2) {
+		$borderValueStar2 = 3;
+	}
+	$widthValueStar1 = ($feeds['value_star_1']*100)/$feeds['feedcount'];
+	if ($widthValueStar1) {
+		$borderValueStar1 = 3;
+	}
+	$widthQualityStar5 = ($feeds['quality_star_5']*100)/$feeds['feedcount'];
+	if ($widthQualityStar5) {
+		$borderQualityStar5 = 3;
+	}
+	$widthQualityStar4 = ($feeds['quality_star_4']*100)/$feeds['feedcount'];
+	if ($widthQualityStar4) {
+		$borderQualityStar4 = 3;
+	}
+	$widthQualityStar3 = ($feeds['quality_star_3']*100)/$feeds['feedcount'];
+	if ($widthQualityStar3) {
+		$borderQualityStar3 = 3;
+	}
+	$widthQualityStar2 = ($feeds['quality_star_2']*100)/$feeds['feedcount'];
+	if ($widthQualityStar2) {
+		$borderQualityStar2 = 3;
+	}
+	$widthQualityStar1 = ($feeds['quality_star_1']*100)/$feeds['feedcount'];
+	if ($widthQualityStar1) {
+		$borderQualityStar1 = 3;
+	}
+}
+
+$avgPriceRatingStar = round(($feeds['price']/20), 1, PHP_ROUND_HALF_UP);
+$avgPriceRatingClass = "wk-mp-rating-icon wk-mp-star".(int)$avgPriceRatingStar;
+
+$avgValueRatingStar = round(($feeds['value']/20), 1, PHP_ROUND_HALF_UP);
+$avgValueRatingClass = "wk-mp-rating-icon wk-mp-star".(int)$avgValueRatingStar;
+
+$avgQualityRatingStar = round(($feeds['quality']/20), 1, PHP_ROUND_HALF_UP);
+$avgQualityRatingClass = "wk-mp-rating-icon wk-mp-star".(int)$avgQualityRatingStar;
+
+$feedbackUrl = $helper->getRewriteUrl('marketplace/seller/feedback/shop/'.$shopUrl);
+
+$totalRatingStar = $helper->getSelleRating($sellerId);
+$ratingClass = "wk-mp-rating-icon wk-mp-star".(int)$totalRatingStar;
+?>
+<div class="wk_mp_design">
+	<?php echo $block->getChildHtml("marketplace_seller_top_block")?>
+	<div class="wk-mp-collection-container">
+		<div class="wk-mp-rating-block" id="rating">
+			<div class="wk-mp-rating-left">
+				<div class="wk-mp-rating-avg">
+					<div class="wk-mp-rating-avg-count <?php echo $ratingClass?>">
+						<?php echo $totalRatingStar; ?>
+					</div>
+					<div class="wk-mp-rating-avg-txt">
+						<?php echo __('Average Rating (%1)', $feeds['feedcount'])?>
+					</div>
+					<div class="wk-mp-rating-avg-txt">
+						<?php 
+						$review_percentage = (($totalRatingStar*100)/5);
+						echo $review_percentage."% ".__('positive feedback');
+						?>
+					</div>
+					<div class="wk-mp-collection-view-btn">
+						<a href="#customer-reviews" title="<?php echo __('Make a Review')?>">
+							<?php echo __('Write your Review')?>
+						</a>
+					</div>
+				</div>
+				<div class="wk-mp-rating-individual">
+					<div class="wk-mp-rating-individual-left">
+						<div class="<?php echo $avgPriceRatingClass?>">
+							<?php echo $avgPriceRatingStar ?>
+						</div>
+						<div class="wk-mp-rating-individual-txt">
+							<?php echo __('Average Price Rating (%1)', $feeds['feedcount'])?>
+						</div>
+					</div>
+					<div class="wk-mp-rating-individual-right">
+						<div  class="wk-mp-rating-progress-bar-container">
+							<div class="wk-mp-rating-individual-right-txt">
+								<?php echo __('5 Star (%1)', $feeds['price_star_5'])?>
+							</div>
+							<div class="wk-mp-rating-individual-progress-bar">
+								<small>
+									<span class="wk-mp-rating-progress-color-bar wk-mp-star5-rating-color-bar" style="width:<?php echo $widthPriceStar5; ?>%; border-width:<?php echo $borderPriceStar5; ?>px;"></span>
+								</small>
+							</div>
+						</div>
+						<div class="wk-mp-rating-progress-bar-container">
+							<div class="wk-mp-rating-individual-right-txt">
+								<?php echo __('4 Star (%1)', $feeds['price_star_4'])?>
+							</div>
+							<div class="wk-mp-rating-individual-progress-bar">
+								<small>
+									<span class="wk-mp-rating-progress-color-bar wk-mp-star4-rating-color-bar" style="width:<?php echo $widthPriceStar4; ?>%; border-width:<?php echo $borderPriceStar4; ?>px;"></span>
+								</small>
+							</div>
+						</div>
+						<div  class="wk-mp-rating-progress-bar-container">
+							<div class="wk-mp-rating-individual-right-txt">
+								<?php echo __('3 Star (%1)', $feeds['price_star_3'])?>
+							</div>
+							<div class="wk-mp-rating-individual-progress-bar">
+								<small>
+									<span class="wk-mp-rating-progress-color-bar wk-mp-star3-rating-color-bar" style="width:<?php echo $widthPriceStar3; ?>%; border-width:<?php echo $borderPriceStar3; ?>px;"></span>
+								</small>
+							</div>
+						</div>
+						<div class="wk-mp-rating-progress-bar-container">
+							<div class="wk-mp-rating-individual-right-txt">
+								<?php echo __('2 Star (%1)', $feeds['price_star_2'])?>
+							</div>
+							<div class="wk-mp-rating-individual-progress-bar">
+								<small>
+									<span class="wk-mp-rating-progress-color-bar wk-mp-star2-rating-color-bar"
+									style="width:<?php echo $widthPriceStar2; ?>%; border-width:<?php echo $borderPriceStar2; ?>px;"></span>
+								</small>
+							</div>
+						</div>
+						<div class="wk-mp-rating-progress-bar-container">
+							<div class="wk-mp-rating-individual-right-txt">
+								<?php echo __('1 Star (%1)', $feeds['price_star_1'])?>
+							</div>
+							<div class="wk-mp-rating-individual-progress-bar">
+								<small>
+									<span class="wk-mp-rating-progress-color-bar wk-mp-star1-rating-color-bar" style="width:<?php echo $widthPriceStar1; ?>%; border-width:<?php echo $borderPriceStar1; ?>px;"></span>
+								</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="wk-mp-rating-individual">
+					<div class="wk-mp-rating-individual-left">
+						<div class="<?php echo $avgValueRatingClass?>">
+							<?php echo $avgValueRatingStar ?>
+						</div>
+						<div class="wk-mp-rating-individual-txt">
+							<?php echo __('Average Value Rating (%1)', $feeds['feedcount'])?>
+						</div>
+					</div>
+					<div class="wk-mp-rating-individual-right">
+						<div  class="wk-mp-rating-progress-bar-container">
+							<div class="wk-mp-rating-individual-right-txt">
+								<?php echo __('5 Star (%1)', $feeds['value_star_5'])?>
+							</div>
+							<div class="wk-mp-rating-individual-progress-bar">
+								<small>
+									<span class="wk-mp-rating-progress-color-bar wk-mp-star5-rating-color-bar" style="width:<?php echo $widthValueStar5; ?>%; border-width:<?php echo $borderValueStar5; ?>px;"></span>
+								</small>
+							</div>
+						</div>
+						<div class="wk-mp-rating-progress-bar-container">
+							<div class="wk-mp-rating-individual-right-txt">
+								<?php echo __('4 Star (%1)', $feeds['value_star_4'])?>
+							</div>
+							<div class="wk-mp-rating-individual-progress-bar">
+								<small>
+									<span class="wk-mp-rating-progress-color-bar wk-mp-star4-rating-color-bar" style="width:<?php echo $widthValueStar4; ?>%; border-width:<?php echo $borderValueStar4; ?>px;"></span>
+								</small>
+							</div>
+						</div>
+						<div  class="wk-mp-rating-progress-bar-container">
+							<div class="wk-mp-rating-individual-right-txt">
+								<?php echo __('3 Star (%1)', $feeds['value_star_3'])?>
+							</div>
+							<div class="wk-mp-rating-individual-progress-bar">
+								<small>
+									<span class="wk-mp-rating-progress-color-bar wk-mp-star3-rating-color-bar" style="width:<?php echo $widthValueStar3; ?>%; border-width:<?php echo $borderValueStar3; ?>px;"></span>
+								</small>
+							</div>
+						</div>
+						<div class="wk-mp-rating-progress-bar-container">
+							<div class="wk-mp-rating-individual-right-txt">
+								<?php echo __('2 Star (%1)', $feeds['value_star_2'])?>
+							</div>
+							<div class="wk-mp-rating-individual-progress-bar">
+								<small>
+									<span class="wk-mp-rating-progress-color-bar wk-mp-star2-rating-color-bar"
+									style="width:<?php echo $widthValueStar2; ?>%; border-width:<?php echo $borderValueStar2; ?>px;"></span>
+								</small>
+							</div>
+						</div>
+						<div class="wk-mp-rating-progress-bar-container">
+							<div class="wk-mp-rating-individual-right-txt">
+								<?php echo __('1 Star (%1)', $feeds['value_star_1'])?>
+							</div>
+							<div class="wk-mp-rating-individual-progress-bar">
+								<small>
+									<span class="wk-mp-rating-progress-color-bar wk-mp-star1-rating-color-bar" style="width:<?php echo $widthValueStar1; ?>%; border-width:<?php echo $borderValueStar1; ?>px;"></span>
+								</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="wk-mp-rating-individual">
+					<div class="wk-mp-rating-individual-left">
+						<div class="<?php echo $avgQualityRatingClass?>">
+							<?php echo $avgQualityRatingStar ?>
+						</div>
+						<div class="wk-mp-rating-individual-txt">
+							<?php echo __('Average Quality Rating (%1)', $feeds['feedcount'])?>
+						</div>
+					</div>
+					<div class="wk-mp-rating-individual-right">
+						<div  class="wk-mp-rating-progress-bar-container">
+							<div class="wk-mp-rating-individual-right-txt">
+								<?php echo __('5 Star (%1)', $feeds['quality_star_5'])?>
+							</div>
+							<div class="wk-mp-rating-individual-progress-bar">
+								<small>
+									<span class="wk-mp-rating-progress-color-bar wk-mp-star5-rating-color-bar" style="width:<?php echo $widthQualityStar5; ?>%; border-width:<?php echo $borderQualityStar5; ?>px;"></span>
+								</small>
+							</div>
+						</div>
+						<div class="wk-mp-rating-progress-bar-container">
+							<div class="wk-mp-rating-individual-right-txt">
+								<?php echo __('4 Star (%1)', $feeds['quality_star_4'])?>
+							</div>
+							<div class="wk-mp-rating-individual-progress-bar">
+								<small>
+									<span class="wk-mp-rating-progress-color-bar wk-mp-star4-rating-color-bar" style="width:<?php echo $widthQualityStar4; ?>%; border-width:<?php echo $borderQualityStar4; ?>px;"></span>
+								</small>
+							</div>
+						</div>
+						<div  class="wk-mp-rating-progress-bar-container">
+							<div class="wk-mp-rating-individual-right-txt">
+								<?php echo __('3 Star (%1)', $feeds['quality_star_3'])?>
+							</div>
+							<div class="wk-mp-rating-individual-progress-bar">
+								<small>
+									<span class="wk-mp-rating-progress-color-bar wk-mp-star3-rating-color-bar" style="width:<?php echo $widthQualityStar3; ?>%; border-width:<?php echo $borderQualityStar3; ?>px;"></span>
+								</small>
+							</div>
+						</div>
+						<div class="wk-mp-rating-progress-bar-container">
+							<div class="wk-mp-rating-individual-right-txt">
+								<?php echo __('2 Star (%1)', $feeds['quality_star_2'])?>
+							</div>
+							<div class="wk-mp-rating-individual-progress-bar">
+								<small>
+									<span class="wk-mp-rating-progress-color-bar wk-mp-star2-rating-color-bar"
+									style="width:<?php echo $widthQualityStar2; ?>%; border-width:<?php echo $borderQualityStar2; ?>px;"></span>
+								</small>
+							</div>
+						</div>
+						<div class="wk-mp-rating-progress-bar-container">
+							<div class="wk-mp-rating-individual-right-txt">
+								<?php echo __('1 Star (%1)', $feeds['quality_star_1'])?>
+							</div>
+							<div class="wk-mp-rating-individual-progress-bar">
+								<small>
+									<span class="wk-mp-rating-progress-color-bar wk-mp-star1-rating-color-bar" style="width:<?php echo $widthQualityStar1; ?>%; border-width:<?php echo $borderQualityStar1; ?>px;"></span>
+								</small>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="wk-mp-rating-right">
+				<?php
+				foreach ($block->getCollection() as $keyed) {			
+					$feedcustomer = $block->getCustomer()->load($keyed['buyer_id']); 
+					$name = $feedcustomer['firstname'].' '.$feedcustomer['lastname'];
+					$feedDateTime= strtotime($keyed['created_at']);
+					$feedDate = date('M d, Y', $feedDateTime);
+					$feedPrice = round(($keyed['feed_price']/20), 1, PHP_ROUND_HALF_UP);
+					$feedValue = round(($keyed['feed_value']/20), 1, PHP_ROUND_HALF_UP);
+					$feedQuality = round(($keyed['feed_quality']/20), 1, PHP_ROUND_HALF_UP);
+					?>
+					<div class="wk-mp-rating-row">
+						<div class="wk-mp-rating-customer-row">
+							<span class="wk-mp-rating-val-txt wk-mp-float-left">
+								<?php echo $keyed['feed_summary']?>
+							</span>
+							<span class="wk-mp-float-right">
+								<?php echo __("By %1 ", $name)?>
+								<i><?php echo $feedDate?></i>
+							</span>
+						</div>
+						<div class="wk-mp-rating-summary-container">
+							<div class="wk-mp-rating-review-row">
+								<span class="wk-mp-rating-txt">
+									<?php echo __("Rating"); ?>
+								</span>
+								<span class="wk-mp-rating-val">
+									<span class="wk-mp-rating-val-txt">
+										<?php echo __("Pricing"); ?>
+									</span>
+									<span class="wk-mp-rating-icon wk-mp-star<?php echo $feedPrice?>">
+										<?php echo $feedPrice?>
+									</span>
+								</span>
+								<span class="wk-mp-rating-val">
+									<span class="wk-mp-rating-val-txt">
+										<?php echo __("Value"); ?>
+									</span>
+									<span class="wk-mp-rating-icon wk-mp-star<?php echo $feedValue?>">
+										<?php echo $feedValue?>
+									</span>
+								</span>
+								<span class="wk-mp-rating-val">
+									<span class="wk-mp-rating-val-txt">
+										<?php echo __("Quality"); ?>
+									</span>
+									<span class="wk-mp-rating-icon wk-mp-star<?php echo $feedQuality?>">
+										<?php echo $feedQuality?>
+									</span>
+								</span>
+							</div>
+							<p><?php echo $keyed['feed_review']?></p>
+						</div>
+					</div>
+				<?php
+				} ?>
+				<?php echo $block->getPagerHtml(); ?>	
+			</div>
+		</div>
+		<div id="customer-reviews" class="box-collateral box-reviews">
+			<div class="form-add">
+				<?php 
+				$flag = 0;
+				if ($helper->isCustomerLoggedIn()) { ?>
+					<?php
+					$flag = 2;
+					$feedavailflag = 0;
+					$ordercount = 0;
+					$feedbackcount = 0;
+					if ($helper->getReviewStatus()){
+						$flag = 1;
+						$collectionfeed=$block->getFeedcountCollection();
+						foreach ($collectionfeed as $value) {
+							$ordercount = $value->getOrderCount();
+							$feedbackcount = $value->getFeedbackCount();
+						}
+						if ($feedbackcount<$ordercount){
+							$feedavailflag =1;
+						}
+					}
+					if (($flag==2) || ($flag==1&&$feedavailflag ==1)) { ?>
+						<div class="showreview">
+							<div class="wk-mp-design">
+								<div><h3><strong><?php echo __('Write Your Own Feedback') ?></strong></h3></div>
+								<div class="fieldset wk-mp-fieldset">
+									<form id="review-form" method="post" action="<?php echo $block->getUrl('marketplace/seller/newfeedback', ['_secure' => $this->getRequest()->isSecure()]) ?>" enctype="multipart/form-data" >
+										<?php echo $block->getBlockHtml('formkey'); ?>
+										<fieldset class="fieldset info wk-mp-fieldset">
+											<h3><?php echo __('How do you rate this Store') ?>?</h3>
+											<span id="input-message-box"></span>
+											<table id="product-review-table" class="data-table">
+											<colgroup>
+												<col>
+												<col width="1">
+												<col width="1">
+												<col width="1">
+												<col width="1">
+												<col width="1">
+											</colgroup>
+											<thead>
+												<tr class="first last">
+													<th>&nbsp;</th>
+													<th><span class="nobr">1 <?php echo __('star') ?></span></th>
+													<th><span class="nobr">2 <?php echo __('stars') ?></span></th>
+													<th><span class="nobr">3 <?php echo __('stars') ?></span></th>
+													<th><span class="nobr">4 <?php echo __('stars') ?></span></th>
+													<th><span class="nobr">5 <?php echo __('stars') ?></span></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr class="first odd">
+													<th><?php echo __('Price') ?></th>
+													<td class="value"><input type="radio" class="radio" value="20" id="Price_1" name="feed_price" checked="checked"/></td>
+													<td class="value"><input type="radio" class="radio" value="40" id="Price_2" name="feed_price"></td>
+													<td class="value"><input type="radio" class="radio" value="60" id="Price_3" name="feed_price"></td>
+													<td class="value"><input type="radio" class="radio" value="80" id="Price_4" name="feed_price"></td>
+													<td class="value last"><input type="radio" class="radio" value="100" id="Price_5" name="feed_price"></td>
+												</tr>
+												<tr class="even">
+													<th><?php echo __('Value') ?></th>
+													<td class="value"><input type="radio" class="radio" value="20" id="Value_1" name="feed_value" checked="checked"/></td>
+													<td class="value"><input type="radio" class="radio" value="40" id="Value_2" name="feed_value"></td>
+													<td class="value"><input type="radio" class="radio" value="60" id="Value_3" name="feed_value"></td>
+													<td class="value"><input type="radio" class="radio" value="80" id="Value_4" name="feed_value"></td>
+													<td class="value last"><input type="radio" class="radio" value="100" id="Value_5" name="feed_value"></td>
+												</tr>
+												<tr class="last odd">
+													<th><?php echo __('Quality') ?></th>
+													<td class="value"><input type="radio" class="radio" value="20" id="Quality_1" name="feed_quality" checked="checked"/></td>
+													<td class="value"><input type="radio" class="radio" value="40" id="Quality_2" name="feed_quality"></td>
+													<td class="value"><input type="radio" class="radio" value="60" id="Quality_3" name="feed_quality"></td>
+													<td class="value"><input type="radio" class="radio" value="80" id="Quality_4" name="feed_quality"></td>
+													<td class="value last"><input type="radio" class="radio" value="100" id="Quality_5" name="feed_quality"></td>
+												</tr>
+											</tbody>
+											</table>								
+											<input type="hidden" name="seller_id" id="seller_id" value="<?php echo $partner->getSellerId(); ?>"/>
+											<input type="hidden" name="shop_url" value="<?php echo $partner->getShopUrl(); ?>" />
+											<div class="field required">
+												<label class="label"><?php echo __('Nickname') ?></label>
+												<div class="control">
+													<input type="text" value="<?php echo $block->getCustomerSessionName(); ?>" class="input-text required-entry widthinput nickname" id="nickname_field" name="feed_nickname">
+												</div>
+											</div>
+											<div class="field required">
+												<label class="label"><?php echo __('Summary of Your Review') ?></label>
+												<div class="control">
+													<input type="text" value="" class="input-text required-entry widthinput summary_field" id="summary_field" name="feed_summary">
+												</div>
+											</div>
+											<div class="field required">
+												<label class="label"><?php echo __('Review') ?></label>
+												<div class="control">
+													<textarea class="required-entry widthinput review_field" rows="3" cols="5" id="review_field" name="feed_review"></textarea>
+												</div>
+											</div>
+										</fieldset>
+										<div class="buttons-set">
+											<button class="button" title="<?php echo __('Submit Review') ?>" type="submit"><span><span><?php echo __('Submit Review') ?></span></span></button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<?php
+					} else { ?>
+						<div class="showreview"><p class="note-msg"><?php echo __('You need to purchase item(s) first to make a review.') ?></p></div>
+						<?php
+					}
+				} else { ?>
+					<?php $block->setCustomerSessionAfterAuthUrl();?>
+					<center><p class="loginmsg"><a class="button-large" href="<?php echo $block->getUrl('customer/account/login/', ['_secure' => $this->getRequest()->isSecure()]) ?>"><button class="button-large"><span><?php echo __('Login To Give Feedback') ?></span></button></a></p></center>
+				<?php 
+				} ?>  
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+    require([
+        "jquery",
+        "mage/mage"
+    ], function($){
+        var reviewDataForm = $('#review-form');
+        reviewDataForm.mage('validation', {});
+	});
+</script>

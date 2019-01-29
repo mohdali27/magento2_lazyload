@@ -1,0 +1,297 @@
+
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Customattribute
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Webkul\Customattribute\Block\Manageattribute */
+
+	$helper = $this->helper('Webkul\Marketplace\Helper\Data');
+	$isPartner = $helper->isSeller();
+	if($isPartner == 1){
+		$currency_code = $helper->getCurrentCurrencyCode();
+		$currency_symbol = $helper->getCurrencySymbol();
+	?>
+<?php 
+	$product_id=$this->getRequest()->getParam('id');
+	$product = $block->getProductCollection($product_id);
+	if($this->getRequest()->getParam('set')) {
+		$attributeSetId=$this->getRequest()->getParam('set');
+	} else {
+		$attributeSetId = $product['attribute_set_id'];
+	}
+	$readresult=$block->getFrontShowAttributes($attributeSetId);
+	$tierCount = 0;
+	foreach($readresult as $attr) {
+		$attribute = $block->getCatalogResourceEavAttribute($attr['attribute_id']);
+		$attributeCode = $attribute['attribute_code'];
+		$defaultvalues = $product->getResource()->getAttribute($attribute['attribute_code'])->getDefaultValue();
+		?>
+		<?php  if($attribute['is_user_defined']  == 1){
+			$isRequired = '';
+			if ($attribute['is_required']) {
+				$isRequired = 'required-entry';
+			}
+			$attributeLabel = $attribute['frontend_label'];
+			if ($attribute->getStoreLabel() != '') {
+				$attributeLabel = $attribute->getStoreLabel();
+			}
+			?>
+			<div class="field <?php if ($attribute['is_required']) { echo 'required'; } ?>">
+				<label
+					class="label" 
+					id="<?php echo $attributeCode ?>">
+					<?php echo $attributeLabel; ?>
+					<?php if ($attribute['frontend_input'] == 'price') { ?>
+						<b><?php echo '('.$currency_symbol.')' ?></b>
+					<?php } ?>:
+				</label>
+				<div class="control">
+					<?php if ($attribute['frontend_input'] == 'select' || $attribute['frontend_input']=='multiselect' || $attribute['frontend_input']=='boolean'){ 
+						$fix="";
+						$multiselect="";
+						if ($attribute['frontend_input']=='multiselect') {
+							$fix = "[]";	
+							$multiselect = "multiple='multiple'";
+						} ?>
+						<select class="<?php if($attribute['is_required']) {echo 'required-entry'; } ?> input-text" name="<?php echo "product[".$attributeCode."]".$fix;?>" <?php echo $multiselect;?>>
+						<?php $attributeOptions = $attribute->getSource()->getAllOptions();
+							  foreach ($attributeOptions as $each) {  
+							  	$values = explode(',', $product[$attributeCode]);
+							  	if ($values[0] == 0) {
+							  		$values = explode(',', $defaultvalues);
+							  	}
+								$selected="";					
+								if (in_array($each["value"], $values)) {
+									$selected = "selected='selected'";
+								}
+							  	?>
+							  <option <?php echo $selected; ?> value="<?php echo $each["value"]; ?>"><?php echo $each["label"]; ?>
+							  </option>
+						
+							<?php } ?>
+						</select>
+					<?php } ?>
+					<?php if ($attribute['frontend_input'] == 'text') { ?>
+						<input class="<?php echo $isRequired.' '.$attribute['frontend_class']; ?> input-text" type="text" name="<?php echo "product[$attributeCode]";?>" value="<?php echo $product[$attributeCode]==''?$defaultvalues:$product[$attributeCode]; ?>" />
+					<?php } ?>
+					<?php if ($attribute['frontend_input'] == 'price') { 
+						$product[$attributeCode] = $product[$attributeCode] == '' ? $defaultvalues:$product[$attributeCode];
+						?>
+						<input class="<?php if($attribute['is_required']) {echo 'required-entry'; } ?> input-text <?php echo $attribute['frontend_class']; ?>" type="number" name="<?php echo "product[$attributeCode]";?>" value="<?php
+							echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($product[$attributeCode], false, false);
+						  ?>" />
+					<?php } ?>
+					<?php if($attribute['frontend_input'] == 'weight'){ ?>
+						<input class="<?php echo $isRequired.' '.$attribute['frontend_class']; ?> input-text" type="text" name="<?php echo "product[$attributeCode]";?>" value="<?php echo $product[$attributeCode]==''?$defaultvalues:$product[$attributeCode]; ?>" />
+					<?php } ?>
+					<?php if($attribute['frontend_input'] == 'date'){ 
+						$product[$attributeCode] = $product[$attributeCode] == '' ? $defaultvalues:$product[$attributeCode];
+						?>
+						<input class="<?php echo $isRequired.' '.$attribute['frontend_class']; ?> input-text datetype" type="text" name="<?php echo "product[$attributeCode]";?>" value="<?php echo $block->formatDate($product[$attributeCode]); ?>" />
+					<?php } ?>
+					<?php if($attribute['frontend_input'] == 'textarea'){ ?>
+						<textarea class="<?php echo $isRequired.' '.$attribute['frontend_class']; ?> input-text" rows="5" cols="75" id="textar" name="<?php echo "product[$attributeCode]";?>" /><?php echo $product[$attributeCode]==''?$defaultvalues:$product[$attributeCode]; ?></textarea>
+					<?php } ?>
+					<?php if($attribute['frontend_input'] == 'media_image'){ ?>
+						<input class="input-text" type="file" name="<?php echo "product[$attributeCode]";?>" value="<?php echo $product[$attributeCode]==''?$defaultvalues:$product[$attributeCode]; ?>" />
+						<div id="wk_add_images_container">
+                            <img class='wk_images' width='75' height='75' alt='image' src="<?php echo $helper->getMediaUrl() ?>catalog/product<?php echo  $product[$attributeCode]==''?$defaultvalues:$product[$attributeCode]; ?>"/>
+                        </div>
+						
+					<?php } ?>
+					<?php if($attribute['frontend_input'] == 'gallery'){ ?>
+						<input class="<?php if($attribute['is_required']) {echo 'required-entry'; } ?> input-text <?php echo $attribute['frontend_class']; ?>" type="file" name="<?php echo "product[$attributeCode]";?>" />
+					<?php } ?>
+				</div>
+			</div>
+		<?php } 
+		elseif ($attribute['is_user_defined']  == 0) {
+			if ($attributeCode=='tier_price') { 
+				$tierCount = count($product['tier_price']);
+				?>
+				<div class="field tierprice">
+					<?php
+					$attributeLabel = $attribute['frontend_label'];
+					if ($attribute->getStoreLabel() != '') {
+						$attributeLabel = $attribute->getStoreLabel();
+					}
+					?>
+					<label class="label"><?php echo $attributeLabel; ?>:</label>
+					<div class="wk_mp_option-box">
+					<table id="tiers_table">
+					<thead>
+						<tr class="wk_mp_headcus ul_first headings">
+							<th><span><?php echo __('Websites') ?></span></th>
+							<th><span><?php echo __('Customer Group') ?></span></th>
+							<th><span><?php echo __('Qty') ?></span></th>
+							<th><span><?php echo __('Price') ?><b><?php echo '('.$currency_symbol.')' ?></b></span></th>
+							<th><span><?php echo __('Action') ?></span></th>
+							<th><span>
+								<button class="button addtierprice" title="Add" type="button">
+									<span>
+										<span><?php echo __('Add') ?></span>
+									</span>
+								</button>
+							</span></th>
+						</tr>
+					</thead>
+					<?php if (count($product['tier_price']) == 0): ?>
+						<tbody class="wk_mp_headcus wk-mp-body">
+							<tr>
+								<td>
+								<select name="product[tier_price][0][website_id]" >
+									<?php  $websites = $block->getWebsites(); 
+											foreach ($websites as $id => $website) { ?>
+												<option value="<?php echo $id; ?>"><?php echo $website['name'].'('.$website['currency'].')'; ?></option>
+											<?php }	?>
+								</select>
+								</td>
+								<td>
+								<select name="product[tier_price][0][cust_group]" >
+									<option value="32000">ALL GROUPS</option>
+									<?php  $customer_group = $block->getCustomerGroupCollection(); 
+											foreach($customer_group as $group){ ?>
+												<option value="<?php echo $group->getCustomerGroupId(); ?>"><?php echo $group->getCustomerGroupCode(); ?></option>
+											<?php }	?>
+								</select>
+								</td>
+							<td>
+								<div class="control">
+									<input class="input-text validate-number" type="text" name="product[tier_price][0][price_qty]">
+								</div>
+							</td>
+							<td><div class="control">
+									<input type="text" class="input-text validate-zero-or-greater" name="product[tier_price][0][price]" >
+								</div>
+							</td>
+							<td>
+								<button class="button delete" title="Delete" type="button">
+									<span>
+										<span><?php echo __('Delete') ?></span>
+									</span>
+								</button>
+							</td>		
+							</tr>
+						</tbody>
+						<?php  else: 
+								$index = 0;
+								foreach ($product['tier_price'] as $value): ?>
+								<tbody class="wk_mp_headcus wk-mp-body">
+							<tr>
+								<td>
+								<select name="product[tier_price][<?= $index ?>][website_id]" >
+									<?php  $websites = $block->getWebsites(); 
+											foreach($websites as $id => $website){ ?>
+												<option <?php if ($value['website_id'] == $id) echo 'selected'; ?> value="<?php echo $id; ?>"><?php echo $website['name'].'('.$website['currency'].')'; ?></option>
+											<?php }	?>
+								</select>
+								</td>
+								<td>
+								<select name="product[tier_price][<?= $index ?>][cust_group]" >
+									<option value="32000">ALL GROUPS</option>
+									<?php  $customer_group = $block->getCustomerGroupCollection(); 
+											foreach ($customer_group as $group) { ?>
+												<option <?php if ($value['cust_group'] == $group->getCustomerGroupId()) echo 'selected'; ?> value="<?php echo $group->getCustomerGroupId(); ?>"><?php echo $group->getCustomerGroupCode(); ?></option>
+											<?php }	?>
+								</select>
+								</td>
+							<td>
+								<div class="control">
+									<input class="input-text validate-number" type="text" name="product[tier_price][<?= $index ?>][price_qty]" value="<?php echo $value['price_qty'];?>">
+								</div>
+							</td>
+							<td><div class="control">
+									<input type="text" class="input-text validate-zero-or-greater" name="product[tier_price][<?= $index ?>][price]" value="<?php echo $value['price'];?>" >
+								</div>
+							</td>
+							<td>
+								<button class="button delete" title="Delete" type="button">
+									<span>
+										<span><?php echo __('Delete') ?></span>
+									</span>
+								</button>
+							</td>		
+							</tr>
+						</tbody>
+						<?php $index++;
+							  endforeach; ?>
+					<?php endif ?>
+						</table>
+					</div>
+				</div>
+			<?php }
+		}
+	}	?>
+	<script id="tierprice-template" type="text/x-magento-template">
+		<tbody class="wk_mp_headcus wk-mp-body">
+				<tr>
+					<td>
+					<select name="product[tier_price][<%- data.index %>][website_id]" >
+						<?php  $websites = $block->getWebsites(); 
+								foreach($websites as $id => $website){ ?>
+									<option value="<?php echo $id; ?>"><?php echo $website['name'].'('.$website['currency'].')'; ?></option>
+								<?php }	?>
+					</select>
+					</td>
+					<td>
+					<select name="product[tier_price][<%- data.index %>][cust_group]" >
+						<option value="32000">ALL GROUPS</option>
+						<?php  $customer_group = $block->getCustomerGroupCollection(); 
+								foreach($customer_group as $group){ ?>
+									<option value="<?php echo $group->getCustomerGroupId(); ?>"><?php echo $group->getCustomerGroupCode(); ?></option>
+								<?php }	?>
+					</select>
+					</td>
+				<td>
+					<div class="control">
+						<input class="input-text validate-number" type="text" name="product[tier_price][<%- data.index %>][price_qty]">
+					</div>
+				</td>
+				<td><div class="control">
+						<input type="text" class="input-text validate-zero-or-greater" name="product[tier_price][<%- data.index %>][price]" >
+					</div>
+				</td>
+				<td>
+					<button class="button delete" title="Delete" type="button">
+						<span>
+							<span><%- data.button %></span>
+						</span>
+					</button>
+				</td>		
+				</tr>
+			</tbody>
+	</script>
+	<?php
+		$optionData = [
+			'dateTypeSelector'		=> '.datetype',
+			'tierPriceSelector' 	=> '.tierprice',
+			'addTierPrice'			=> '.addtierprice',
+			'tierTemplate'			=> '#tierprice-template',
+			'deleteOptionSelector'	=> '.delete-product-option',
+			'deleteButton'			=> '.delete',
+			'attSetidSelector'		=> '#attribute-set-id',
+			'actionUrl'				=> $block->getAjaxCheckUrl(),
+			'currentUrl'			=> $block->getUrl('marketplace/product/edit/', ["_secure" => $this->getRequest()->isSecure()]),
+			'productId'				=> $this->getRequest()->getParam('id'),
+			'productType'			=> '',
+			'tierCount'				=> $tierCount
+		];
+		$serializedData = $this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode($optionData);
+	 ?>
+	<script type="text/x-magento-init">
+    {
+        "*": {
+            "addAttribute": <?php /* @noEscape */ echo $serializedData; ?>
+        }
+    }
+	</script>
+<?php } ?>

@@ -1,0 +1,27 @@
+<div class="select-attributes-block">
+    <div class="select-attributes-actions" data-type="skipKO">
+    </div>
+    <h2 class="steps-wizard-title"><?= /* @escapeNotVerified */  __('Step 1: Select Attributes') ?></h2>
+    <div class="selected-attributes" data-bind="scope: 'variation-steps-wizard_step1'">
+        <?= /* @escapeNotVerified */  __('Selected Attributes:') ?>
+        <span data-bind="text: selectedAttributes() || '--'"></span>
+    </div>
+</div>
+<?= $block->getChildHtml(); ?>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "variation-steps-wizard_step1": {
+                        "component": "Webkul_Marketplace/js/variations/steps/select_attributes",
+                        "multiselectName":
+                            "marketplace_product_attributes_listing.marketplace_product_attributes_listing.product_attributes_columns.ids",
+                        "providerName": "marketplace_product_attributes_listing.marketplace_product_attributes_listing_data_source",
+                        "appendTo": "variation-steps-wizard"
+                    }
+                }
+            }
+        }
+    }
+</script>

@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="seller-login" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Webkul_Marketplace::css/wk_block.css"/>
+        <css src="Webkul_Marketplace::css/style.css"/>
+        <css src="Webkul_Marketplace::css/product.css"/>
+        <css src="Webkul_Marketplace::css/layout.css"/>
+        <css src="Webkul_Marketplace::css/login.css"/>
+    </head>
+    <body>
+        <move element="messages" destination="seller.login.content" before="-"/>
+        <move element="copyright" destination="seller.login.footer" before="-"/>
+        <move element="logo" destination="seller.login.header" before="-"/>
+        <referenceContainer name="seller.login.content">
+            <block class="Magento\Framework\View\Element\FormKey" name="formkey"/>
+            <container name="customer.login.container" label="Vendor Login Container" htmlTag="div" htmlClass="wk-mp-login-container">
+                <block class="Magento\Customer\Block\Form\Login" name="seller_form_login" template="Webkul_Marketplace::account/login.phtml">
+                    <container name="form.additional.info" as="form_additional_info"/>
+                    <container name="form.additional.buttons" label="Form Additional Buttons"/>
+                </block>
+            </container>
+            <block class="Magento\Cookie\Block\RequireCookie" name="seller-require-cookie" template="Magento_Cookie::require_cookie.phtml">
+                <arguments>
+                    <argument name="triggers" xsi:type="array">
+                        <item name="loginButton" xsi:type="string">.action.login</item>
+                    </argument>
+                </arguments>
+            </block>
+            <block class="Magento\PageCache\Block\Javascript" template="Magento_PageCache::javascript.phtml" name="seller.pageCache" as="seller.pageCache"/>
+            <!-- For form submit error fix -->
+            <block name="seller.customer.section.config" class="Magento\Customer\Block\SectionConfig"
+                   template="Magento_Customer::js/section-config.phtml"/>
+            <block name="seller.customer.customer.data"
+                   class="Magento\Customer\Block\CustomerData"
+                   template="Magento_Customer::js/customer-data.phtml"/>
+        </referenceContainer>
+        <referenceContainer name="form.additional.info">
+            <block class="Magento\Framework\View\Element\Template" name="form_additional_info_customer" template="Magento_Customer::additionalinfocustomer.phtml"/>
+
+            <block class="Magento\Captcha\Block\Captcha" name="captcha" after="-" cacheable="false">
+                <action method="setFormId">
+                    <argument name="formId" xsi:type="string">user_login</argument>
+                </action>
+                <action method="setImgWidth">
+                    <argument name="width" xsi:type="string">230</argument>
+                </action>
+                <action method="setImgHeight">
+                    <argument name="width" xsi:type="string">50</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceBlock name="head.components">
+            <block class="Magento\Framework\View\Element\Js\Components" name="captcha_page_head_components" template="Magento_Captcha::js/components.phtml"/>
+        </referenceBlock>
+    </body>
+</page>

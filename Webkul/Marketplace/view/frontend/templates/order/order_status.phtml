@@ -1,0 +1,27 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+// @codingStandardsIgnoreFile
+
+$orderHelper = $this->helper('Webkul\Marketplace\Helper\Orders');
+$order_id = $this->getRequest()->getParam('id');
+$order = $block->Order->load($order_id);
+$orderStatusLabel = $order->getStatusLabel();
+$tracking=$orderHelper->getOrderinfo($order_id);
+$is_canceled=$tracking->getIsCanceled();
+if($is_canceled){
+	$orderStatusLabel='Canceled';
+}
+?>
+<span class="order-status"><?php echo $orderStatusLabel?></span>
+<div class="order-date">
+	<?php echo __('<span class="label">Order Date:</span> %1', '<date>' . $block->formatDate($order->getCreatedAt(), \IntlDateFormatter::LONG) . '</date>') ?>
+</div>

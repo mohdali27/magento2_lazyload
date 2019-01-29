@@ -1,0 +1,135 @@
+<?php  
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+// @codingStandardsIgnoreFile
+
+$helper = $this->helper('Webkul\Marketplace\Helper\Data');
+$partner = $block->getProfileDetail();
+$parentCategory = '';
+$arr_have_child_cat = [];
+$paramData = $this->getRequest()->getParams();
+if (isset($paramData['c'])) {
+    $parentCategory = $paramData['c'];
+}
+$catClass = 'filter-options';
+$subcats='';
+$cat = '';
+if($parentCategory!=''){
+	$cat = $block->getCategoryById($parentCategory);
+	$subcats = $cat->getChildren();
+	if ($subcats=='') {
+		$catClass = 'filter-current';
+	}
+} ?>
+<div class="wk-mp-block block filter block-layered-nav" id="layered-filter-block" data-mage-init='{"collapsible":{"openedState": "active", "collapsible": true, "active": false, "collateral": { "openedState": "filter-active", "element": "body" } }}'>
+	<!-- <div class="wk-mp-block-title filter-title" data-count="4">
+		<strong data-role="title"><?php /* @escapeNotVerified */ // __('Shop By') ?></strong>
+	</div> -->
+	<div class="filter-title">	
+		<strong data-role="title"><span><?php echo __("Browse BY") ?></span></strong>
+	</div>
+	<div class="wk-mp-block-title">	
+		<strong><span><?php echo __("Browse BY") ?></span></strong>
+	</div>
+	<div class="block-content filter-content">
+		<?php $wrapOptions = false; ?>
+		<?php
+		if (($parentCategory!='' && $subcats!='') || (count($block->getCategoryList()))) { ?>
+			<div class="wk-mp-filter-options-title">
+				<strong role="heading" class="block-subtitle filter-subtitle">
+					<?php echo __("SELLER'S CATEGORY") ?>
+				</strong>
+			</div>
+			<dl id="wk-mp-narrow-by-list" class="<?php echo $catClass?>">
+				<div class="wk-mp-filter-options-content">
+					<ol class="items">
+						<?php 
+						foreach ($block->getCategoryList() as $key => $value) {
+							array_push($arr_have_child_cat, $value['category_id']);
+							if ($value['category_id']!=1) { ?>
+								<?php  $wrapOptions = true; ?>
+								<li class="item">
+									<a href="<?php echo $helper->getRewriteUrl('marketplace/seller/collection/shop/'.$partner['shop_url'])."?c=".$value['category_id'];?>" <?php if($parentCategory == $value['category_id']){ ?> class="current" <?php }?>>
+										<?php echo $value['catname'] ?>           		
+										<span class="count">
+											<?php echo sprintf('%02d',$value['countCategory'])?>
+											<span class="filter-count-label">
+												item
+											</span>
+										</span>
+									</a>
+								</li>
+								<?php
+							}
+						}
+						if ($parentCategory!='') {
+							if ($subcats!='') {
+								foreach (explode(',',$subcats) as $subCatid) {
+									$_category = $block->getCategoryById($subCatid);
+									if ($_category->getIsActive()) {
+										if (!in_array($_category->getId(), $arr_have_child_cat)) {
+											?>
+											<?php  $wrapOptions = true; ?>
+											<li class="item">
+												<a href="<?php echo $helper->getRewriteUrl('marketplace/seller/collection/shop/'.$partner['shop_url'])."?c=".$_category->getId();?>" <?php if($parentCategory == $_category->getId()){ ?> class="current" <?php }?>>
+													<?php echo $_category->getName() ?>
+													<span class="count">
+														0
+														<span class="filter-count-label">
+															item
+														</span>
+													</span>
+												</a>
+											</li>
+											<?php
+										}			
+									}
+								}
+							}
+						} ?>	            	
+					</ol>
+				</div>
+			</dl>
+		<?php
+		} else if ($cat && $cat->getName()) { ?>
+			<div class="wk-mp-filter-options-content">
+				<div class="filter-current" data-mage-init='{"collapsible":{"openedState": "active", "collapsible": true, "active": false }}'>
+					<strong class="block-subtitle filter-current-subtitle"
+							role="heading"
+							aria-level="2"
+							data-role="title"
+							data-count="1">
+							<?= /* @escapeNotVerified */ __('Now Shopping by') ?>
+					</strong>
+					<ol class="items">
+						<li class="item">
+							<span class="filter-label"><?php echo __('Category')?></span>
+							<span class="filter-value"><?php echo $cat->getName();?></span>
+							<a title="<?php echo __('Remove Category %1',$cat->getName());?>" href="<?php echo $helper->getRewriteUrl('marketplace/seller/collection/shop/'.$partner['shop_url']);?>" class="action remove">
+								<span><?php echo __('Remove This Item')?></span>
+							</a>
+						</li>
+					</ol>
+				</div>
+			</div>
+			<?php
+		} ?>
+		<?php if (!$wrapOptions): ?>
+			<script>
+				require([
+					'jquery'
+				], function ($) {
+					$('#layered-filter-block').addClass('filter-no-options');
+				});
+			</script>
+		<?php endif; ?>
+	</div>
+</div>

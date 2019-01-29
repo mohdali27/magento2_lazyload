@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Webkul\Marketplace\Api\Data\NotificationInterface" type="Webkul\Marketplace\Model\Notification"/>
+    <preference for="Webkul\Marketplace\Api\NotificationRepositoryInterface" type="Webkul\Marketplace\Model\NotificationRepository"/>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="marketplace_products_list_data_source" xsi:type="string">Webkul\Marketplace\Model\ResourceModel\Product\Grid\Collection</item>
+                <item name="marketplace_sellers_list_data_source" xsi:type="string">Webkul\Marketplace\Model\ResourceModel\Seller\Grid\Collection</item>
+                <item name="marketplace_order_list_data_source" xsi:type="string">Webkul\Marketplace\Model\ResourceModel\Saleslist\Grid\Collection</item>
+                <item name="marketplace_feedback_list_data_source" xsi:type="string">Webkul\Marketplace\Model\ResourceModel\Feedback\Grid\Collection</item>
+                <item name="marketplace_transaction_list_data_source" xsi:type="string">Webkul\Marketplace\Model\ResourceModel\Sellertransaction\Grid\Collection</item>
+                <item name="marketplace_commission_list_data_source" xsi:type="string">Webkul\Marketplace\Model\ResourceModel\Saleperpartner\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="\Webkul\Marketplace\Model\Order\Pdf\Invoice">
+        <plugin name="Webkul_Marketplace::invoicePdfHeader"
+                type="Webkul\Marketplace\Model\Plugin\Order\InvoicePdfHeader"
+                sortOrder="10" />
+    </type>
+    <type name="\Webkul\Marketplace\Model\Order\Pdf\Shipment">
+        <plugin name="Webkul_Marketplace::shipmentPdfHeader"
+                type="Webkul\Marketplace\Model\Plugin\Order\ShipmentPdfHeader"
+                sortOrder="11" />
+    </type>
+    <type name="\Webkul\Marketplace\Model\Order\Pdf\Creditmemo">
+        <plugin name="Webkul_Marketplace::creditmemoPdfHeader"
+                type="Webkul\Marketplace\Model\Plugin\Order\CreditmemoPdfHeader"
+                sortOrder="12" />
+    </type>
+    <type name="\Magento\Customer\Model\Session">
+        <plugin name="Webkul_Marketplace::customerSessionVendorLogin"
+                type="Webkul\Marketplace\Model\Plugin\Customer\Session"
+                sortOrder="13" />
+    </type>
+    <type name="Webkul\Marketplace\Model\ResourceModel\Product\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">marketplace_product</argument>
+            <argument name="eventPrefix" xsi:type="string">marketplace_product_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">product_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\Marketplace\Model\ResourceModel\Product</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\Marketplace\Model\ResourceModel\Seller\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">marketplace_userdata</argument>
+            <argument name="eventPrefix" xsi:type="string">marketplace_seller_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">seller_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\Marketplace\Model\ResourceModel\Seller</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\Marketplace\Model\ResourceModel\Saleslist\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">marketplace_saleslist</argument>
+            <argument name="eventPrefix" xsi:type="string">marketplace_order_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">order_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\Marketplace\Model\ResourceModel\Saleslist</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\Marketplace\Model\ResourceModel\Feedback\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">marketplace_datafeedback</argument>
+            <argument name="eventPrefix" xsi:type="string">marketplace_feedback_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">feedback_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\Marketplace\Model\ResourceModel\Feedback</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\Marketplace\Model\ResourceModel\Sellertransaction\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">marketplace_sellertransaction</argument>
+            <argument name="eventPrefix" xsi:type="string">marketplace_transaction_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">transaction_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\Marketplace\Model\ResourceModel\Sellertransaction</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\Marketplace\Model\ResourceModel\Saleperpartner\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">marketplace_saleperpartner</argument>
+            <argument name="eventPrefix" xsi:type="string">marketplace_commission_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">commission_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\Marketplace\Model\ResourceModel\Saleperpartner</argument>
+        </arguments>
+    </type>
+    <virtualType name="MarketplaceGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="ProductGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\Marketplace\Model\ResourceModel\Product\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MarketplaceGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="SellerGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\Marketplace\Model\ResourceModel\Seller\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MarketplaceGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OrderGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\Marketplace\Model\ResourceModel\Saleslist\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MarketplaceGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="FeedbackGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\Marketplace\Model\ResourceModel\Feedback\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MarketplaceGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="TransactionGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\Marketplace\Model\ResourceModel\Sellertransaction\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MarketplaceGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="CommissionnGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\Marketplace\Model\ResourceModel\Saleperpartner\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MarketplaceGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid" type="Magento\Sales\Model\ResourceModel\Grid">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="order_approval_status" xsi:type="string">sales_order.order_approval_status</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="\Magento\Sales\Model\Order\Invoice\Total\Shipping">
+        <plugin name="Webkul_Marketplace::invoiceTotalShippingCollect"
+                type="Webkul\Marketplace\Model\Plugin\Order\Invoice\Total\Shipping"
+                sortOrder="1" />
+    </type>
+    <type name="Magento\Catalog\Model\Layer\FilterList">
+        <plugin name="Webkul_Marketplace::filterList" type="Webkul\Marketplace\Plugin\Catalog\Model\Layer\FilterList"/>
+    </type>
+    <type name="Magento\CatalogSearch\Model\Search\SelectContainer\SelectContainer">
+        <plugin name="Webkul_Marketplace::SelectContainer" type="Webkul\Marketplace\Plugin\CatalogSearch\Model\Search\SelectContainer\SelectContainer" />
+    </type>
+</config>

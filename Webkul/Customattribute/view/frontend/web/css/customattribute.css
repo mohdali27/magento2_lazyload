@@ -1,0 +1,20 @@
+select[multiple]{height:110px;}
+#tiers_table .headings{background:none repeat scroll 0 0 #D6D6D6;}
+#tiers_table .headings th{
+    border-color: #F9F9F9 #D1CFCF #F9F9F9 #F9F9F9;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 0.9em;
+    /*padding-bottom: 0;*/
+    padding-top: 0px;}
+#tiers_table tr{width: auto;}
+#tiers_table .a-right{background: none repeat scroll 0 0 #D7E5EF;width: 450px;}
+#customattmain select{padding:0;}.content > span > span {display: inline-block;font-weight: bold;padding: 2px;}
+.form-list .content {width: 460px!important;}
+.data span select,.data span input {padding: 0;width: 100px;}
+.data {display: inline-block;}
+.customwidthedit{min-width: 91px;}
+.customwidth{min-width: 33px;}
+.customwidthp{min-width: 104px;}
+.wk_clear{clear:both;}
+.massuploadnotice div{border:1px solid #ccc;padding:2px 10px;}

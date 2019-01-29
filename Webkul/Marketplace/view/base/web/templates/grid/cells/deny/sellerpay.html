@@ -1,0 +1,41 @@
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<form id="ask-form-<%- sellerid %>" method="get" enctype="multipart/form-data" action="<%- formaction %>" class="wk-mp-pay-form">
+    <div class="modal-body">
+        <div class="bootbox-body">
+            <textarea class="bootbox-input bootbox-input-text form-control required-entry" name="seller_pay_reason" rows="4" cols="83"></textarea>
+            <input type="hidden" name="autoorderid" value="<%- autoorderid %>">         
+            <input type="hidden" name="seller_id" value="<%- sellerid %>">         
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span class="error"></span>
+        <button type="reset" class="btn btn-default"><span><%- cancellabel %></span></button>
+        <button type="submit" class="btn btn-primary"><span><%- submitlabel %></span></button>
+        <span class="clear"></span>
+    </div>
+</form>
+<script>
+    require([
+        "jquery",
+        "mage/mage"
+    ], function($){
+        $('#ask-form-<%- sellerid %>').mage('validation', {});
+        $("body").delegate('.action-close',"click",function(){
+            if($(this).parents('.modals-wrapper').find('form').attr('class')=='wk-mp-pay-form'){
+                $(this).parents('.modals-wrapper').find('.modals-overlay').remove();
+                $(this).parents('.modal-popup').remove();
+                $('body').removeClass('_has-modal');
+            }
+        });
+    });
+</script>

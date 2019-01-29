@@ -1,0 +1,319 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+// @codingStandardsIgnoreFile
+
+$helper = $this->helper('Webkul\Marketplace\Helper\Data');
+$orderHelper = $this->helper('Webkul\Marketplace\Helper\Orders');
+$isPartner = $helper->isSeller();
+if ($isPartner == 1) {
+    $orderId = $this->getRequest()->getParam('order_id');
+    $shipmentId = $this->getRequest()->getParam('shipment_id');
+    $order = $block->getOrder();
+    $tracking=$orderHelper->getOrderinfo($orderId);
+    $shipment = $block->getShipment();
+    $paymentMethod = '';
+    if ($order->getPayment()) {
+        $paymentMethod = $order->getPayment()->getMethodInstance()->getTitle();
+    }
+    $marketplaceOrders = $block->getSellerOrderInfo($orderId);
+    if (count($marketplaceOrders)) {	?>
+        <div class="wk-mp-design">
+            <div class="fieldset wk-mp-fieldset">
+                <div class="page-title-wrapper">
+                    <h1 class="page-title">
+                        <span data-ui-id="page-title-wrapper" class="base">
+                            <?php echo __('Shipment #%1', $shipment->getIncrementId()) ?>
+                        </span>
+                    </h1>
+                    <div class="order-date">
+                        <?php echo __('<span class="label">Order Date:</span> %1', '<date>' . $block->formatDate($shipment->getCreatedAt(),\IntlDateFormatter::MEDIUM, true, $block->getTimezoneForStore($order->getStore())) . '</date>') ?>
+                    </div>
+                    <div class="actions-toolbar order-actions-toolbar">
+                        <div class="actions">
+                            <a href="<?php echo $block->getUrl('marketplace/order_shipment/email', ['order_id'=>$orderId,'shipment_id'=>$shipmentId, '_secure' => $this->getRequest()->isSecure()])?>" onclick="return confirm('<?php echo __("Are you sure you want to send shipment email to customer?") ?>')" class="action">
+                                <button class="button wk-mp-btn" title="<?php echo __('Send Email To Customer') ?>" type="button">
+                                    <span><span><?php echo __('Send Tracking Information') ?></span></span>
+                                </button>
+                            </a>
+                            <a href="<?php echo $block->getUrl('marketplace/order_shipment/printpdf', ['order_id'=>$orderId,'shipment_id'=>$shipmentId, '_secure' => $this->getRequest()->isSecure()]);?>" class="action">
+                                <button class="button wk-mp-btn" title="<?php echo __('Shipment Slip') ?>">
+                                    <span><span><?php echo __('Print Shipment') ?></span></span>
+                                </button>
+                            </a>
+                            <?php
+                            foreach ($block->getChildNames() as $key => $blockName) {
+                                if ($blockName != 'marketplace_order_shipment_items') {
+                                    echo $block->getChildHtml($blockName, false);
+                                }
+                            } ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="block block-order-details-view">
+                    <div class="block-title">
+                        <strong><?php echo __('Order Information') ?></strong>
+                    </div>
+                    <div class="block-content">
+                        <div class="box-content">
+                            <div class="box wk-box">
+                                <strong class="box-title wk-order-info-title">
+                                    <a href="<?php echo $block->getUrl('marketplace/order/view', ['id'=>$orderId, '_secure' => $this->getRequest()->isSecure()]);?>">
+                                        <?php echo __('Order # %1', $order->getIncrementId()) ?>
+                                    </a>
+                                </strong>
+                                <div class="box-content">
+                                    <div class="wk-row">
+                                        <span class="label"><?php echo __('Order Status')?> : </span>
+                                        <span class="value"><?php echo ucfirst($order->getStatus()); ?></span>
+                                    </div>
+                                    <div class="wk-row">
+                                        <span class="label"><?php echo __('Order Date')?> : </span>
+                                        <span class="value"><?php echo $block->formatDate($order->getCreatedAt(),\IntlDateFormatter::MEDIUM, true, $block->getTimezoneForStore($order->getStore())); ?></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php if ($helper->getSellerProfileDisplayFlag()) { ?>
+                                <div class="box wk-box">
+                                    <strong class="box-title"><span><?php echo __('Buyer Information') ?></span></strong>
+                                    <div class="box-content">
+                                        <div class="box wk-box">
+                                            <div class="wk-row">
+                                                <span class="label"><?php echo __('Customer Name')?> : </span>
+                                                <span class="value"><?php echo $order->getCustomerName(); ?></span>
+                                            </div>
+                                            <div class="wk-row">
+                                                <span class="label"><?php echo __('Email')?> : </span>
+                                                <span class="value"><?php echo $order->getCustomerEmail(); ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+                <?php if ($helper->getSellerProfileDisplayFlag()) { ?>
+                    <div class="block block-order-details-view">
+                        <div class="block-title">
+                            <strong><?php echo __('Address Information') ?></strong>
+                        </div>
+                        <div class="block-content">
+                            <div class="box-content">
+                                <div class="box box-order-billing-address wk-box">
+                                    <strong class="box-title">
+                                        <span><?php echo __('Billing Address') ?></span>
+                                    </strong>
+                                    <div class="box-content">
+                                        <address><?php echo $block->getFormattedAddress($order->getBillingAddress()); ?></address>
+                                    </div>
+                                </div>
+                                <?php if (!$order->getIsVirtual()): ?>
+                                    <div class="box box-order-shipping-address wk-box">
+                                        <strong class="box-title"><span><?php echo __('Shipping Address') ?></span></strong>
+                                        <div class="box-content">
+                                            <address><?php echo $block->getFormattedAddress($order->getShippingAddress()); ?></address>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+                <div class="block block-order-details-view">
+                    <div class="block-title">
+                        <strong><?php echo __('Payment & Shipping Method') ?></strong>
+                    </div>
+                    <div class="block-content">
+                        <div class="box box-order-billing-method wk-box">
+                            <strong class="box-title">
+                                <span><?php echo __('Payment Information') ?></span>
+                            </strong>
+                            <div class="box-content">
+                                <?php echo $paymentMethod; ?>
+                            </div>
+                        </div>
+                        <?php if (!$order->getIsVirtual()): ?>
+                            <div class="box box-order-shipping-method wk-box">
+                                <strong class="box-title">
+                                    <span><?php echo __('Shipping and Tracking Information') ?></span>
+                                </strong>
+                                <div class="box-content">
+                                    <?php if ($order->getShippingDescription()): ?>
+                                        <?php echo $block->escapeHtml($order->getShippingDescription()) ?>
+                                    <?php else: ?>
+                                        <?php echo __('No shipping information available'); ?>
+                                    <?php endif; ?>
+                                    <?php
+                                    if ($tracking->getTrackingNumber()) {
+                                    ?>
+                                        <p>
+                                            <a href="<?php echo $this->helper('Magento\Shipping\Helper\Data')->getTrackingPopupUrlBySalesModel($block->getShipment()) ?>" title="<?php echo __('Track this shipment') ?>" target="blank">
+                                                <?php echo __('Track this shipment') ?>
+                                            </a>
+                                        </p>
+                                        <div class="admin__control-table-wrapper">
+                                            <table class="data-table admin__control-table wk-mp-list-table" id="wk-mp-shipment-tracking-info">
+                                                <thead>
+                                                    <tr class="headings">
+                                                        <th><?php echo __('Carrier') ?></th>
+                                                        <th><?php echo __('Title') ?></th>
+                                                        <th><?php echo __('Number') ?></th>
+                                                        <th><?php echo __('Action') ?></th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td>
+                                                            <select name="carrier"
+                                                            class="select"
+                                                            id="wk-mp-tracking-carrier">
+                                                                <?php foreach ($block->getCarriers() as $_code => $_name): ?>
+                                                                    <option value="<?php echo $_code ?>">
+                                                                        <?php echo $block->escapeHtml($_name) ?>
+                                                                    </option>
+                                                                <?php endforeach; ?>
+                                                            </select>
+                                                        </td>
+                                                        <td >
+                                                            <input class="input-text"
+                                                                type="text"
+                                                                id="wk-mp-tracking-title"
+                                                                name="title"
+                                                                value="" />
+                                                        </td>
+                                                        <td >
+                                                            <input class="input-text"
+                                                                type="text"
+                                                                id="wk-mp-tracking-number"
+                                                                name="number"
+                                                                value="" />
+                                                        </td>
+                                                        <td>
+                                                            <button id="wk-mp-tracking-add">
+                                                                <span>
+                                                                    <?php echo __('Add') ?>
+                                                                </span>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+                                            <?php if ($_tracks = $block->getShipment()->getAllTracks()): ?>
+                                                <tbody id="wk-mp-shipment-tracking-info-tbody">
+                                                <?php $i = 0; foreach ($_tracks as $_track):$i++ ?>
+                                                    <tr>
+                                                        <td><?php echo $block->escapeHtml($block->getCarrierTitle($_track->getCarrierCode())) ?></td>
+                                                        <td><?php echo $block->escapeHtml($_track->getTitle()) ?></td>
+                                                        <td>
+                                                            <?php if ($_track->isCustom()): ?>
+                                                            <?php echo $block->escapeHtml($_track->getNumber()) ?>
+                                                            <?php else: ?>
+                                                            <a href="<?php echo $this->helper('Magento\Shipping\Helper\Data')->getTrackingPopupUrlBySalesModel($_track) ?>" target="blank">
+                                                                <?php echo $block->escapeHtml($_track->getNumber()) ?>
+                                                            </a>
+                                                            <div id="shipment_tracking_info_response_<?php echo $_track->getId() ?>"></div>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td class="col-delete">
+                                                            <button class="wk-mp-tracking-action-delete action-delete" data-url="<?php echo $block->trackingDeleteUrl($orderId, $shipmentId, $_track->getId())?>">
+                                                                <span>
+                                                                    <?php echo __('Delete') ?>
+                                                                </span>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                                </tbody>
+                                            <?php endif; ?>
+                                            </table>
+                                        </div>
+                                    <?php
+                                    } ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <div class="block block-order-details-view wk-order-title-block">
+                    <div class="block-title">
+                        <strong><?php echo __('Items Shipped') ?></strong>
+                    </div>
+                </div>
+                <div class="order-details-items ordered">
+                    <div class="order-title">
+                        <strong><?php echo __('Items Shipped') ?></strong>
+                    </div>
+                    <?= $block->getChildHtml('marketplace_order_shipment_items') ?>
+                </div>
+            </div>
+        </div>
+        <div class="buttons-set">
+            <p class="back-link">
+                <a href="<?php echo $block->getUrl('marketplace/order/history', ['_secure' => $this->getRequest()->isSecure()]);?>" class="left">&laquo; <?php echo __('Back To My Orders') ?></a>
+            </p>
+        </div>
+        <script>
+            require([
+                "jquery",
+                "mage/mage"
+            ], function($) {
+                var dataForm = $('#marketplace-shipping-form');
+                dataForm.mage('validation', {});
+
+                $('#mp-create-shipment-btn').click(function() {
+                    dataForm.submit();
+                });
+            });
+        </script>
+        <script id="sellerOrderShipmentTemplate" type="text/x-jquery-tmpl">
+            <tr>
+                <td><%- data.carrier %></td>
+                <td><%- data.title %></td>
+                <td class="<%- data.numberclass %>">
+                    <%- data.number %>
+                </td>
+                <td class="<%- data.numberclasshref %>">
+                    <a href="<%- data.trackingPopupUrl %>" target="blank">
+                        <%- data.number %>
+                    </a>
+                </td>
+                <td class="col-delete">
+                    <button class="wk-mp-tracking-action-delete action-delete" data-url="<%- data.trackingDeleteUrl %>">
+                        <span>
+                            <?php echo __('Delete') ?>
+                        </span>
+                    </button>
+                </td>
+            </tr>
+        </script>
+        <?php
+        $formData = [
+            'addTrackingAjaxUrl' => $block->trackingAddUrl($orderId, $shipmentId)
+        ];
+        $serializedFormData = $this->helper(
+            'Magento\Framework\Json\Helper\Data'
+        )->jsonEncode($formData);
+        ?>
+        <script type="text/x-magento-init">
+            {
+                "*": {
+                    "sellerOrderShipment": <?php /* @noEscape */ echo $serializedFormData; ?>
+                }
+            }
+        </script>
+        <?php
+    }
+} else { ?>
+    <h2 class="wk-mp-error_msg">
+        <?php echo __("To Become Seller Please Contact to Admin."); ?>
+    </h2>
+    <?php
+} ?>

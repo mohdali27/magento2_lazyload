@@ -1,0 +1,110 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+// @codingStandardsIgnoreFile
+
+$helper = $this->helper('Webkul\Marketplace\Helper\Data');
+$isPartner = $helper->isSeller();
+if ($isPartner == 1) {
+    $orderId = $this->getRequest()->getParam('id');
+    $order = $block->getOrder();
+    $paymentMethod = '';
+    if ($order->getPayment()) {
+        $paymentMethod = $order->getPayment()->getMethodInstance()->getTitle();
+    }
+
+    $marketplaceOrders = $block->getSellerOrderInfo($orderId);
+    if (count($marketplaceOrders)) { ?>
+        <div class="wk_mp_design">
+            <div class="fieldset wk_mp_fieldset" id="wk_mp_print_order">
+                <div class="order-details-items ordered">
+                    <div class="order-title">
+                        <strong><?php echo __('Items Ordered') ?></strong>
+                    </div>
+                    <?= $block->getChildHtml('marketplace_order_items') ?>
+                </div>
+                <?php if ($helper->getSellerProfileDisplayFlag()) { ?>
+                    <div class="block block-order-details-view">
+                        <div class="block-title">
+                            <strong><?php echo __('Buyer Information') ?></strong>
+                        </div>
+                        <div class="block-content">
+                            <div class="box-content">
+                                <div class="box">
+                                    <div class="wk_row">
+                                        <span class="label"><?php echo __('Customer Name')?> : </span>
+                                        <span class="value"><?php echo $order->getCustomerName(); ?></span>
+                                    </div>
+                                    <div class="wk_row">
+                                        <span class="label"><?php echo __('Email')?> : </span>
+                                        <span class="value"><?php echo $order->getCustomerEmail(); ?></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+                <div class="block block-order-details-view">
+                    <div class="block-title">
+                        <strong><?php echo __('Order Information') ?></strong>
+                    </div>
+                    <div class="block-content">
+                        <?php if ($helper->getSellerProfileDisplayFlag()) { ?>
+                            <?php if ($block->isOrderCanShip($order)): ?>
+                                <div class="box box-order-shipping-address">
+                                    <strong class="box-title"><span><?php echo __('Shipping Address') ?></span></strong>
+                                    <div class="box-content">
+                                        <address><?php echo $block->getFormattedAddress($order->getShippingAddress()); ?></address>
+                                    </div>
+                                </div>
+
+                                <div class="box box-order-shipping-method">
+                                    <strong class="box-title">
+                                        <span><?php echo __('Shipping Method') ?></span>
+                                    </strong>
+                                    <div class="box-content">
+                                    <?php if ($order->getShippingDescription()): ?>
+                                        <?php echo $block->escapeHtml($order->getShippingDescription()) ?>
+                                    <?php else: ?>
+                                        <?php echo __('No shipping information available'); ?>
+                                    <?php endif; ?>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                            <div class="box box-order-billing-address">
+                                <strong class="box-title">
+                                    <span><?php echo __('Billing Address') ?></span>
+                                </strong>
+                                <div class="box-content">
+                                    <address><?php echo $block->getFormattedAddress($order->getBillingAddress()); ?></address>
+                                </div>
+                            </div>
+                        <?php } ?>
+                        <div class="box box-order-billing-method">
+                            <strong class="box-title">
+                                <span><?php echo __('Payment Method') ?></span>
+                            </strong>
+                            <div class="box-content">
+                                <?php echo $paymentMethod; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+    }
+} else { ?>
+    <h2 class="wk_mp_error_msg">
+        <?php echo __("To Become Seller Please Contact to Admin."); ?>
+    </h2>
+    <?php
+} ?>

@@ -1,0 +1,191 @@
+<?php  
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+// @codingStandardsIgnoreFile
+
+$helper = $this->helper('Webkul\Marketplace\Helper\Data');
+$bannerDisplay 		= 	$helper->getDisplayBannerLayout2();
+$bannerImage 		= 	$helper->getBannerImageLayout2();
+$bannerContent 		= 	$helper->getBannerContentLayout2();
+$marketplacebutton 	= 	$helper->getBannerButtonLayout2();
+$sellerAccountUrl = $block->getUrl(
+	'marketplace/account/becomeseller',
+	["_secure" => $this->getRequest()->isSecure()]
+);
+if (!$helper->isCustomerLoggedIn()) {
+	$sellerAccountUrl = '#register-as-seller';
+} ?>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getViewFileUrl('Webkul_Marketplace::css/landingpage_one.css');?>">
+<div class="wk-mp-design wk-mp-landingpage wk-mp-landingpage-layout2">
+	<?php
+	if($bannerDisplay){?>
+		<div class="wk-mp-banner-container-layout2">	
+			<div class="wk-mp-banner">
+				<div class="wk-mp-header">
+					<?php echo $block->getCmsFilterContent($bannerContent)?>
+					<p>
+						<a href="<?php echo $sellerAccountUrl?>">
+							<button class="button wk-mp-landing-button">
+								<span>
+									<span>
+										<strong><?php echo $marketplacebutton; ?></strong>
+									</span>
+								</span>
+							</button>
+						</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	<?php
+	} ?>
+	<div class="wk-list-container-wrapper wk-text-transform-left">
+		<div class="wk-list-container">
+			<ul>
+				<li class="wk-icon1">
+					<div class="wk-icon-container">
+					</div>
+					<div class="wk-icon-content">
+						<span class="wk-icon-span"><?php echo __('Huge Buyers');?></span>
+						<div class="wk-icon-div"><?php echo __('Get your product showcased to a huge range of customers, as everyday many user shops from us.');?></div>
+					</div>
+				</li>
+				<li class="wk-icon3">
+					<div class="wk-icon-container">
+					</div>
+					<div class="wk-icon-content">
+						<span class="wk-icon-span"><?php echo __('Quick Payments');?></span>
+						<div class="wk-icon-div"><?php echo __('Once goods have been successfully delivered to respective customers, you can request for payout.');?></div>
+					</div>
+				</li>
+				<li class="wk-icon5">
+					<div class="wk-icon-container">
+					</div>
+					<div class="wk-icon-content">
+						<span class="wk-icon-span"><?php echo __('Earn Badges');?></span>
+						<div class="wk-icon-div"><?php echo __('Once you climb a milestone you get awarded with a badge, which make you look like more pro.');?></div>
+					</div>
+				</li>
+				<li class="wk-icon7">
+					<div class="wk-icon-container">
+					</div>
+					<div class="wk-icon-content">
+						<span class="wk-icon-span"><?php echo __('Customize Profile');?></span>
+						<div class="wk-icon-div"><?php echo __('Customize your profile with information like profile logo, shop location, shipping and refund policies.');?></div>
+					</div>
+				</li>
+				<li class="wk-icon9">
+					<div class="wk-icon-container">
+					</div>
+					<div class="wk-icon-content">
+						<span class="wk-icon-span"><?php echo __('Add Media');?></span>
+						<div class="wk-icon-div"><?php echo __('Embed video YouTube to make your account more genuine and stand out in the queue.');?></div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="wk-list-container">
+			<ul>
+				<li class="wk-icon2">
+					<div class="wk-icon-container">
+					</div>
+					<div class="wk-icon-content">
+						<span class="wk-icon-span"><?php echo __('Got Stuck? Ask Questions');?></span>
+						<div class="wk-icon-div"><?php echo __('If you ever get stuck, let us know and we will help you with the best we have in minimum possible time.');?></div>
+					</div>
+				</li>
+				<li class="wk-icon4">
+					<div class="wk-icon-container">
+					</div>
+					<div class="wk-icon-content">
+						<span class="wk-icon-span"><?php echo __('Manage Your Orders');?></span>
+						<div class="wk-icon-div"><?php echo __('Manage your orders at maximum ease and help customers to have a better shopping experience.');?></div>
+					</div>
+				</li>
+				<li class="wk-icon6">
+					<div class="wk-icon-container">
+					</div>
+					<div class="wk-icon-content">
+						<span class="wk-icon-span"><?php echo __('Get Yourself Verified');?></span>
+						<div class="wk-icon-div"><?php echo __('Add a verified brooch to your profile by providing very necessary some business details and documents.');?></div>
+					</div>
+				</li>
+				<li class="wk-icon8">
+					<div class="wk-icon-container">
+					</div>
+					<div class="wk-icon-content">
+						<span class="wk-icon-span"><?php echo __('Create Your Own Collection');?></span>
+						<div class="wk-icon-div"><?php echo __('Add various products and create your own product collection that will be visible to customers.');?></div>
+					</div>
+				</li>
+				<li class="wk-icon10">
+					<div class="wk-icon-container">
+					</div>
+					<div class="wk-icon-content">
+						<span class="wk-icon-span"><?php echo __('Add Unlimited Products');?></span>
+						<div class="wk-icon-div"><?php echo __('Add unlimited products which you want and fulfill your customers need.');?></div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>		
+	<div class="wk-list-container-class">
+		<div class="wk-list-container-wrapper wk-text-transform-left">
+			<div class="wk-list-container">
+				<div class="wk-list-container-feature-label"><?php echo __('Really Easy To Setup And Customize');?></div>
+				<ul>
+					<li class="wk-icon-check">
+						<span class="wk-icon-check-span"><?php echo __('Create an Account');?></span>
+					</li>
+					<li class="wk-icon-check">
+						<span class="wk-icon-check-span"><?php echo __('Create your Profile');?></span>
+					</li>
+					<li class="wk-icon-check">
+						<span class="wk-icon-check-span"><?php echo __('Add your Details');?></span>
+					</li>
+					<li class="wk-icon-check">
+						<span class="wk-icon-check-span"><?php echo __('Add your Product Listing');?></span>
+					</li>
+					<li class="wk-icon-check">
+						<span class="wk-icon-check-span"><?php echo __('Sell your Products and Earn Points');?></span>
+					</li>
+				</ul>
+			</div>
+			<?php if (!$helper->isCustomerLoggedIn()): ?>
+				<div class="wk-list-container wk-list-container-registration" id="register-as-seller">
+					<div class="wk-list-container-feature-label"><?php echo __('Register As Seller')?></div>
+					<?php echo $block->getChildHtml('customer_form_register');?>
+					
+				</div>
+			<?php endif; ?>
+		</div>
+	</div>
+	<div class="wk-list-container-wrapper wk-text-transform-center">
+		<span class="wk-icon-check-span"><?php echo __('Open your own online shop & explore a new world of marketplace with more and millions of shoppers')?></span>
+        <div class="primary">
+        	<a href="<?php echo $sellerAccountUrl?>">
+	            <button type="submit" class="action submit primary" title="<?php echo __('Open Your Shop')?>">
+	            	<span><?php echo __('Open Your Shop')?></span>
+	            </button>
+	        </a>
+        </div>
+	</div>
+</div>
+<script>
+    require([
+        "jquery",
+        "mage/mage",
+    ], function($){
+		$('.page-title-wrapper').hide();
+		$('.wk-mp-landingpage').insertBefore('#maincontent');
+		$('.wk-mp-banner').css('background-image','url("<?php echo $bannerImage ?>")');
+    });
+</script>

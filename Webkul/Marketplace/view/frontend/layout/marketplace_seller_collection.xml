@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="seller-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+        <css src="Webkul_Marketplace::css/wk_block.css"/>
+        <css src="Webkul_Marketplace::css/style.css"/>
+        <css src="Webkul_Marketplace::css/collection.css"/>
+        <css src="Webkul_Marketplace::css/filter.css"/>
+        <css src="Magento_Swatches::css/swatches.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Webkul\Marketplace\Block\Collection" name="marketplace_sellercollection" template="Webkul_Marketplace::collectionview.phtml" before="-">
+                <block class="Webkul\Marketplace\Block\Collection" name="marketplace_seller_top_block" template="Webkul_Marketplace::seller/top-block.phtml"/>
+                <block class="Magento\Catalog\Block\Product\ProductList\Toolbar" name="product_list_toolbar" template="Magento_Catalog::product/list/toolbar.phtml">
+                    <block class="Magento\Theme\Block\Html\Pager" name="product_list_toolbar_pager"/>
+                </block>
+                <action method="setToolbarBlockName">
+                    <argument name="name" xsi:type="string">product_list_toolbar</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="marketplace_sellercollection">
+            <block class="Webkul\Marketplace\Block\Sellercategory" name="marketplace_sellercollectionleft" template="Webkul_Marketplace::collectionleft.phtml" before="-"/>
+            <block class="Webkul\Marketplace\Block\Sellercategory" name="marketplace_sellercategory" template="Webkul_Marketplace::sellercategory.phtml" before="-"/>
+        </referenceContainer>
+        <referenceContainer name="marketplace_seller_top_block">
+            <block class="Webkul\Marketplace\Block\Sellercategory" name="marketplace_seller_profile_contact" template="Webkul_Marketplace::seller/contact.phtml"/>
+            <block class="Webkul\Marketplace\Block\Sellercategory" name="marketplace_seller_profile_menu" template="Webkul_Marketplace::seller/menu.phtml" before="-"/>
+        </referenceContainer>
+        <referenceContainer name="marketplace_sellercollectionleft">
+            <block class="Webkul\Marketplace\Block\Collection\Navigation\Category" name="marketplace_sellercollection_layered_navigation" before="-" template="Webkul_Marketplace::seller/collection/layer/view.phtml">
+                <block class="Magento\LayeredNavigation\Block\Navigation\State" name="marketplace.catalog.navigation.state" as="state" template="Webkul_Marketplace::seller/collection/layer/state.phtml"/>
+                <block class="Magento\LayeredNavigation\Block\Navigation\FilterRenderer" name="marketplace.catalog.navigation.renderer" as="renderer" template="Webkul_Marketplace::seller/collection/layer/filter.phtml"/>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

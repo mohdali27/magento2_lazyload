@@ -1,0 +1,135 @@
+<?php
+/* @var Webkul\Marketplace\Block\Product\Edit\NewVideo $block */
+?>
+<div><form></form></div>
+<div id="new-video" style="display:none">
+    <form id="new_video_form" class="admin__scope-old" enctype="multipart/form-data">
+        <div></div>
+        <span class="field-row">
+            <div id="new_video_messages" class="control-value admin__field-value"></div>
+        </span>
+        <fieldset class="fieldset admin__fieldset " id="new_video_form_fieldset">
+            <div class="messages"></div>        
+            <input id="" name="form_key" data-ui-id="affected-attribute-set-form-fieldset-element-hidden-form-key" value="<?php echo $block->getFormKey() ?>" type="hidden"/> 
+            <input id="item_id" name="" data-ui-id="product-tabs-tab-google-experiment-fieldset-element-hidden" value="" type="hidden"/>    
+            <input id="file_name" name="" data-ui-id="product-tabs-tab-google-experiment-fieldset-element-hidden" value="" type="hidden"/>    
+            <input id="video_provider" name="video_provider" data-ui-id="product-tabs-tab-google-experiment-fieldset-element-hidden-video-provider" value="" type="hidden"/>    
+            <div class="admin__field field field-video_url  required _required with-note" data-ui-id="product-tabs-tab-google-experiment-fieldset-element-form-field-video-url" >
+                <label class="label admin__field-label" for="video_url" data-ui-id="product-tabs-tab-google-experiment-fieldset-element-text-video-url-label" >
+                    <span><?php /* @escapeNotVerified */ echo __('Url') ?></span>
+                </label>
+                <div class="admin__field-control control">
+                    <input id="video_url" name="video_url" data-ui-id="product-tabs-tab-google-experiment-fieldset-element-text-video-url" value="" class="edited-data validate-url input-text admin__control-text required-entry _required" title="<?php /* @escapeNotVerified */ echo __('Url') ?>" type="text"/>
+                    <div class="note admin__field-note" id="video_url-note">
+                        <?php echo $block->getNoteVideoUrl();?>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="admin__field field field-video_title  required _required" data-ui-id="product-tabs-tab-google-experiment-fieldset-element-form-field-video-title" >
+                <label class="label admin__field-label" for="video_title" data-ui-id="product-tabs-tab-google-experiment-fieldset-element-text-video-title-label" >
+                    <span><?php /* @escapeNotVerified */ echo __('Title') ?></span>
+                </label>
+                <div class="admin__field-control control">
+                    <input id="video_title" name="video_title" data-ui-id="product-tabs-tab-google-experiment-fieldset-element-text-video-title" value="" class="edited-data input-text admin__control-text required-entry _required" title="<?php /* @escapeNotVerified */ echo __('Title') ?>" type="text"/>
+                </div>
+            </div>
+
+            <div class="admin__field field field-video_description " data-ui-id="product-tabs-tab-google-experiment-fieldset-element-form-field-video-description" >
+                <label class="label admin__field-label" for="video_description" data-ui-id="product-tabs-tab-google-experiment-fieldset-element-textarea-video-description-label" >
+                    <span><?php /* @escapeNotVerified */ echo __('Description') ?></span>
+                </label>
+                <div class="admin__field-control control">
+                    <textarea id="video_description" name="video_description" class="edited-data textarea admin__control-textarea" title="<?php /* @escapeNotVerified */ echo __('Description') ?>" rows="2" cols="15" data-ui-id="product-tabs-tab-google-experiment-fieldset-element-textarea-video-description" ></textarea>
+                </div>
+            </div>
+    
+            <div class="admin__field field field-new_video_screenshot " data-ui-id="product-tabs-tab-google-experiment-fieldset-element-form-field-new-video-screenshot" >
+                <label class="label admin__field-label" for="new_video_screenshot" data-ui-id="product-tabs-tab-google-experiment-fieldset-element-file-image-label" >
+                    <span><?php /* @escapeNotVerified */ echo __('Preview Image') ?></span>
+                </label>
+                <div class="admin__field-control control">
+                    <input id="new_video_screenshot" name="image" data-ui-id="product-tabs-tab-google-experiment-fieldset-element-file-image" value="" title="<?php /* @escapeNotVerified */ echo __('Preview Image') ?>" type="file"/>
+                </div>
+            </div>
+    
+            <div class="admin__field field field-new_video_screenshot_preview " data-ui-id="product-tabs-tab-google-experiment-fieldset-element-form-field-new-video-screenshot-preview" >
+                <label class="label admin__field-label" for="new_video_screenshot_preview" data-ui-id="product-tabs-tab-google-experiment-fieldset-element-button-preview-label" ><span></span></label>
+                <div class="admin__field-control control">
+                    <input id="new_video_screenshot_preview" name="_preview" data-ui-id="product-tabs-tab-google-experiment-fieldset-element-button-preview" value="" class="preview_hidden_image_input_button" type="button"/>
+                </div>
+            </div>
+    
+            <div class="admin__field field field-new_video_get " data-ui-id="product-tabs-tab-google-experiment-fieldset-element-form-field-new-video-get" >
+                <label class="label admin__field-label" for="new_video_get" data-ui-id="product-tabs-tab-google-experiment-fieldset-element-button-new-video-get-label" ><span></span></label>
+                <div class="admin__field-control control">
+                    <input id="new_video_get" name="new_video_get" data-ui-id="product-tabs-tab-google-experiment-fieldset-element-button-new-video-get" value="<?php /* @escapeNotVerified */ echo __('Get Video Information') ?>" title="<?php /* @escapeNotVerified */ echo __('Get Video Information') ?>" class="action-default" type="button"/>
+                </div>
+            </div>
+    
+            <div class="admin__field field field-roleLabel  no-label" data-ui-id="product-tabs-tab-google-experiment-fieldset-element-form-field-rolelabel" >
+                <div class="admin__field-control control">
+                    <div id="roleLabel" class="control-value admin__field-value"><?php /* @escapeNotVerified */ echo __('Role') ?></div>
+                </div>
+            </div>
+
+            <?php
+            foreach ($block->getProductMediaAttributes() as $attribute) :
+            ?>
+                <div class="admin__field field field-video_<?php echo $block->escapeHtml($attribute->getAttributeCode()) ?>" data-ui-id="affected-attribute-set-form-fieldset-element-form-field-video-image" >
+                    <label class="label admin__field-label" for="video_<?php echo $block->escapeHtml($attribute->getAttributeCode()) ?>" data-ui-id="affected-attribute-set-form-fieldset-element-checkbox-label" >
+                        <span><?php echo $block->escapeHtml($attribute->getFrontendLabel()) ?></span>
+                    </label>
+                    <div class="admin__field-control control">
+                        <input id="video_<?php echo $block->escapeHtml($attribute->getAttributeCode()) ?>"
+                            name=""
+                            data-ui-id="product-tabs-tab-google-experiment-fieldset-element-checkbox"
+                            value="<?php echo $block->escapeHtml(
+                                $attribute->getAttributeCode()
+                            ) ?>"
+                            class="video_image_role"
+                            title="<?php echo $block->escapeHtml($attribute->getFrontendLabel()) ?>"
+                            data-role="role-type-selector"
+                            type="checkbox"
+                        />
+                    </div>
+                </div>
+            <?php
+            endforeach;
+            ?>
+    
+            <div class="admin__field field field-new_video_disabled " data-ui-id="product-tabs-tab-google-experiment-fieldset-element-form-field-new-video-disabled" >
+                <label class="label admin__field-label" for="new_video_disabled" data-ui-id="product-tabs-tab-google-experiment-fieldset-element-checkbox-disabled-label" ><span><?php /* @escapeNotVerified */ echo __('Hide from Product Page') ?></span></label>
+                <div class="admin__field-control control">
+                  <input id="new_video_disabled" name="disabled" data-ui-id="product-tabs-tab-google-experiment-fieldset-element-checkbox-disabled" value="" class="edited-data" title="<?php /* @escapeNotVerified */ echo __('Hide from Product Page') ?>" type="checkbox"/>
+                </div>
+            </div>
+        </fieldset>    
+    </form>
+    <script>
+        require(["jquery","mage/mage"],function($) {
+            $(function(){
+                $('#new-video').mage(
+                    'newVideoDialog',
+                    <?php /* @escapeNotVerified */ echo $block->getVideoEncodedOptions();?>
+                );
+            });
+        });
+    </script>
+  <div id="video-player-preview-location" class="video-player-sidebar">
+      <div class="video-player-container"></div>
+      <div class="video-information title">
+          <label><?php /* @escapeNotVerified */ echo __('Title:') ?> </label><span></span>
+      </div>
+      <div class="video-information uploaded">
+          <label><?php /* @escapeNotVerified */ echo __('Uploaded:') ?> </label><span></span>
+      </div>
+      <div class="video-information uploader">
+          <label><?php /* @escapeNotVerified */ echo __('Uploader:') ?> </label><span></span>
+      </div>
+      <div class="video-information duration">
+          <label><?php /* @escapeNotVerified */ echo __('Duration:') ?> </label><span></span>
+      </div>
+  </div>
+</div>
+

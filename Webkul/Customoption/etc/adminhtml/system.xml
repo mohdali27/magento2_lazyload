@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * Webkul Software
+ *
+ * @category Webkul
+ * @package Webkul_Customoption
+ * @author Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license https://store.webkul.com/license.html
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="webkul" translate="label" sortOrder="10">
+			<label>Webkul</label>
+		</tab>
+		<section id="mpcustomoption" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+			<label>Custom Option</label>
+			<tab>webkul</tab>
+			<resource>Webkul_Customoption::config_mpcustomoption</resource>
+			<group id="settings" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Custom Option Settings</label>
+				<field id="active" translate="label" sortOrder="1" type="select" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Show Custom Options to Seller</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+            </group>
+        </section>
+    </system>
+</config>
