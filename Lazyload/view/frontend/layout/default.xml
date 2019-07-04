@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <body>
-        <referenceContainer name="before.body.end">
-            <block ifconfig="webapp_lazyload/general/enable" class="Magento\Framework\View\Element\Template" name="webapp_lazyloading" template="Webapp_Lazyload::lazyloading.phtml" />
-        </referenceContainer>
-    </body>
-</page>
