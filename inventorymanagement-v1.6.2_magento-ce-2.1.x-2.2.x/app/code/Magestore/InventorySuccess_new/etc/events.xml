@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    
+    <event name="controller_action_catalog_product_save_entity_after">
+        <observer name="inventorysuccess_controller_action_catalog_product_save_entity_after" instance="Magestore\InventorySuccess\Observer\Catalog\ControllerProductSaveAfter" />
+    </event>
+
+    <event name="catalog_product_save_before">
+        <observer name="inventorysuccess_controller_action_catalog_product_save_entity_before" instance="Magestore\InventorySuccess\Observer\Catalog\ControllerProductSaveBefore" />
+    </event>
+
+
+    <event name="stockchange_adjust_stock_after">
+        <observer name="inventorysuccess_stockchange_adjust_stock_after" instance="Magestore\InventorySuccess\Observer\StockChange\AdjustStockAfter" />
+    </event>
+    <event name="stockchange_issue_stock_after">
+        <observer name="inventorysuccess_stockchange_issue_stock_after" instance="Magestore\InventorySuccess\Observer\StockChange\IssueStockAfter" />
+    </event>
+    <event name="stockchange_receive_stock_after">
+        <observer name="inventorysuccess_stockchange_receive_stock_after" instance="Magestore\InventorySuccess\Observer\StockChange\ReceiveStockAfter" />
+    </event>
+
+    <!-- Sales Events -->            
+    <event name="sales_order_item_save_before">
+        <observer name="inventorysuccess_sales_order_item_save_before" instance="Magestore\InventorySuccess\Observer\Sales\OrderItemSaveBefore" />
+    </event>
+    <event name="sales_order_save_before">
+        <observer name="inventorysuccess_sales_order_save_before" instance="Magestore\InventorySuccess\Observer\Sales\OrderSaveBefore" />
+    </event>
+    <event name="sales_order_item_save_after">
+        <observer name="inventorysuccess_sales_order_item_save_after" instance="Magestore\InventorySuccess\Observer\Sales\OrderItemSaveAfter" />
+    </event>     
+    <event name="sales_order_item_cancel">
+        <observer name="inventorysuccess_sales_order_item_cancel" instance="Magestore\InventorySuccess\Observer\Sales\OrderItemCancel"/>
+    </event>                        
+    <event name="sales_shipment_item_save_after">
+        <observer name="inventorysuccess_sales_shipment_item_save_after" instance="Magestore\InventorySuccess\Observer\Sales\ShipmentItemSaveAfter"/>
+    </event>      
+    <event name="sales_creditmemo_item_save_after">
+        <observer name="inventorysuccess_sales_creditmemo_item_save_after" instance="Magestore\InventorySuccess\Observer\Sales\CreditmemoItemSaveAfter"/>
+    </event>    
+    <!-- End of Sales Events -->
+
+    <!-- Integrate webpos -->
+    <event name="webpos_catalog_product_getlist">
+        <observer name="inventorysuccess_webpos_catalog_product_getlist" instance="Magestore\InventorySuccess\Observer\Webpos\Catalog\Product\WebposCatalogProductGetlist"/>
+    </event>
+    <event name="webpos_catalog_product_getlist_flat_table">
+        <observer name="inventorysuccess_webpos_catalog_product_getlist_flat_table" instance="Magestore\InventorySuccess\Observer\Webpos\Catalog\Product\WebposCatalogProductGetlistFromFlatTable"/>
+    </event>
+    <event name="webpos_inventory_stockitem_getstockitems">
+        <observer name="inventorysuccess_webpos_inventory_stockitem_getstockitems" instance="Magestore\InventorySuccess\Observer\Webpos\Inventory\Stock\Item\WebposInventoryStockitemGetStockItems"/>
+    </event>
+    <event name="webpos_inventory_stockitem_getstockitems_flattable">
+        <observer name="inventorysuccess_webpos_inventory_stockitem_getstockitems_flattable" instance="Magestore\InventorySuccess\Observer\Webpos\Inventory\Stock\Item\WebposInventoryStockitemGetStockItemsFromFlatTable"/>
+    </event>
+    <event name="webpos_inventory_stockitem_update">
+        <observer name="inventorysuccess_webpos_inventory_stockitem_update" instance="Magestore\InventorySuccess\Observer\Webpos\Inventory\Stock\Item\WebposInventoryStockitemUpdate"/>
+    </event>    
+    <event name="webpos_config_load_after">
+        <observer name="inventorysuccess_webpos_config_load_after" instance="Magestore\InventorySuccess\Observer\Webpos\Inventory\Stock\Item\WebposConfigLoadAfter"/>
+    </event>
+    <!-- End integrate webpos -->
+    
+    <!-- Integration FulfilSuccess -->
+    <event name="fulfillsuccess_add_item_shelf_location">
+        <observer name="inventorysuccess_fulfillsuccess_add_item_shelf_location" instance="Magestore\InventorySuccess\Observer\FulfilSuccess\AddItemShelfLocation"/>
+    </event>
+    <!-- End Integration FulfilSuccess -->    
+
+    <!-- Even after mass update attribute product -->
+    <event name="controller_action_postdispatch_catalog_product_action_attribute_save">
+        <observer name="inventorysuccess_controller_action_postdispatch_catalog_product_action_attribute_save" instance="Magestore\InventorySuccess\Observer\Catalog\ControllerCatalogProductActionAttributeSave"/>
+    </event>
+    <!-- End: Even after mass update attribute product -->
+
+</config>

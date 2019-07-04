@@ -1,0 +1,33 @@
+<!--@subject Amasty Unsuccsessfull Feed Generation  @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"var logo_url":"Email Logo Image Url",
+"var logo_alt":"Email Logo Image Alt",
+"var store.getFrontendName()":"Store Name",
+"var feed_id":"Feed Id",
+"var feed_name":"Feed Name",
+"var date_time":"Date and time of generation feed",
+"var generation_error":"Generation Error"
+}
+@-->
+{{template config_path="design/email/header_template"}}
+<table class="container bord_color am-winter-template" cellpadding="0" cellspacing="0">
+    <tr class="email-head">
+        <td align="center" valign="top">
+            <table class="table-head am-fullwidth" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                    <td class="am-head">
+                        <p class="am-email-text">
+                            Hello,<br/>
+                            When generating the feed {{var feed_id}}, {{var feed_name}} dated {{var date_time}}, the errors occurred:<br/>
+                            {{var generation_error}}<br/>
+                            For more details, please visit admin panel.<br/>
+                            Thanks,<br/>
+                            {{var store.getFrontendName()}}</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}

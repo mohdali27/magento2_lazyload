@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Magecomp_Emailquotepro::css/emailquote.css"/>
+    </head>
+    <body>
+        <referenceContainer name="checkout.cart.form.before">
+            <block class="Magecomp\Emailquotepro\Block\Emailquote" template="Magecomp_Emailquotepro::emailquote.phtml"
+                   name="emailquote_index"/>
+        </referenceContainer>
+    </body>
+</page>

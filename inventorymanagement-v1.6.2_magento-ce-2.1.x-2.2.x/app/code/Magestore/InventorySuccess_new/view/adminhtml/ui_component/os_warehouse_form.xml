@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">os_warehouse_form.os_warehouse_form_data_source
+            </item>
+            <item name="deps" xsi:type="string">os_warehouse_form.os_warehouse_form_data_source</item>
+            <item name="namespace" xsi:type="string">os_warehouse_form</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Magestore\InventorySuccess\Block\Adminhtml\Warehouse\Edit\Buttons\Back</item>
+            <item name="save" xsi:type="string">Magestore\InventorySuccess\Block\Adminhtml\Warehouse\Edit\Buttons\Save</item>
+            <item name="duplicate" xsi:type="string">Magestore\InventorySuccess\Block\Adminhtml\Warehouse\Edit\Buttons\Duplicate</item>
+            <item name="delete" xsi:type="string">Magestore\InventorySuccess\Block\Adminhtml\Warehouse\Edit\Buttons\Delete</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="childrenFromMeta" xsi:type="boolean">true</item>
+    </argument>
+    <dataSource name="os_warehouse_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\Warehouse\Form\Warehouse</argument>
+            <argument name="name" xsi:type="string">os_warehouse_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">warehouse_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="inventorysuccess/warehouse/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <!--<item name="component" xsi:type="string">Magestore_InventorySuccess/js/warehouse/form/general</item>-->
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+</form>

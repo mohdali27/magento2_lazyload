@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magestore_OrderSuccess::all" title="Order Success" translate="title" sortOrder="1">
+
+                    <resource id="Magestore_InventorySuccess::forcedit" title="Force Edit Qty" translate="title" sortOrder="1"/>
+
+                    <resource id="Magestore_InventorySuccess::inventory" title="Inventory Management" translate="title" sortOrder="2">
+                        <!-- Warehouse Section -->
+                        <resource id="Magestore_InventorySuccess::warehouse" title="Stock Listing" translate="title" sortOrder="1">
+                            <resource id="Magestore_InventorySuccess::warehouse_stock_view" title="Stocks in Location" translate="title" sortOrder="1"/>
+                            <resource id="Magestore_InventorySuccess::product_none_in_warehouse" title="Non-Location Products" translate="title" sortOrder="5"/>
+                            <resource id="Magestore_InventorySuccess::warehouse_list" title="Location" translate="title" sortOrder="10">
+                                <resource id="Magestore_InventorySuccess::warehouse_create" title="Create Location" translate="title" sortOrder="1"/>
+                                <resource id="Magestore_InventorySuccess::warehouse_edit" title="Edit Location" translate="title" sortOrder="5"/>
+                                <resource id="Magestore_InventorySuccess::warehouse_permission" title="Manage Permissions" translate="title" sortOrder="10"/>
+                                <resource id="Magestore_InventorySuccess::warehouse_view" title="View Location Info" translate="title" sortOrder="15"/>
+                                <resource id="Magestore_InventorySuccess::warehouse_delete" title="Delete Location" sortOrder="20"/>
+                                <resource id="Magestore_InventorySuccess::warehouse_duplicate" title="Duplicate Location" sortOrder="25"/>
+                                <resource id="Magestore_InventorySuccess::delete_product" title="Remove Products from Location" sortOrder="30"/>
+                            </resource>
+                        </resource>
+                        <!-- End of Warehouse Section -->
+
+                        <!--Adjust Stock & Stocktaking Section-->
+                        <resource id="Magestore_InventorySuccess::stockcontrol" title="Stock Control" translate="title" sortOrder="5">
+                            <resource id="Magestore_InventorySuccess::adjuststock" title="Adjust Stock" translate="title" sortOrder="1">
+                                <resource id="Magestore_InventorySuccess::create_adjuststock" title="Create a new Stock Adjusment" translate="title" sortOrder="1"/>
+                                <resource id="Magestore_InventorySuccess::adjuststock_history" title="Adjust Stock History" translate="title" sortOrder="5"/>
+                                <resource id="Magestore_InventorySuccess::confirm_adjuststock" title="Confirm Stock Adjusment" translate="title" sortOrder="10"/>
+                            </resource>
+                            <resource id="Magestore_InventorySuccess::stocktaking" title="Stocktaking" translate="title" sortOrder="10">
+                                <resource id="Magestore_InventorySuccess::create_stocktaking" title="Create Stocktaking" translate="title" sortOrder="5"/>
+                                <resource id="Magestore_InventorySuccess::verify_stocktaking" title="Verify Stocktaking" translate="title" sortOrder="10"/>
+                                <resource id="Magestore_InventorySuccess::confirm_stocktaking" title="Confirm Stocktaking" translate="title" sortOrder="15"/>
+                                <resource id="Magestore_InventorySuccess::stocktaking_history" title="Stocktaking History" translate="title" sortOrder="30"/>
+                            </resource>
+                            <resource id="Magestore_InventorySuccess::stock_movement" title="Stock Movement History" translate="title" sortOrder="15">
+                            </resource>
+                        </resource>
+                        <!--End of Adjust Stock & Stocktaking Section-->
+
+                        <!--Create Transfer Stock Section-->
+                        <resource id="Magestore_InventorySuccess::transferstock_create" title="Transfer Stock" translate="title" sortOrder="10">
+                            <resource id="Magestore_InventorySuccess::request_stock" title="Request Stock" translate="title" sortOrder="1">
+                                <resource id="Magestore_InventorySuccess::request_stock_view" title="View Request Stock Info" translate="title" sortOrder="1">
+                                    <resource id="Magestore_InventorySuccess::request_stock_create" title="Create Request Stock" translate="title" sortOrder="1">
+                                        <resource id="Magestore_InventorySuccess::request_stock_add_product" title="Request Stock - Add Product" translate="title" sortOrder="1"/>
+                                        <resource id="Magestore_InventorySuccess::request_stock_add_delivery" title="Request Stock - Add Delivery" translate="title" sortOrder="5"/>
+                                        <resource id="Magestore_InventorySuccess::request_stock_add_receiving" title="Request Stock - Add Receiving" translate="title" sortOrder="10"/>
+                                        <resource id="Magestore_InventorySuccess::request_stock_complete" title="Request Stock - Complete" translate="title" sortOrder="15"/>
+                                        <resource id="Magestore_InventorySuccess::request_stock_edit_product" title="Request Stock - Edit Product" translate="title" sortOrder="20"/>
+                                        <resource id="Magestore_InventorySuccess::request_stock_edit_general" title="Request Stock - Edit General" translate="title" sortOrder="25"/>
+                                    </resource>
+                                </resource>
+                            </resource>
+                            <resource id="Magestore_InventorySuccess::send_stock" title="Send Stock" translate="title" sortOrder="5">
+                                <resource id="Magestore_InventorySuccess::send_stock_view" title="View Send Stock Info" translate="title" sortOrder="1">
+                                    <resource id="Magestore_InventorySuccess::send_stock_create" title="Create Send Stock" translate="title" sortOrder="1">
+                                        <resource id="Magestore_InventorySuccess::send_stock_add_product" title="Send Stock - Add Product" translate="title" sortOrder="1"/>
+                                        <resource id="Magestore_InventorySuccess::send_stock_add_receiving" title="Send Stock - Add Receiving" translate="title" sortOrder="5"/>
+                                        <resource id="Magestore_InventorySuccess::send_stock_complete" title="Send Stock - Complete" translate="title" sortOrder="10"/>
+                                        <resource id="Magestore_InventorySuccess::send_stock_direct_transfer" title="Send Stock - Direct Transfer" translate="title" sortOrder="15"/>
+                                        <resource id="Magestore_InventorySuccess::send_stock_edit_general" title="Send Stock - Edit General" translate="title" sortOrder="20"/>
+                                    </resource>
+                                </resource>
+                            </resource>
+                            <resource id="Magestore_InventorySuccess::external_transfer_stock" title="External Transfer Stock" translate="title" sortOrder="10">
+                                <resource id="Magestore_InventorySuccess::external_transfer_stock_view" title="View External Transfer Stock" translate="title" sortOrder="1">
+                                    <resource id="Magestore_InventorySuccess::external_transfer_stock_create" title="Create External Transfer Stock" translate="title" sortOrder="1">
+                                        <resource id="Magestore_InventorySuccess::external_transfer_stock_add_product" title="External Transfer Stock - Add Product" translate="title" sortOrder="1"/>
+                                        <resource id="Magestore_InventorySuccess::external_transfer_stock_complete" title="Send Stock - Complete" translate="title" sortOrder="5"/>
+                                        <resource id="Magestore_InventorySuccess::external_transfer_edit_general" title="External Transfer Stock - Edit General" translate="title" sortOrder="10"/>
+                                    </resource>
+                                </resource>
+                            </resource>
+                        </resource>
+                        <!--End Create Transfer Stock Section-->
+
+                        <!--Transfer Stock History Section-->
+                        <resource id="Magestore_InventorySuccess::transferstock_history" title="Transfer Stock History" translate="title" sortOrder="15">
+                            <resource id="Magestore_InventorySuccess::request_stock_history" title="Request Stock History" translate="title" sortOrder="1"/>
+                            <resource id="Magestore_InventorySuccess::send_stock_history" title="Send Stock History" translate="title" sortOrder="5"/>
+                            <resource id="Magestore_InventorySuccess::from_external_transfer_stock_history" title="Transfer Stock From External History" translate="title" sortOrder="10"/>
+                            <resource id="Magestore_InventorySuccess::to_external_transfer_stock_history" title="Transfer Stock To External History" translate="title" sortOrder="15"/>
+                        </resource>
+                        <!--End Transfer Stock History Section-->
+
+                        <!-- Prediction Section -->
+                        <resource id="Magestore_InventorySuccess::prediction" title="Prediction" translate="title" sortOrder="20">
+                            <!--Supply Needs Section-->
+                            <resource id="Magestore_InventorySuccess::supplyneeds" title="Show Supply Needs" translate="title" sortOrder="1"/>
+                            <!--End of Supply Needs Section-->
+                            <!-- Low Stock Notification Section -->
+                            <resource id="Magestore_InventorySuccess::list_notification_rule" title="Show Notification Rules" translate="title" sortOrder="5"/>
+                            <resource id="Magestore_InventorySuccess::view_notification_rule" title="Create Notification Rule" translate="title" sortOrder="10"/>
+                            <resource id="Magestore_InventorySuccess::list_notification" title="Show Notification List" translate="title" sortOrder="15"/>
+                            <resource id="Magestore_InventorySuccess::view_notification" title="View notification details" translate="title" sortOrder="20"/>
+                            <!-- End Low Stock Notification Section -->
+                        </resource>
+                        <!--End of Prediction Section-->
+
+                        <!--API Section-->
+                        <resource id="Magestore_InventorySuccess::restapi" title="Inventory Rest API" translate="title" sortOrder="9999">
+                            <!--Warehouse Stock Section-->
+                            <resource id="Magestore_InventorySuccess::api_warehouse_stock" title="Location Stock" translate="title" sortOrder="1">
+                                <resource id="Magestore_InventorySuccess::api_update_stock" title="Update Stock" translate="title" sortOrder="1"/>
+                                <resource id="Magestore_InventorySuccess::api_get_stock" title="Get Stock Info" translate="title" sortOrder="5"/>
+                            </resource>
+                            <!--End of Warehouse Stock Section-->
+                            <!--Warehouse Section-->
+                            <resource id="Magestore_InventorySuccess::api_warehouse_management" title="Location" translate="title" sortOrder="5">
+                                <resource id="Magestore_InventorySuccess::api_create_warehouse" title="Create Location" translate="title" sortOrder="1"/>
+                                <resource id="Magestore_InventorySuccess::api_edit_warehouse" title="Edit Location" translate="title" sortOrder="5"/>
+                                <resource id="Magestore_InventorySuccess::api_view_warehouse" title="Get Location Info" translate="title" sortOrder="10">
+                                </resource>
+                            </resource>
+                            <!--End of Warehouse Section-->
+                            <!--Adjust Stock Section-->
+                            <resource id="Magestore_InventorySuccess::api_adjust_stock" title="Adjust Stock" translate="title" sortOrder="10">
+                                <resource id="Magestore_InventorySuccess::api_create_adjust_stock" title="Create Adjust Stock" translate="title" sortOrder="1"/>
+                                <resource id="Magestore_InventorySuccess::api_view_adjust_stock" title="Get Adjust Stock Info" translate="title" sortOrder="5"/>
+                            </resource>
+                            <!--End of Adjust Stock Section-->
+                        </resource>
+                        <!--End API Section-->
+                    </resource>
+                    <resource id="Magestore_InventorySuccess::order_process" title="Order Process" translate="title" sortOrder="2">
+                        <resource id="Magestore_InventorySuccess::change_order_warehouse" title="Change Order Location" translate="title" sortOrder="1"/>
+                        <resource id="Magestore_InventorySuccess::view_order_warehouse" title="View Order Location" translate="title" sortOrder="10">
+                            <resource id="Magestore_InventorySuccess::create_shipment" title="Create Shipment" translate="title" sortOrder="10"/>
+                            <resource id="Magestore_InventorySuccess::create_creditmemo" title="Create Credit Memo" translate="title" sortOrder="20"/>
+                            <resource id="Magestore_InventorySuccess::cancel_order" title="Cancel Order" translate="title" sortOrder="30"/>
+                        </resource>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Magestore_InventorySuccess::configuration" title="Inventory Management Settings" translate="title"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

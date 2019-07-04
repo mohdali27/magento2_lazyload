@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Feed
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Amasty_Feed::feed" title="Feeds" module="Amasty_Feed" parent="Magento_Catalog::catalog" sortOrder="30" resource="Amasty_Feed::feed"/>
+
+        <add id="Amasty_Feed::feed_profile" title="Profiles" sortOrder="10" module="Amasty_Feed" parent="Amasty_Feed::feed" action="amfeed/feed/" dependsOnModule="Magento_Catalog" resource="Amasty_Feed::feed_profile"/>
+        <add id="Amasty_Feed::feed_category" title="Categories" sortOrder="20" module="Amasty_Feed" parent="Amasty_Feed::feed" action="amfeed/category/" dependsOnModule="Magento_Catalog" resource="Amasty_Feed::feed_category"/>
+        <add id="Amasty_Feed::feed_field" title="Custom Fields" sortOrder="30" module="Amasty_Feed" parent="Amasty_Feed::feed" action="amfeed/field/" dependsOnModule="Magento_Catalog" resource="Amasty_Feed::feed_field"/>
+    </menu>
+</config>

@@ -1,0 +1,140 @@
+//
+//  Amasty Product Feed
+//  ____________________________________________
+
+//
+//  Variables
+//  _____________________________________________
+
+@amfeed-generation-popup__width: 700px;
+@amfeed-download-link-icon__background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIiIGhlaWdodD0iMjIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNy43MyAxMC45MjJhMS4xNzQgMS4xNzQgMCAwIDEgMC0xLjY2MmwuODM0LS44MzVhMy41MzUgMy41MzUgMCAwIDAgMC00Ljk5IDMuNTQgMy41NCAwIDAgMC00Ljk5MyAwbC0zLjcyIDMuNzJhMy41NCAzLjU0IDAgMCAwIDAgNC45OTRBMS4xNzQgMS4xNzQgMCAxIDEgOC4xOSAxMy44MUM1LjkgMTEuNTI1IDUuOSA3Ljc3OCA4LjE4NiA1LjQ5M2wzLjcyMy0zLjcxOWMyLjI4NS0yLjI4OSA2LjAzMi0yLjI4OSA4LjMxNyAwIDIuMjg1IDIuMjg1IDIuMjg1IDYuMDMyIDAgOC4zMTdsLS44My44MzFhMS4xOCAxLjE4IDAgMCAxLTEuNjY3IDB6bS0xMy40NjMuMTUyYy40Ni40Ni40NiAxLjIwNiAwIDEuNjY2bC0uODMxLjgzYTMuNTQgMy41NCAwIDAgMCAwIDQuOTk0IDMuNTQyIDMuNTQyIDAgMCAwIDQuOTkgMGwzLjcyMy0zLjcyM2MxLjM3NC0xLjM3IDEuMzctMy42MTUgMC00Ljk5YTEuMTc5IDEuMTc5IDAgMCAxIDAtMS42NjUgMS4xNzIgMS4xNzIgMCAwIDEgMS42NjEgMGMyLjI5IDIuMjg5IDIuMjkgNi4wMzIgMCA4LjMybC0zLjcxOSAzLjcyYy0yLjI4OSAyLjI4OS02LjAzMiAyLjI4OS04LjMxNyAwLTIuMjg1LTIuMjg1LTIuMjg1LTYuMDMyIDAtOC4zMTdsLjgzLS44MzVjLjQ2LS40NiAxLjIwMy0uNDYgMS42NjMgMHoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=) center no-repeat;
+@amfeed-download-link-icon__background-color: #1e79c2;
+@amfeed-copy-link-button__background-color: #1e79c2;
+@amfeed-download-container__height: 40px;
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amfeed-generation-steps {
+        width: 420px;
+        margin: 0 auto;
+    }
+
+    .amfeed-generation-progress {
+        .modal-header {
+            margin-bottom: 30px;
+            padding: 0;
+        }
+
+        .modal-inner-wrap {
+            .lib-css(width, @amfeed-generation-popup__width);
+            padding: 30px 100px;
+            border-radius: 10px;
+        }
+
+        .modal-title {
+            margin: 0;
+            text-align: center;
+        }
+
+        .modal-content {
+            padding: 0;
+        }
+
+        .action-close {
+            &,
+            &:focus {
+                padding: 20px;
+            }
+
+            &:before,
+            &:before:active {
+                font-size: 10px;
+            }
+        }
+    }
+
+    .amfeed-generation-error {
+        & {
+            display: none;
+            width: 100%;
+            margin-top: 20px;
+            overflow: auto;
+            background: #f4f4f4;
+        }
+
+        .amfeed-error {
+            margin: 20px;
+            word-break: break-word;
+            word-wrap: break-word;
+        }
+    }
+
+    .amfeed-generation-info {
+        & {
+            box-sizing: content-box;
+            padding-top: 20px;
+            text-align: right;
+            border-top: 1px solid #ececec;
+        }
+
+        .amfeed-duration {
+            margin-right: 50px;
+        }
+    }
+
+    .amfeed-progress-tablist {
+        display: none;
+    }
+
+    .amfeed-step-content {
+        display: none;
+        padding: 20px 0 0;
+    }
+
+    .amfeed-download-container {
+        & {
+            .lib-vendor-prefix-display(flex);
+            .lib-css(height, @amfeed-download-container__height);
+            margin-bottom: 20px;
+        }
+
+        &:before {
+            content: '';
+            position: absolute;
+            display: block;
+            .lib-css(width, @amfeed-download-container__height);
+            .lib-css(height, @amfeed-download-container__height);
+            .lib-css(background, @amfeed-download-link-icon__background-color @amfeed-download-link-icon__background-image);
+            background-size: 55%;
+            border-radius: 100%;
+        }
+
+        .amfeed-input {
+            .lib-vendor-prefix-flex-grow(1);
+            .lib-css(margin-left, @amfeed-download-container__height / 2);
+            .lib-css(padding-left, @amfeed-download-container__height / 2 + 15px);;
+            padding-left: 35px;
+            background: #f4f4f4;
+            border: none;
+        }
+
+        .amfeed-button {
+            & {
+                color: #fff;
+                .lib-css(background, @amfeed-copy-link-button__background-color);
+                border: none;
+            }
+
+            &:hover {
+                background: lighten(@amfeed-copy-link-button__background-color, 10%);
+            }
+        }
+    }
+
+    .amprogressbar-progress-timer {
+        margin: 30px 0 50px;
+    }
+}

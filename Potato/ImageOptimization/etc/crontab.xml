@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="po_optimization">
+        <job name="potato_image_scan_filesystem" instance="Potato\ImageOptimization\Cron\ScanImage" method="execute">
+            <schedule>*/3 * * * *</schedule>
+        </job>
+        <job name="potato_image_optimization" instance="Potato\ImageOptimization\Cron\Optimization" method="execute">
+            <schedule>*/5 * * * *</schedule>
+        </job>
+        <job name="potato_image_app_optimization" instance="Potato\ImageOptimization\Cron\AppOptimization" method="execute">
+            <schedule>*/2 * * * *</schedule>
+        </job>
+    </group>
+</config>

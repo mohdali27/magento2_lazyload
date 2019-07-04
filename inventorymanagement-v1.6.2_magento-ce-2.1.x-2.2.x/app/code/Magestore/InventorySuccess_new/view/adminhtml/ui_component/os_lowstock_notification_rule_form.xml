@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">os_lowstock_notification_rule_form.os_lowstock_notification_rule_form_data_source</item>
+            <item name="deps" xsi:type="string">os_lowstock_notification_rule_form.os_lowstock_notification_rule_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Low Stock Notification Rule</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">os_lowstock_notification_rule_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="array">
+                <item name="name" xsi:type="string">back</item>
+                <item name="label" xsi:type="string" translate="true">Back</item>
+                <item name="class" xsi:type="string">back</item>
+                <item name="url" xsi:type="string">*/*/</item>
+            </item>
+            <item name="save" xsi:type="string">Magestore\InventorySuccess\Block\Adminhtml\LowStockNotification\Rule\Edit\Button\SaveButton</item>
+            <item name="save_and_continue" xsi:type="string">Magestore\InventorySuccess\Block\Adminhtml\LowStockNotification\Rule\Edit\Button\SaveAndContinueButton</item>
+            <item name="save_and_apply" xsi:type="string">Magestore\InventorySuccess\Block\Adminhtml\LowStockNotification\Rule\Edit\Button\SaveAndApplyButton</item>
+            <item name="run_now" xsi:type="string">Magestore\InventorySuccess\Block\Adminhtml\LowStockNotification\Rule\Edit\Button\RunNowButton</item>
+            <item name="duplicate" xsi:type="string">Magestore\InventorySuccess\Block\Adminhtml\LowStockNotification\Rule\Edit\Button\DuplicateButton</item>
+            <item name="delete" xsi:type="string">Magestore\InventorySuccess\Block\Adminhtml\LowStockNotification\Rule\Edit\Button\DeleteButton</item>
+        </item>
+    </argument>
+    <dataSource name="os_lowstock_notification_rule_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\LowStockNotification\DataForm\RuleDataProvider</argument>
+            <argument name="name" xsi:type="string">os_lowstock_notification_rule_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">rule_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="inventorysuccess/lowstocknotification_rule/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+</form>

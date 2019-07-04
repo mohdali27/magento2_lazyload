@@ -1,0 +1,318 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <type name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\General">
+        <plugin name="change_data" type="Magestore\InventorySuccess\Plugin\Product\General" sortOrder="1" />
+    </type>
+
+    <virtualType name="Magestore\InventorySuccess\Ui\DataProvider\Warehouse\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="general" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\Warehouse\Form\Modifier\General</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+                <item name="stock_movement" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\Warehouse\Form\Modifier\StockMovement</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                </item>
+                <item name="warehouse_order" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\Warehouse\Form\Modifier\Orders</item>
+                    <item name="sortOrder" xsi:type="number">25</item>
+                </item>
+                <item name="warehouse_permission" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\Permission\Warehouse\Modifier\WarehousePermission</item>
+                    <item name="sortOrder" xsi:type="number">35</item>
+                </item>
+                <item name="stock_on_hand" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\Warehouse\Form\Modifier\StockOnHand</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                </item>
+                <item name="dashboard" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\Warehouse\Form\Modifier\Dashboard</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magestore\InventorySuccess\Ui\DataProvider\Warehouse\Form\Warehouse">
+        <arguments>
+            <argument name="pool" xsi:type="object">Magestore\InventorySuccess\Ui\DataProvider\Warehouse\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Magestore\InventorySuccess\Ui\DataProvider\AdjustStock\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="productlist" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\AdjustStock\Form\Modifier\ProductList</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+                <item name="general" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\AdjustStock\Form\Modifier\General</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magestore\InventorySuccess\Ui\DataProvider\AdjustStock\Form\AdjustStock">
+        <arguments>
+            <argument name="pool" xsi:type="object">Magestore\InventorySuccess\Ui\DataProvider\AdjustStock\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Magestore\InventorySuccess\Ui\DataProvider\Stocktaking\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="productlist" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\Stocktaking\Form\Modifier\ProductList</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+                <item name="general" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\Stocktaking\Form\Modifier\General</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magestore\InventorySuccess\Ui\DataProvider\Stocktaking\Form\Stocktaking">
+        <arguments>
+            <argument name="pool" xsi:type="object">Magestore\InventorySuccess\Ui\DataProvider\Stocktaking\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+    
+    <type name="Magento\ConfigurableProduct\Ui\DataProvider\Product\Form\Modifier\Composite">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="inventorysuccessConfigurablePanel" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\Product\Form\Modifier\ConfigurablePanel</item>
+            </argument>
+        </arguments>
+    </type>    
+    
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="inventorysuccess" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\Product\Form\Modifier\Stock</item>
+                    <item name="sortOrder" xsi:type="number">900</item>
+                </item>
+                <item name="inventorysuccess_warehouse_stock_form" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\Product\Form\Modifier\WarehouseStock</item>
+                    <item name="sortOrder" xsi:type="number">1000</item>
+                </item>
+                <item name="stock-movement" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\Product\Form\Modifier\StockMovement</item>
+                    <item name="sortOrder" xsi:type="number">180</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magestore\InventorySuccess\Ui\DataProvider\Product\Form\Modifier\Stock">
+        <arguments>
+            <argument name="allowedProductTypes" xsi:type="object">Magestore\InventorySuccess\Ui\BaseAllowedProductTypes</argument>
+            <argument name="modifiers" xsi:type="array">
+                <item name="qty" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\Product\Form\Modifier\Qty</item>
+                <item name="StockData" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\Product\Form\Modifier\StockData</item>
+                <!--
+                <item name="WarehouseStock" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\Product\Form\Modifier\WarehouseStock</item>
+                -->
+                <!--
+                <item name="configurablePanel" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\Product\Form\Modifier\ConfigurablePanel</item>
+                -->
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Magestore\InventorySuccess\Ui\BaseAllowedProductTypes" type="Magento\Catalog\Ui\AllowedProductTypes">
+        <arguments>
+            <argument name="productTypes" xsi:type="array">
+                <item name="simple" xsi:type="string">simple</item>
+                <item name="configurable" xsi:type="string">configurable</item>
+                <item name="virtual" xsi:type="string">virtual</item>
+                <item name="grouped" xsi:type="string">grouped</item>
+                <item name="bundle" xsi:type="string">bundle</item>
+                <!--type
+                <item name="virtual" xsi:type="string">virtual</item>
+                <item name="configurable" xsi:type="string">configurable</item>
+                -->
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magestore\InventorySuccess\Ui\DataProvider\TransferStock\Request\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="general" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\TransferStock\Request\Form\Modifier\General</item>
+                    <item name="sortOrder" xsi:type="number">1</item>
+                </item>
+                <item name="product_list" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\TransferStock\Request\Form\Modifier\ProductList</item>
+                    <item name="sortOrder" xsi:type="number">2</item>
+                </item>
+                <item name="stock_summary" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\TransferStock\Request\Form\Modifier\StockSummary</item>
+                    <item name="sortOrder" xsi:type="number">3</item>
+                </item>
+                <item name="delivery_history" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\TransferStock\Request\Form\Modifier\DeliveryHistory</item>
+                    <item name="sortOrder" xsi:type="number">4</item>
+                </item>
+                <item name="receiving_history" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\TransferStock\Request\Form\Modifier\ReceivingHistory</item>
+                    <item name="sortOrder" xsi:type="number">5</item>
+                </item>
+                <item name="return" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\TransferStock\Request\Form\Modifier\ReturnStock</item>
+                    <item name="sortOrder" xsi:type="number">6</item>
+                </item>
+                <item name="shortfall" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\TransferStock\Request\Form\Modifier\Shortfall</item>
+                    <item name="sortOrder" xsi:type="number">7</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magestore\InventorySuccess\Ui\DataProvider\TransferStock\Request\Form\RequestStock">
+        <arguments>
+            <argument name="pool" xsi:type="object">Magestore\InventorySuccess\Ui\DataProvider\TransferStock\Request\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Magestore\InventorySuccess\Ui\DataProvider\TransferStock\External\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="general" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\TransferStock\External\Form\Modifier\General</item>
+                    <item name="sortOrder" xsi:type="number">1</item>
+                </item>
+                <item name="product_list" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\TransferStock\External\Form\Modifier\ProductList</item>
+                    <item name="sortOrder" xsi:type="number">2</item>
+                </item>
+                <item name="stock_summary" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\TransferStock\External\Form\Modifier\StockSummary</item>
+                    <item name="sortOrder" xsi:type="number">3</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magestore\InventorySuccess\Ui\DataProvider\TransferStock\External\Form\ExternalTransferDataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">Magestore\InventorySuccess\Ui\DataProvider\TransferStock\External\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Magestore\InventorySuccess\Ui\DataProvider\TransferStock\Send\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="general" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\TransferStock\Send\Form\Modifier\General</item>
+                    <item name="sortOrder" xsi:type="number">1</item>
+                </item>
+                <item name="product_list" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\TransferStock\Send\Form\Modifier\ProductList</item>
+                    <item name="sortOrder" xsi:type="number">2</item>
+                </item>
+                <item name="stock_summary" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\TransferStock\Send\Form\Modifier\StockSummary</item>
+                    <item name="sortOrder" xsi:type="number">3</item>
+                </item>
+                <item name="receiving_history" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\TransferStock\Send\Form\Modifier\ReceivingHistory</item>
+                    <item name="sortOrder" xsi:type="number">4</item>
+                </item>
+                <item name="return" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\TransferStock\Send\Form\Modifier\ReturnStock</item>
+                    <item name="sortOrder" xsi:type="number">5</item>
+                </item>
+                <item name="shortfall" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\TransferStock\Send\Form\Modifier\Shortfall</item>
+                    <item name="sortOrder" xsi:type="number">6</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magestore\InventorySuccess\Ui\DataProvider\TransferStock\Send\Form\SendStockDataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">Magestore\InventorySuccess\Ui\DataProvider\TransferStock\Send\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+    <!-- Request Stock from Shipment Form -->
+    <virtualType name="Magestore\InventorySuccess\Ui\DataProvider\TransferStock\Request\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="request_stock_for_shipment" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\Sales\ShipmentForm\Modifier\RequestStock\General</item>
+                    <item name="sortOrder" xsi:type="number">6</item>
+                </item>
+            </argument>
+        </arguments>        
+    </virtualType> 
+    <!-- End of Request Stock from Shipment Form -->
+
+    <!--rewrite import product data -->
+    <preference for="Magento\CatalogImportExport\Model\Import\Product" type="Magestore\InventorySuccess\Rewrite\CatalogImportExport\Model\Import\Product" />
+    <preference for="Magento\ImportExport\Block\Adminhtml\Import\Edit\Form" type="Magestore\InventorySuccess\Rewrite\ImportExport\Block\Adminhtml\Import\Edit\Form" />
+    <!-- end rewrite import product data -->
+    <virtualType name="Magestore\InventorySuccess\Ui\DataProvider\LowStockNotification\DataForm\Notification\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="general" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\LowStockNotification\DataForm\Notification\Modifier\General</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+                <item name="product_listing" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\LowStockNotification\DataForm\Notification\Modifier\ProductListing</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magestore\InventorySuccess\Ui\DataProvider\LowStockNotification\DataForm\NotificationDataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">Magestore\InventorySuccess\Ui\DataProvider\LowStockNotification\DataForm\Notification\Modifier\Pool</argument>
+        </arguments>
+    </type>
+
+    <!--Handle notification of toolbar-->
+    <type name="Magento\AdminNotification\Block\ToolbarEntry">
+        <plugin name="inventory_success_notification" type="Magestore\InventorySuccess\Plugin\AdminNotification\Block\ToolbarEntry" sortOrder="1" />
+    </type>
+    <!--
+    <type name="Magento\Catalog\Ui\DataProvider\Product\ProductDataProvider">
+        <arguments>
+            <argument name="addFieldStrategies" xsi:type="array">
+                <item name="qty" xsi:type="object">Magestore\InventorySuccess\Ui\DataProvider\Product\AddQuantityFieldToCollection</item>
+            </argument>
+        </arguments>
+    </type>    
+    -->
+    <!--Add Supplier fielset in product view-->
+
+    <!--Check view order by warehouse-->
+    <type name="Magento\Sales\Controller\Adminhtml\Order\View">
+        <plugin name="order_view" type="Magestore\InventorySuccess\Plugin\Order\View" sortOrder="1" />
+    </type>
+
+
+    <type name="Magento\Ui\Model\Export\MetadataProvider">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="os_stocktransfer_listing" xsi:type="array">
+                    <item name="created_at" xsi:type="string">created_at</item>
+                </item>
+                <item name="os_stockmovement_listing" xsi:type="array">
+                    <item name="created_at" xsi:type="string">created_at</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,84 @@
+//
+//  Amasty Loader Component
+//  ____________________________________________
+
+//
+//  Variables
+//  _____________________________________________
+
+@amloader__size: 50px;
+@amloader-dot__size: 7px;
+@amloader-dot__color: #1e79c2;
+@amloader-count-of-dots: 12;
+@amloader-animation-duration: 1s;
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amloader-spinner-container {
+        & {
+            text-align: center;
+        }
+
+        & > .amloader-spinner {
+            position: relative;
+            .lib-css(width, @amloader__size);
+            .lib-css(height, @amloader__size);
+            margin: auto;
+            .lib-css(transform, rotate(-90deg));
+        }
+
+        .amloader-title {
+            margin-top: 20px;
+        }
+    }
+
+    .amloader-dot-container {
+        & {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50%;
+            .lib-css(height, @amloader-dot__size);
+            transform-origin: 0 0;
+        }
+
+        & > .amloader-dot {
+            float: right;
+            .lib-css(width, @amloader-dot__size);
+            .lib-css(height, @amloader-dot__size);
+            .lib-css(background, @amloader-dot__color);
+            border-radius: 100%;
+            .lib-css(transform, scale(.5, .5), 1);
+        }
+    }
+
+
+    // Generation of animation and transformation styles of loader dots
+    .generate-dot(@dot-number: 1) when (@dot-number =< @amloader-count-of-dots) {
+        .dot-@{dot-number}-container {
+            .lib-css(transform, rotate((360deg / @amloader-count-of-dots) * (@dot-number - 1)) translateY(-50%), 1);
+        }
+
+        .dot-@{dot-number} {
+            .animation(scale-dot @amloader-animation-duration -(@amloader-animation-duration / @amloader-count-of-dots) * (@amloader-count-of-dots - @dot-number) infinite);
+        }
+
+        .generate-dot(@dot-number + 1);
+    }
+
+    .generate-dot();
+    // End of generation loop
+
+    @keyframes scale-dot {
+        0%,
+        100% {
+            transform: scale(0.5, 0.5);
+        }
+        50% {
+            transform: scale(1, 1);
+        }
+    }
+}

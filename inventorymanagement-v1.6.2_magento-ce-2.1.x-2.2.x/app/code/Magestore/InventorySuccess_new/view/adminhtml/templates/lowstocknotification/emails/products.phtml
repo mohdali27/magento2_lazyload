@@ -1,0 +1,33 @@
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+
+<p class="greeting">
+    <?php echo __('Hello, '); ?>
+</p>
+<p>
+    <?php echo __('There are some product(s) remaining in the system/warehouse. If stock in these items reachs zero, visitor to your site will no longer be able to purchase them. Once you have more of these products in stock, you may raise the stock level in your Inventory panel. Please recheck them via the download link here:') ?>
+</p>
+<?php $productSystem = $block->getProductSystem() ?>
+<?php if ($productSystem): ?>
+    <p>
+        <?php echo __('Low Stocks for system: ');?>
+        <a href="<?php echo $block->getDownloadUrl($productSystem); ?>" title="<?php echo __('Low Stocks for system') ?>"><?php echo __('Download'); ?></a>
+    </p>
+<?php endif ?>
+<?php $productWarehouse = $block->getProductWarehouse() ?>
+<?php if (is_array($productWarehouse)): ?>
+    <?php $warehouseInfo = $block->getWarehouseInformation($productWarehouse); ?>
+    <?php if (count($warehouseInfo)): ?>
+        <?php foreach ($warehouseInfo as $warehouse): ?>
+            <p>
+                <?php echo __('Low Stock for warehouse %1: ', $warehouse['warehouse_name']); ?>
+                <a href="<?php echo $block->getDownloadUrl($warehouse['notification_id']); ?>" title="<?php echo __('Low Stocks for warehouse %1', $warehouse['warehouse_name']) ?>"><?php echo __('Download'); ?></a>
+            </p>
+        <?php endforeach ?>
+    <?php endif ?>
+<?php endif ?>
+<p><?php echo __('Thank You,'); ?></p>

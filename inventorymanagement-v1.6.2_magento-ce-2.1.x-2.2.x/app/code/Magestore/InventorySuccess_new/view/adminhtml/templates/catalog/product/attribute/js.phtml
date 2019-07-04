@@ -1,0 +1,19 @@
+<?php
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<script>
+require([
+    "jquery",
+    "prototype"
+], function(jQuery){
+    $("inventory_qty_checkbox").hide();
+    $("inventory_qty_checkbox").next().hide();
+    jQuery("#inventory_qty_checkbox").next().parent().parent().append("<div class=\"messages\"><div class=\"message message-notice\"><div><?php echo $block->getQtyMessage() ?></div></div></div>");
+});
+</script>

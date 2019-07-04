@@ -1,0 +1,20 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Feed
+ */
+?>
+<?php
+$countOfDots = 12;
+?>
+<div class="amloader-spinner-container">
+        <div class="amloader-spinner">
+        <?php for ($index = 0; $index < $countOfDots; $index++) : ?>
+            <div class="amloader-dot-container dot-<?= $index + 1?>-container">
+                <div class="amloader-dot dot-<?= $index + 1?>"></div>
+            </div>
+        <?php endfor; ?>
+        </div>
+    <p class="amloader-title"><?= $block->escapeHtml(__('Please wait...')) ?></p>
+</div>

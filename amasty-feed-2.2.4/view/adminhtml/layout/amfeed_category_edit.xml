@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Feed
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Amasty_Feed::category/edit.css"/>
+    </head>
+    <body>
+        <referenceContainer name="left">
+            <block class="Amasty\Feed\Block\Adminhtml\Category\Edit\Tabs" name="feed_tabs">
+                <block class="Amasty\Feed\Block\Adminhtml\Category\Edit\Tab\General" name="amasty_feed_edit_tab_general" />
+                <block class="Amasty\Feed\Block\Adminhtml\Category\Edit\Tab\ExcludeCategories" name="amasty_feed_edit_tab_exclude_categories" />
+                <block class="Amasty\Feed\Block\Adminhtml\Category\Edit\Tab\RenameCategories" name="amasty_feed_edit_tab_rename_categories" />
+
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">feed_tab_general</argument>
+                    <argument name="block" xsi:type="string">amasty_feed_edit_tab_general</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">feed_tab_exclude_categories</argument>
+                    <argument name="block" xsi:type="string">amasty_feed_edit_tab_exclude_categories</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">feed_tab_rename_categories</argument>
+                    <argument name="block" xsi:type="string">amasty_feed_edit_tab_rename_categories</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Amasty\Feed\Block\Adminhtml\Category\Edit" name="category_edit"/>
+        </referenceContainer>
+    </body>
+</page>

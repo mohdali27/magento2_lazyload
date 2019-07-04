@@ -1,0 +1,31 @@
+<?php
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+?>
+<?php $_item = $block->getItem() ?>
+<tr>
+    <td class="col-product"><?php echo $block->getColumnHtml($_item, 'name') ?></td>
+    <td class="col-ordered-qty"><?php echo $block->getColumnHtml($_item, 'qty') ?></td>
+    <td class="col-qty-in-warehouse" id="qty_in_warehouse[<?php echo $_item->getOrderItemId() ?>]"></td>
+    <td class="col-qty">
+        <?php if ($block->canShipPartiallyItem()): ?>
+            <input type="text"
+                   class="input-text admin__control-text qty-item qty-to-ship-input"
+                   name="shipment[items][<?php /* @escapeNotVerified */ echo $_item->getOrderItemId() ?>]"
+                   id="shipment[items][<?php /* @escapeNotVerified */ echo $_item->getOrderItemId() ?>]"
+                   value="<?php /* @escapeNotVerified */ echo $_item->getQty()*1 ?>" />
+        <?php else: ?>
+            <?php /* @escapeNotVerified */ echo $_item->getQty()*1 ?>
+        <?php endif; ?>
+    </td>
+    <td class="col-qty-pending-ship <?php if ($block->isShipmentRegular()): ?>last<?php endif; ?>" id="qty_pending_ship[<?php echo $_item->getOrderItemId()?>]"></td>
+    <?php if (!$block->canShipPartiallyItem()): ?>
+    <td class="col-ship last">
+        <input type="hidden" name="shipment[items][<?php /* @escapeNotVerified */ echo $_item->getOrderItemId() ?>]" value="0" />
+        <input type="checkbox" name="shipment[items][<?php /* @escapeNotVerified */ echo $_item->getOrderItemId() ?>]" value="<?php /* @escapeNotVerified */ echo $_item->getQty()*1 ?>" checked />
+    </td>
+    <?php endif; ?>
+</tr>

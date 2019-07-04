@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <emailquote>
+            <general>
+                <enable>0</enable>
+                <heading>Send Quote</heading>
+                <custom_identity>general</custom_identity>
+                <adminemailtemplate>emailquote_general_adminemailtemplate</adminemailtemplate>
+                <customerFeedbacktemplate>emailquote_general_customerFeedbacktemplate</customerFeedbacktemplate>
+            </general>
+        </emailquote>
+    </default>
+</config>

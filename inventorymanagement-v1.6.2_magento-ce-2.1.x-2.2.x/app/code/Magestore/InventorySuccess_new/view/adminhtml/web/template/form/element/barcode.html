@@ -1,0 +1,19 @@
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<input class="admin__control-text" type="text"
+    style="width: 100%; height: 50px; font-size: 16px; display:none;"
+    id="inventorysuccess-barcode-input"
+    onfocus="this.select()"
+    data-bind="
+        event: {change: userChanges},
+        value: value,
+        hasFocus: focused,
+        valueUpdate: valueUpdate,
+        attr: {
+            name: inputName,
+            placeholder: placeholder,
+            'aria-describedby': noticeId,
+            disabled: disabled
+    }"/><br />&nbsp

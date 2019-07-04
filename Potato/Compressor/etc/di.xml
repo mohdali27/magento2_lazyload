@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Potato\Compressor\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Potato\Compressor\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">po_compressor_log</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Potato\Compressor\Logger\Handler</item>
+                <item name="debug" xsi:type="object">Magento\Framework\Logger\Handler\Debug</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Magento\Theme\Model\Url\Plugin\Signature"
+                type="Potato\Compressor\Plugin\DisableSignature" />
+    <type name="Magento\Framework\View\Asset\Config">
+        <plugin name="disableMerge" type="Potato\Compressor\Plugin\DisableMerge" sortOrder="1" />
+    </type>
+</config>

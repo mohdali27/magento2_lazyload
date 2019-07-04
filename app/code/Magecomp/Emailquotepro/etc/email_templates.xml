@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="emailquote_general_adminemailtemplate" label="Customer Quote To Admin" file="emailquote.html"
+              type="html" area="frontend" module="Magecomp_Emailquotepro"/>
+    <template id="emailquote_adminsettings_customertemplate" label="Admin Review And Send Quote to Customer"
+              file="emailproductquote.html" type="html" area="adminhtml" module="Magecomp_Emailquotepro"/>
+    <template id="emailquote_general_customerFeedbacktemplate" label="Customer Success Email"
+              file="succesemailquote.html" type="html" area="frontend" module="Magecomp_Emailquotepro"/>
+</config>

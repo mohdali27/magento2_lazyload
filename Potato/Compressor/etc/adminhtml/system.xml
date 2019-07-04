@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="potato" translate="label" sortOrder="340">
+            <label>POTATOCOMMERCE</label>
+        </tab>
+        <section id="po_compressor" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <label>JS/CSS Compressor</label>
+            <tab>potato</tab>
+            <resource>Potato_Compressor::po_compressor</resource>
+            <group id="general" translate="label,comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>General Settings</label>
+                <field id="is_enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable Extension</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="notice" type="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Potato\Compressor\Block\Adminhtml\System\Config\Note</frontend_model>
+                </field>
+            </group>
+            <group id="js_settings" translate="label,comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>JS Settings</label>
+                <field id="is_enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="merge" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Merge JavaScript files</label>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="merge_inline" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Merge inline scripts</label>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                        <field id="merge">1</field>
+                    </depends>
+                    <comment><![CDATA[Be sure that you do not have inline scripts with dynamic content. Otherwise this option can lead to disk space overflow. Use 'data-po-cmp-ignore-merge' to fix it.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="compression" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable compression</label>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="inline" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Inline small JS</label>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="defer" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Defer parsing of JS</label>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Move all styles at the end of the HTML body]]></comment>
+                </field>
+            </group>
+            <group id="css_settings" translate="label,comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>CSS Settings</label>
+                <field id="is_enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="merge" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Merge CSS files</label>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="merge_inline" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Merge inline styles</label>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                        <field id="merge">1</field>
+                    </depends>
+                    <comment><![CDATA[Be sure that you do not have inline styles with dynamic content. Otherwise this option can lead to disk space overflow. Use 'data-po-cmp-ignore-merge' to fix it.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="compression" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable compression</label>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
+                    <comment><![CDATA[Compress files using <a href="https://code.google.com/p/minify/" target="__blank">Minify</a> library]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="inline" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Inline small CSS</label>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="defer" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Defer parsing of CSS</label>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Move all styles at the end of the HTML body]]></comment>
+                </field>
+            </group>
+            <group id="html" translate="label,comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
+                <label>HTML Settings</label>
+                <field id="compression" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable compression</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Compress files using <a href="https://code.google.com/p/minify/" target="__blank">Minify</a> library]]></comment>
+                </field>
+            </group>
+            <group id="image" translate="label,comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
+                <label>Image Settings</label>
+                <field id="is_enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="lazy_load" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Lazy load</label>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
+                    <source_model>Potato\Compressor\Model\Source\LazyLoad</source_model>
+                </field>
+                <field id="identical_content" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Fix different URLs for identical content</label>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="inline_into_css" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Inline images into CSS files</label>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="advanced" translate="label,comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
+                <label>Advanced</label>
+                <field id="folder_permission" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Cache Folder Permission</label>
+                    <comment><![CDATA[<a target="_blank" href="http://devdocs.magento.com/guides/m1x/install/installer-privileges_after.html">Magento Recommendations</a>]]></comment>
+                </field>
+                <field id="file_permission" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Cache File Permission</label>
+                    <comment><![CDATA[<a target="_blank" href="http://devdocs.magento.com/guides/m1x/install/installer-privileges_after.html">Magento Recommendations</a>]]></comment>
+                </field>
+                <field id="exclude" translate="label comment" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Ignore scripts/styles with the following text inside</label>
+                    <comment><![CDATA[Use a new line as a separator.<br>Targets for search: <br> &lt;script src=&quot;<b style="color: red">this line</b>&quot;&gt;<b style="color: red">this line</b>&lt;/script&gt;<br>&lt;link href=&quot;<b style="color: red">this line</b>&quot;&gt;<br>&lt;style&gt;<b style="color: red">this line</b>&lt;/style&gt;<br> ]]></comment>
+                </field>
+                <field id="inline_into_css_file_size_limit" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Max size of image to insert into CSS</label>
+                    <comment><![CDATA[in Kb. Max size of image which can be inserted into CSS file or inline CSS content. Leave blank to disable the limit.]]></comment>
+                </field>
+            </group>
+            <group id="cache_management" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
+                <label>Cache Management</label>
+                <field id="max_size" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Max size of cache folder</label>
+                    <comment><![CDATA[in Mb, leave empty to disable the feature]]></comment>
+                </field>
+                <field id="status" sortOrder="20" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <frontend_model>Potato\Compressor\Block\Adminhtml\System\Config\Cache\Status</frontend_model>
+                </field>
+                <field id="clean" sortOrder="20" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <frontend_model>Potato\Compressor\Block\Adminhtml\System\Config\Cache\Clean</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

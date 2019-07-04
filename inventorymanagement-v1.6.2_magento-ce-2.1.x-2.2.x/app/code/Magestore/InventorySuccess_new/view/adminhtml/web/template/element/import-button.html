@@ -1,0 +1,16 @@
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<button type="button"
+        css="
+            'action-advanced': $data.displayAsLink,
+            'action-secondary': !$data.displayAsLink
+        "
+        data-bind="click: handleOnclick"
+        disable="disabled"
+        attr="'data-index': index">
+    <span text="title">
+    </span>
+</button>

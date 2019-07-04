@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magecomp_Emailquotepro::emailproductquote" module="Magecomp_Emailquotepro"
+             resource="Magecomp_Emailquotepro::emailproductquote" sortOrder="50" title="Email Quote Pro"/>
+        <add id="Magecomp_Emailquotepro::emailquotepro_emailquote" title="Email Quote Statistics"
+             module="Magecomp_Emailquotepro" sortOrder="10" action="emailquotepro/emailproductquote/index"
+             resource="Magecomp_Emailquotepro::emailquotepro_emailproductquote"
+             parent="Magecomp_Emailquotepro::emailproductquote"/>
+        <add id="Magecomp_Emailquotepro::config_emailquotepro" title="Configuration" module="Magecomp_Emailquotepro"
+             sortOrder="20" parent="Magecomp_Emailquotepro::emailproductquote"
+             action="adminhtml/system_config/edit/section/emailquote"
+             resource="Magecomp_Emailquotepro::config_emailquotesettings"/>
+    </menu>
+</config>

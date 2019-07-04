@@ -1,0 +1,88 @@
+<div id="import-receiving-modal" class="import-product" data-modal-info="<?php /* @escapeNotVerified */ echo $block->getWidgetOptions();?>">
+    <?php if (!$block->getIsReadonly()): ?>
+        <div class="os_panel">
+            <div class="header">
+                <label><?php echo __('Instruction');?></label>
+            </div>
+            <ul class="content">
+                <li class="item">
+                    <span><?php echo __('Please choose a CSV file to import products received. You can download this sample CSV file');?></span>
+                    <span data-role="data" data-key="barcode" data-type="text" class="value"></span>
+                    <div class="clear"></div>
+                </li>
+                <li class="item">
+                    <span><a href="<?php echo $block->getCsvSampleLink();?>"><?php echo __('Download'); ?></a></span>
+                </li>
+            </ul>
+        </div>
+        <div class="import-receiving-form">
+            <?php if ($block->getUseContainer()): ?>
+            <form id="import-receiving-form" class="admin__fieldset" action="<?php /* @escapeNotVerified */ echo $block->getUrl('inventorysuccess/transferstock_request/saveimportreceiving').'id/'.$block->getRequest()->getParam('id'); ?>" method="post" enctype="multipart/form-data">
+                <?php endif; ?>
+                <?php echo $block->getBlockHtml('formkey')?>
+                <div class="fieldset admin__field">
+                    <label for="import_product" class="admin__field-label"><span><?php /* @escapeNotVerified */ echo __('Please choose  a CSV file to import:') ?></span></label>
+                    <div class="admin__field-control">
+                        <input type="file" id="import_receiving_product_file" accept=".csv" name="import_receiving_product" class="input-file required-entry"/>
+                    </div>
+                </div>
+                <?php if ($block->getUseContainer()): ?>
+            </form>
+        <?php endif; ?>
+        </div>
+    <?php endif; ?>
+</div>
+
+
+
+<script>
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/modal',
+        "mage/mage",
+        "mage/validation",
+        "loadingPopup"
+    ], function ($) {
+        $('#import-receiving-modal').modal(
+            {
+                type: 'slide',
+                modalClass: 'mage-new-video-dialog form-inline',
+                title: $.mage.__('Import products to create Receive'),
+                buttons: [
+                    {
+                        text: $.mage.__('Cancel'),
+                        attr: {
+                        },
+                        /**
+                         * Default action on button click
+                         */
+                        click: function (event) {
+                            this.closeModal(event);
+                        }
+                    },
+                    {
+                        text: $.mage.__('Import'),
+                        attr: {
+                            'class': 'action-primary'
+                        },
+                        /**
+                         * Default action on button click
+                         */
+                        click: function (event) {
+                            var form = $('#import-receiving-form');
+                            if (form.validation() && form.validation('isValid')) {
+                                if($(':input[name="import_receiving_product"]').val()) {
+                                    $('body').loadingPopup({
+                                        timeout: false
+                                    });
+                                    form.submit();
+                                }
+                                this.closeModal(event);
+                            }
+                        }
+                    }
+                ]
+            }
+        )
+    });
+</script>

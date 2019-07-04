@@ -1,0 +1,36 @@
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<textarea class="admin__control-textarea" data-bind="
+    value: value,
+    valueUpdate: valueUpdate,
+    hasFocus: focused,
+    attr: {
+        name: inputName,
+        cols: cols,
+        rows: rows,
+        'aria-describedby': noticeId,
+        placeholder: placeholder,
+        id: uid,
+        disabled: disabled,
+        readonly: true
+    }"style="border: none; resize: none; "
+></textarea>
+
+<style type="text/css">
+    .admin__fieldset > .admin__field{
+        margin-bottom: 0 !important;
+    }
+    .admin__fieldset-wrapper-content .admin__fieldset{
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+    .admin__field-complex{
+        margin: 0 !important;
+    }
+    .admin__field-complex + .admin__field._empty._no-header{
+        display: none;
+    }
+</style>

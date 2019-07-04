@@ -1,0 +1,15 @@
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!--@subject {{trans "Low Stock Notification"}} @-->
+<!--@vars {
+"var this.getUrl($store, 'customer/account/')":"Customer Account URL",
+"var customer.email":"Customer Email",
+"var customer.name":"Customer Name"
+} @-->
+
+<p>
+    {{layout handle="inventorysuccess_lowstocknotification_email_product" productSystem=$productSystem productWarehouse=$productWarehouse area="adminhtml"}}
+</p>

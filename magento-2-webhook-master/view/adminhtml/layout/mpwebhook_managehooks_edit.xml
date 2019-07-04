@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Webhook
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <head>
+        <css src="Mageplaza_Webhook::css/lib/codemirror.css"/>
+        <css src="Mageplaza_Core::css/font-awesome.min.css"/>
+        <css src="Mageplaza_Webhook::css/form/edit-hook.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Mageplaza\Webhook\Block\Adminhtml\Hook\Edit" name="mageplaza_webhook_hook_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Mageplaza\Webhook\Block\Adminhtml\Hook\Edit\Tabs" name="mageplaza_webhook_hook_tabs">
+                <block class="Mageplaza\Webhook\Block\Adminhtml\Hook\Edit\Tab\General" name="mageplaza_webhook_hook_tab_general"/>
+                <block class="Mageplaza\Webhook\Block\Adminhtml\Hook\Edit\Tab\Actions" name="mageplaza_webhook_hook_tab_actions"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">hook</argument>
+                    <argument name="block" xsi:type="string">mageplaza_webhook_hook_tab_general</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">template</argument>
+                    <argument name="block" xsi:type="string">mageplaza_webhook_hook_tab_actions</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

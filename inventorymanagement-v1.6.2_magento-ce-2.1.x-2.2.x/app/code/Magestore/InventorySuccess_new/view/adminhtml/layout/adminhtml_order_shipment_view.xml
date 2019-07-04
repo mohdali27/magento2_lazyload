@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="shipment_items">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magestore_InventorySuccess::order/shipment/view/items.phtml</argument>
+            </action>
+            <block class="Magestore\InventorySuccess\Block\Adminhtml\Order\Shipment\View\Warehouse" as="ship_warehouse" template="Magestore_InventorySuccess::order/shipment/view/warehouse.phtml"/>
+        </referenceBlock>      
+    </body>
+</page>

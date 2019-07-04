@@ -1,0 +1,68 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Feed
+ */
+?>
+<?php
+/** @var \Amasty\Feed\Block\Adminhtml\Category\Edit\Tab\RenameMapping $block */
+$_value = $block->getElement()->getValue();
+$_htmlId = $block->getElement()->getHtmlId();
+?>
+<div class="field">
+    <label class="label"><?= $block->escapeHtml($block->getElement()->getLabel()); ?></label>
+    <div class="control">
+        <p>
+            <?= $block->escapeHtml(__("Please make sure all categories are renamed and mapped to Google Taxonomy. If you don't need a certain category, please go to the previous step (\"Step 2: Exclude Categories\") and specify all unwanted categories that should be excluded from the feed.")) ?>
+        </p>
+    </div>
+</div>
+<div class="field" id="attribute-<?= $block->escapeHtml($_htmlId) ?>-container">
+    <label class="label"><?= $block->escapeHtml($block->getElement()->getLabel()); ?></label>
+    <div class="control" data-amfeed-js="amfeed-category-list">
+        <table class="amfeed-category-list">
+            <tr data-amfeed-js="category-item">
+                <th class="amfeed-cell"><?= $block->escapeHtml(__('Default Category Name')) ?></th>
+                <th class="amfeed-cell"><?= $block->escapeHtml(__('New Category Name')) ?></th>
+            </tr>
+            <?php foreach ($block->getCategoriesList() as $category) : ?>
+                <tr
+                    <?php if (isset($_value[$category['id']]) && $_value[$category['id']]['skip']) : ?>
+                        style="display: none"
+                    <?php endif ?>
+                        data-amfeed-js="category-item">
+                    <td class="amfeed-label-container amfeed-cell">
+                        <label class="amfeed-label" for="category-<?= $block->escapeHtml($category['id']) ?>">
+                            <?= $block->escapeHtml($block->escapeHtml($category['name'])); ?>
+                        </label>
+                    </td>
+                    <td class="amfeed-new-name amfeed-cell">
+                        <input data-amfeed-js="amfeed-taxonomy-input"
+                               id="category-<?= $block->escapeHtml($category['id']) ?>"
+                               title="<?= $block->escapeHtml(__('Rename category')) ?>"
+                               name="mapping[<?= $block->escapeHtml($category['id']) ?>][name]"
+                            <?php if (isset($_value[$category['id']]['name']) && $_value[$category['id']]['name']) : ?>
+                                value="<?= $block->escapeHtml($_value[$category['id']]['name']) ?>"
+                            <?php endif; ?>
+                            <?php if (isset($_value[$category['id']]) && $_value[$category['id']]['skip']) : ?>
+                                class="amfeed-input input-text admin__control-text category-<?= $block->escapeHtml($category['id']) ?>"
+                            <?php else : ?>
+                                class="amfeed-input input-text admin__control-text required-entry _required category-<?= $block->escapeHtml($category['id']) ?>"
+                            <?php endif; ?>
+                        />
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Amasty_Feed/js/feed/searchCategory": {
+                "ajaxUrl" : "<?= $block->escapeUrl($block->getAjaxUrl()) ?>"
+            }
+        }
+    }
+</script>

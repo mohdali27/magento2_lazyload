@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles"/>
+    <body>
+        <referenceContainer name="content">
+            <uiComponent name="os_lowstock_notification_form"/>
+            <block class="Magestore\InventorySuccess\Block\Adminhtml\LowStockNotification\Notification\Edit\Productgrid" name="magestore.inventorysuccess.lowstocknotification.edit.productgrid"/>
+            <block class="Magento\Backend\Block\Widget\Grid\Serializer" name="productgrid_grid_serializer">
+                <arguments>
+                    <argument name="grid_block" xsi:type="string">magestore.inventorysuccess.lowstocknotification.edit.productgrid</argument>
+                    <argument name="callback" xsi:type="string">getSelectedRelatedProducts</argument>
+                    <argument name="input_element_name" xsi:type="string">notification_products</argument>
+                    <argument name="reload_param_name" xsi:type="string">notification_products</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

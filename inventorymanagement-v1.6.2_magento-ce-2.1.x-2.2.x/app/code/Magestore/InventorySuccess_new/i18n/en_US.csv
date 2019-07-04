@@ -1,0 +1,149 @@
+Import,Import
+Print,Print
+"Save & New","Save & New"
+"Save & Close","Save & Close"
+Generate,Generate
+Back,Back
+Reason,Reason
+"Import File","Import File"
+"Please select a CSV file","Please select a CSV file"
+Delete,Delete
+Save,Save
+"Scan Barcode","Scan Barcode"
+Instruction,Instruction
+Download,Download
+"Invalid data","Invalid data"
+"There are %1 barcodes existed and there are %2 invalid skus. You must download","There are %1 barcodes existed and there are %2 invalid skus. You must download"
+"There are %1 barcodes existed. You must download","There are %1 barcodes existed. You must download"
+"There are %1 invalid skus. You must download","There are %1 invalid skus. You must download"
+"this file","this file"
+" to modify and try to import them again."," to modify and try to import them again."
+All,All
+"Barcode Created History","Barcode Created History"
+"Manage Barcodes","Manage Barcodes"
+"Barcode Created History Details","Barcode Created History Details"
+"Import Barcode","Import Barcode"
+"Barcode Details","Barcode Details"
+"Please scan your barcode to get data","Please scan your barcode to get data"
+"In Stock","In Stock"
+"Out of Stock","Out of Stock"
+Enabled,Enabled
+Disabled,Disabled
+"Cannot find any records for %1","Cannot find any records for %1"
+"The barcode has been imported.","The barcode has been imported."
+"No barcode has been imported.","No barcode has been imported."
+"Invalid file upload attempt","Invalid file upload attempt"
+"Barcode Printing Configuration","Barcode Printing Configuration"
+"Generate Barcode","Generate Barcode"
+"Scan Barcodes","Scan Barcodes"
+"%1 barcode(s) has been generated.","%1 barcode(s) has been generated."
+"Cannot generate %1 barcode(s), please change Barcode Pattern from the configuration to increase the maximum barcode number","Cannot generate %1 barcode(s), please change Barcode Pattern from the configuration to increase the maximum barcode number"
+"You must select the product to generate the barcode","You must select the product to generate the barcode"
+"Barcode Import Results","Barcode Import Results"
+"Invalid editing data!","Invalid editing data!"
+OK,OK
+"The template(s) has been deleted successfully","The template(s) has been deleted successfully"
+"The template has been deleted successfully","The template has been deleted successfully"
+"Edit Barcode Template","Edit Barcode Template"
+"Add a New Barcode Template","Add a New Barcode Template"
+"The template(s) status has been saved successfully","The template(s) status has been saved successfully"
+"The template has been saved successfully","The template has been saved successfully"
+"Cannot find any data to preview","Cannot find any data to preview"
+"Manage Barcode Label Templates","Manage Barcode Label Templates"
+Generated,Generated
+Imported,Imported
+Standard,Standard
+A4,A4
+Jewelry,Jewelry
+Active,Active
+Inactive,Inactive
+ID,ID
+SKU,SKU
+Quantity,Quantity
+Supplier,Supplier
+"Purchased Time","Purchased Time"
+Actions,Actions
+Cancel,Cancel
+Remove,Remove
+Name,Name
+"General Infomation","General Infomation"
+"Generate barcode per item (each item will generate a barcode with qty = 1)","Generate barcode per item (each item will generate a barcode with qty = 1)"
+"Generate barcode per purchase (each product sku will generate a barcode)","Generate barcode per purchase (each product sku will generate a barcode)"
+Warehouse,Warehouse
+"Available Qty","Available Qty"
+"Qty to Ship","Qty to Ship"
+"Qty In Warehouse","Qty In Warehouse"
+"Shelf Location","Shelf Location"
+mm,mm
+cm,cm
+in,in
+px,px
+"-- Select Template --","-- Select Template --"
+"Per Item","Per Item"
+"Per Purchase","Per Purchase"
+"Standard Barcode","Standard Barcode"
+"A4 Barcode","A4 Barcode"
+"Jewelry Barcode","Jewelry Barcode"
+Code-128,Code-128
+Code-25,Code-25
+"Interleaved 2 of 5","Interleaved 2 of 5"
+Code-39,Code-39
+Ean-13,Ean-13
+Ean-2,Ean-2
+Ean-5,Ean-5
+Ean-8,Ean-8
+Identcode,Identcode
+Itf14,Itf14
+Leitcode,Leitcode
+Planet,Planet
+Postnet,Postnet
+Royalmail,Royalmail
+UPC-A,UPC-A
+UPC-E,UPC-E
+"Invalid file upload attempt.","Invalid file upload attempt."
+BARCODE,BARCODE
+QTY,QTY
+"Invalid file format.","Invalid file format."
+"Barcode Management","Barcode Management"
+"Barcode Listing","Barcode Listing"
+"Generate Barcodes","Generate Barcodes"
+"Import Barcodes","Import Barcodes"
+"Print Barcodes","Print Barcodes"
+"Barcode Generated History","Barcode Generated History"
+"Barcode Label Templates","Barcode Label Templates"
+"Barcode Settings","Barcode Settings"
+"Order Success","Order Success"
+"Inventory Management","Inventory Management"
+"Cannot find the data for ","Cannot find the data for "
+"Cannot find the redirect URL for ","Cannot find the redirect URL for "
+"Error","Error"
+"Message","Message"
+"Your browser has blocked the automatic popup, please change your browser settings or print the receipt manually","Your browser has blocked the automatic popup, please change your browser settings or print the receipt manually"
+"Stock Listing","Stock Listing"
+"Stocks in Warehouse","Stocks in Warehouse"
+"Non-Warehouse Products","Non-Warehouse Products"
+"Warehouses","Warehouses"
+"Prediction","Prediction"
+"Supply Needs","Supply Needs"
+"Low Stock Rules","Low Stock Rules"
+"Low Stock Notifications","Low Stock Notifications"
+"Stock Control","Stock Control"
+"New Stock Adjustment","New Stock Adjustment"
+"New Stocktaking","New Stocktaking"
+"Adjust Stock History","Adjust Stock History"
+"Stocktaking History","Stocktaking History"
+"Receipt/ Delivery History","Receipt/ Delivery History"
+"Stock Movement History","Stock Movement History"
+"Settings","Settings"
+"Configuration","Configuration"
+"Transfer Stock","Transfer Stock"
+"Send Stock","Send Stock"
+"Request Stock","Request Stock"
+"Transfer to External","Transfer to External"
+"Transfer from External","Transfer from External"
+"Transfer Stock History","Transfer Stock History"
+"Send Stock History","Send Stock History"
+"Request Stock History","Request Stock History"
+"Transfer to External History","Transfer to External History"
+"Transfer from External History","Transfer from External History"
+

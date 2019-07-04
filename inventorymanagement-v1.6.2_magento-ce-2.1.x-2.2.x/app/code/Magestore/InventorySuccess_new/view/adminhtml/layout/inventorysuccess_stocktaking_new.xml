@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <update handle="styles"/>
+    <head>
+        <css src="Magestore_InventorySuccess::css/inventory.css"/>
+    </head>
+    <referenceContainer name="page.main.actions">
+        <block class="Magestore\InventorySuccess\Block\Adminhtml\Stocktaking\Steps\Timeline" name="variation-steps-wizard">
+            <arguments>
+                <argument name="config" xsi:type="array">
+                    <item name="form" xsi:type="string">os_stocktaking_form.os_stocktaking_form</item>
+                </argument>
+            </arguments>
+            <block class="Magestore\InventorySuccess\Block\Adminhtml\Stocktaking\Steps\InputGeneral" name="new">
+                <arguments>
+                    <argument name="config" xsi:type="array">
+                        <item name="form" xsi:type="string">os_stocktaking_form.os_stocktaking_form</item>
+                    </argument>
+                </arguments>
+            </block>
+            <block class="Magestore\InventorySuccess\Block\Adminhtml\Stocktaking\Steps\PrepareProducts" name="pending">
+                <arguments>
+                    <argument name="config" xsi:type="array">
+                        <item name="form" xsi:type="string">os_stocktaking_form.os_stocktaking_form</item>
+                    </argument>
+                </arguments>
+            </block>
+            <block class="Magestore\InventorySuccess\Block\Adminhtml\Stocktaking\Steps\Stocktake" name="processing">
+                <arguments>
+                    <argument name="config" xsi:type="array">
+                        <item name="form" xsi:type="string">os_stocktaking_form.os_stocktaking_form</item>
+                    </argument>
+                </arguments>
+            </block>
+            <block class="Magestore\InventorySuccess\Block\Adminhtml\Stocktaking\Steps\Verify" name="verified">
+                <arguments>
+                    <argument name="config" xsi:type="array">
+                        <item name="form" xsi:type="string">os_stocktaking_form.os_stocktaking_form</item>
+                    </argument>
+                </arguments>
+            </block>
+            <block class="Magestore\InventorySuccess\Block\Adminhtml\Stocktaking\Steps\Confirm" name="completed">
+                <arguments>
+                    <argument name="config" xsi:type="array">
+                        <item name="form" xsi:type="string">os_stocktaking_form.os_stocktaking_form</item>
+                    </argument>
+                </arguments>
+            </block>
+        </block>
+    </referenceContainer>
+    <referenceContainer name="content">
+        <block class="Magestore\InventorySuccess\Block\Adminhtml\Import\NoticeMessage" name="inventory_success_message" template="Magestore_InventorySuccess::import/success/message.phtml" before="-"/>
+        <uiComponent name="os_stocktaking_form"/>
+        <block class="Magestore\InventorySuccess\Block\Adminhtml\Stocktaking\Import\Form" name="import-form" template="Magestore_InventorySuccess::stocktaking/import/form.phtml" after="-"/>
+    </referenceContainer>
+</page>

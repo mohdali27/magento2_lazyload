@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../app/code/Magento/Webapi/etc/webapi.xsd">
+
+    <!--Warehouse Stock API-->
+    <route url="/V1/inventory/warehouseStocks/" method="GET">
+        <service class="Magestore\InventorySuccess\Api\Warehouse\WarehouseStockRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_InventorySuccess::api_get_stock"/>
+        </resources>
+    </route>
+
+    <route url="/V1/inventory/warehouseStocks/warehouse/:warehouseId/productSku/:productSku" method="GET">
+        <service class="Magestore\InventorySuccess\Api\Warehouse\WarehouseStockRepositoryInterface" method="getWarehouseStockBySku"/>
+        <resources>
+            <resource ref="Magestore_InventorySuccess::api_get_stock"/>
+        </resources>
+    </route>
+
+    <route url="/V1/inventory/warehouseStocks" method="PUT">
+        <service class="Magestore\InventorySuccess\Api\Warehouse\WarehouseStockRepositoryInterface" method="updateWarehouseStockBySku"/>
+        <resources>
+            <resource ref="Magestore_InventorySuccess::api_update_stock"/>
+        </resources>
+    </route>
+    <!--End of Warehouse Stock API-->
+
+    <!--Warehouse API-->
+    <route url="/V1/inventory/warehouses/:warehouseCode" method="GET">
+        <service class="Magestore\InventorySuccess\Api\Warehouse\WarehouseRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Magestore_InventorySuccess::api_view_warehouse"/>
+        </resources>
+    </route>
+
+    <route url="/V1/inventory/warehouses" method="POST">
+        <service class="Magestore\InventorySuccess\Api\Warehouse\WarehouseRepositoryInterface" method="create"/>
+        <resources>
+            <resource ref="Magestore_InventorySuccess::api_create_warehouse"/>
+        </resources>
+    </route>
+
+    <route url="/V1/inventory/warehouses/:code" method="PUT">
+        <service class="Magestore\InventorySuccess\Api\Warehouse\WarehouseRepositoryInterface" method="update"/>
+        <resources>
+            <resource ref="Magestore_InventorySuccess::api_edit_warehouse"/>
+        </resources>
+    </route>
+    <!--End of Warehouse API-->
+
+    <!--Adjust Stock API-->
+    <route url="/V1/inventory/adjustStocks/:adjustStockCode" method="GET">
+        <service class="Magestore\InventorySuccess\Api\AdjustStock\AdjustStockRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Magestore_InventorySuccess::api_view_adjust_stock"/>
+        </resources>
+    </route>
+
+    <route url="/V1/inventory/adjustStocks" method="POST">
+        <service class="Magestore\InventorySuccess\Api\AdjustStock\AdjustStockRepositoryInterface" method="createAdjustStock"/>
+        <resources>
+            <resource ref="Magestore_InventorySuccess::api_create_adjust_stock"/>
+        </resources>
+    </route>
+    <!--End of Adjust Stock API-->
+</routes>

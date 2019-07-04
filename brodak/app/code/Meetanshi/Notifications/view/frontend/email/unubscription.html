@@ -1,0 +1,7 @@
+<!--@subject User Unsubscribed at {{trans "%store" store=$store.getFrontendName()}} @-->
+{{template config_path="design/email/header_template"}}
+
+<p>A subscriber has unsubscribed at {{trans "%store" store=$store.getFrontendName()}} with below details:</p>
+<p>Customer Email : {{trans "%email" email=$customermail}}</p>
+
+{{template config_path="design/email/footer_template"}}

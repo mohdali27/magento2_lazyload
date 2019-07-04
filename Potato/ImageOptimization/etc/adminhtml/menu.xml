@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Potato_ImageOptimization::menu" title="Image Optimizer by PotatoCommerce" module="Potato_ImageOptimization" sortOrder="60" parent="Magento_Backend::system" resource="Potato_ImageOptimization::menu"/>
+        <add id="Potato_ImageOptimization::po_image_grid" title="Processed Images" module="Potato_ImageOptimization" sortOrder="10" parent="Potato_ImageOptimization::menu" action="po_image/image" resource="Potato_ImageOptimization::po_image_grid"/>
+        <add id="Potato_ImageOptimization::po_image_setting" title="Settings" module="Potato_ImageOptimization" sortOrder="30" parent="Potato_ImageOptimization::menu" action="adminhtml/system_config/edit/section/potato_image_optimization" resource="Potato_ImageOptimization::po_image_setting"/>
+    </menu>
+</config>

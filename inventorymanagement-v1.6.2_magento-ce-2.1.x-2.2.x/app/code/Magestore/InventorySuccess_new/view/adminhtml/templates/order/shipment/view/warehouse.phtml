@@ -1,0 +1,24 @@
+<?php
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+?>
+<?php /** @var \Magestore\InventorySuccess\Block\Adminhtml\Order\Shipment\View\Warehouse $block */ ?>
+<div class="entry-edit form-inline">
+    <fieldset class="fieldset admin__fieldset">
+        <div class="admin__field field">
+            <label class="label admin__field-label">
+                <?php if ($block->isDropship()): ?>
+                    <span><?php echo __('This shipment has been processed from Supplier: %1', $block->getSupplierDisplay($block->isDropship())) ?></span>
+                <?php else: ?>
+                    <?php $warehouse = $block->getShipWarehouse(); ?>
+                    <span><?php echo __('This shipment has been processed from Location: %1', $block->getWarehouseDisplay($warehouse)) ?></span>
+                <?php endif ?>
+            </label>
+            <div class="admin__field-control">     
+            </div>
+        </div>
+    </fieldset>
+</div>

@@ -1,0 +1,86 @@
+<!--@subject New Quote@-->
+<!--@vars
+{"var customerName":"Customer Name",
+"var customerEmail":"Customer Email",
+"var customerPhone":"Customer Telephone",
+"var customerComment":"Comment",
+"var orderComment":"Order Comment",
+"street":"street",
+"city":"city",
+"region":"region",
+"country":"countryName",
+"postcode":"Post code or zip code ",
+"var cartgrid":"Cart Data Grid"}
+@-->
+<body style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<div style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+
+    <table cellspacing="0" cellpadding="0" border="0" height="100%" width="100%">
+    <tr>
+        <td align="center" valign="top" style="padding:20px 0 20px 0">
+            <table bgcolor="FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #E0E0E0;">
+                <tr>
+                    <td valign="top" colspan="5">
+                        <h1 style="font-size:22px; font-weight:normal; line-height:22px; margin:0 0 11px 0;">{{trans  "Hello "}} {{var customerName}},</h1>
+                    </td>
+                </tr>
+                 <tr>
+                    <td valign="top" colspan="5">
+                        {{trans  "Thank You for Your Interest in our Product(s)."}}
+                    </td>
+                </tr>
+                 <tr>
+                    <td valign="top" colspan="5">
+                        <div style="font-size:16px; font-weight:normal; margin:0 0 5px 0;">{{trans "Your Quote Request"}} #{{var quoteid}} {{trans  "is Ready. Please Click Checkout Button to Place an Order." }} </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top" colspan="5">
+                         {{depend street}}
+                       	 <div style="font-size:16px; font-weight:normal; margin:0 0 5px 0;">{{var street}}</div>
+                        {{/depend}}
+	                    {{depend city}}
+    	                	<div style="font-size:16px; font-weight:normal; margin:0 0 5px 0;">{{var city}}</div>
+                        {{/depend}}
+                    	{{depend region}}	
+                        <div style="font-size:16px; font-weight:normal; margin:0 0 5px 0;">{{var region}}</div>
+                        {{/depend}}
+                    
+                        {{depend country}}
+                            <div style="font-size:16px; font-weight:normal; margin:0 0 5px 0;">{{var country}}</div>
+                        {{/depend}}
+                        {{depend postcode}}
+                            <div style="font-size:16px; font-weight:normal; margin:0 0 5px 0;">{{var postcode}}</div>
+                        {{/depend}}
+                    </td>
+                </tr>
+
+
+                {{var cartgrid|raw}}
+                <tr>
+                    <td valign="top" colspan="5">
+                        {{depend orderComment}}
+                            <div style="font-size:16px; font-weight:normal; margin:0 0 5px 0;">{{trans "Comment :"}}  </div>
+                            <div style="font-size:16px; font-weight:normal; margin:0 0 5px 0;">{{var orderComment}} </div>
+                        {{/depend}}
+                    </td>
+                </tr>
+                 <tr>
+                    <td valign="top" colspan="5" style="text-align:center;cursor: pointer">
+                        <a href='{{config path="web/unsecure/base_url"}}emailquotepro/index/setcart/quoteid/{{var encryptquoteid}}' style="float: left;width: 100%;">
+                        <button style="background-color: #3399cc;border: 0 none; border-radius: 6px;color: #fff;cursor: pointer;font-size: 16px;height: 37px;letter-spacing: 5px;margin: auto 0;text-transform: uppercase;width: 200px;">{{trans "Checkout"}}</button>
+                      </a>
+                    </td>
+                </tr>
+                <tr>
+                	<td valign="top" colspan="5">
+                        <p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#F9F9F9; text-align:center;"><strong>{{trans "Thank you again"}}</strong></td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+</table>
+
+</div>
+</body>

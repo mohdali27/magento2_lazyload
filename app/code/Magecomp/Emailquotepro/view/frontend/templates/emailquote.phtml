@@ -1,0 +1,137 @@
+<?php
+
+$helper = \Magento\Framework\App\ObjectManager::getInstance()->get('Magecomp\Emailquotepro\Helper\Data');
+$cart = \Magento\Framework\App\ObjectManager::getInstance()->get('Magento\Checkout\Model\Session')->getQuote();
+
+if ($helper->IsActive()) : ?>
+    <?php $title = $helper->getTitle();
+    $custID = $block->getCustomerIdData();
+    $custName = $block->getCustomerNameData();
+    $custEmail = $block->getCustomerEmailData();
+    $custphone = $block->getCustomerTelephoneData(); ?>
+    <button class="checkout-types button btn-proceed-checkout btn-checkout" title="<?php echo $title; ?>" type="button"
+            onclick="showpopup();">
+    	<span>
+    		<span><?php echo $title; ?></span>
+        </span>
+    </button>
+    <div style="clear:both; height:10px;"></div>
+
+    <div class="message-success success message" id="sucessreqmessage" style="display:none;">
+        <div><?php echo __('Your Request Has Been Submitted Successfully.') ?></div>
+    </div>
+
+    <div class="message-error error message" id="errorreqmessage" style="display:none;">
+        <div><?php echo __('Something Went Wrong, Please Try Later.') ?></div>
+    </div>
+
+    <div id="mailcotentarea">
+        <div id="maincontent">
+            <div id="closesection">
+                <div onclick="closepopup();" id="closebtndiv"></div>
+            </div>
+
+            <div class="page-title">
+                <h1><?php echo $title; ?></h1>
+            </div>
+
+            <form id="quote-form" name="quote-form" method="post" class="scaffold-form">
+                <input type="hidden" id="custid" name="custid" value="<?php echo $custID; ?>"/>
+                <input type="hidden" id="quoteid" name="quoteid" value="<?php echo $cart->getEntityId(); ?>"/>
+
+
+                <div class="fieldset">
+
+                    <div class="field email required">
+                        <label for="customername" class="label"><span><?php echo __('Name') ?></span></label>
+                        <div class="control">
+                            <input type="text" id="customername" name="customername" value="<?php echo $custName; ?>"
+                                   title="<?php echo __('Name') ?>" maxlength="255" class="input-text required-entry"/>
+                        </div>
+                    </div>
+
+                    <div class="field email required">
+                        <label for="customeremail" class="label"><span><?php echo __('Email') ?></span></label>
+                        <div class="control">
+                            <input type="text" id="customeremail" name="customeremail" value="<?php echo $custEmail; ?>"
+                                   title="<?php echo __('Email') ?>" maxlength="255"
+                                   class="input-text validate-email required-entry"/>
+                        </div>
+                    </div>
+
+                    <div class="field email required">
+                        <label for="telephone" class="label"><span><?php echo __('Telephone') ?></span></label>
+                        <div class="control">
+                            <input type="text" id="telephone" name="telephone" value="<?php echo $custphone; ?>"
+                                   title="<?php echo __('Telephone') ?>" maxlength="255"
+                                   class="input-text required-entry validate-digits"/>
+                        </div>
+                    </div>
+
+                    <div class="field email required">
+                        <label for="comment" class="label"><span><?php echo __('Comment') ?></span></label>
+                        <div class="control">
+                            <textarea id="comment" name="comment" title="<?php echo __('Comment') ?>"
+                                      class="input-text required-entry"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="actions-toolbar">
+                        <div class="primary">
+                            <button class="button btn-proceed-checkout btn-checkout" title="<?php echo __('Submit') ?>"
+                                    type="button" onclick="sendquote();">
+                                <span><span><?php echo __('Submit') ?></span></span>
+                            </button>
+                            <img src="<?php echo $block->getViewFileUrl('Magecomp_Emailquotepro::images/loader.gif'); ?>"
+                                 id="waitingimage" name="waitingimage"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<?php endif; ?>
+
+<script type="text/javascript">
+
+    function showpopup() {
+        document.getElementById('mailcotentarea').style.display = 'block';
+    }
+
+    function closepopup() {
+        document.getElementById('mailcotentarea').style.display = 'none';
+    }
+
+    function sendquote() {
+        jQuery.noConflict();
+        if (jQuery('#quote-form').valid()) {
+            var formurl = '<?php echo $block->getSubmitUrl(); ?>';
+            jQuery.ajax({
+                type: "POST",
+                url: formurl,
+                data: jQuery('#quote-form').serialize(true),
+                beforeSend: function () {
+                    document.getElementById('waitingimage').style.visibility = 'visible';
+                },
+                success: function (transport) {
+                    document.getElementById('waitingimage').style.visibility = 'hidden';
+                    var response = transport;//transport.responseText;
+                    closepopup();
+                    if (response == 'success') {
+                        document.getElementById('sucessreqmessage').style.display = 'block';
+
+                    }
+                    else {
+                        document.getElementById('errorreqmessage').style.display = 'block';
+                    }
+                },
+                error: function () {
+                    document.getElementById('waitingimage').style.visibility = 'hidden';
+                    closepopup();
+                    document.getElementById('errorreqmessage').style.display = 'block';
+                }
+            });
+        }
+    }
+
+</script>

@@ -1,0 +1,55 @@
+.amfeed-category-list {
+    background: #f1f1f1;
+    border: 1px solid #e3e3e3;
+}
+
+.amfeed-category-list .amfeed-cell {
+    padding: 10px 15px;
+    vertical-align: top;
+    text-align: left;
+}
+
+.amfeed-category-list .amfeed-label-container {
+    padding-top: 15px;
+}
+
+.amfeed-category-list .amfeed-label-container .amfeed-label {
+    position: relative;
+}
+
+.amfeed-category-list .amfeed-label-container .amfeed-label:after {
+    content: '*';
+    position: absolute;
+    z-index: 1;
+    display: inline-block;
+    margin-top: 0;
+    margin-left: 10px;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1;
+    color: #e22626;
+}
+
+.amfeed-new-name {
+    width: 70%;
+}
+
+.amfeed-new-name .amfeed-input {
+    width: 100%;
+}
+
+.amfeed-exclude-categories {
+    list-style-type: none;
+}
+
+.amfeed-exclude-categories .amfeed-label {
+    color: #007bdb;
+}
+
+.amfeed-exclude-categories .amfeed-checkbox:checked ~ .amfeed-label {
+    color: #d8d8d8;
+}
+
+.amfeed-exclude-categories .amfeed-category {
+    padding: 3px 0;
+}

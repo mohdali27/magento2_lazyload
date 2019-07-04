@@ -1,0 +1,39 @@
+<?php
+$collection = $block->getLogginCustomerQuoteList();
+?>
+<table id="quote-table">
+    <tr>
+
+        <th class="td-sku">Product SKU</th>
+        <th class="td-comment">Comment</th>
+        <th class="td-total">Grand Total</th>
+        <th class="td-status">Status</th>
+    </tr>
+     <?php
+     if(count($collection) == 0){
+
+         echo __("<tr class='not-quote'> <td colspan='4'>Still you have not sent any quote to Admin</td></tr>");
+     }else {
+         ?><?php
+         foreach ($collection as $emailquote) { ?>
+             <tr>
+
+                 <td class="td-sku"><?php echo $emailquote->getProductSku(); ?></td>
+                 <td class="td-comment"><?php echo $emailquote->getComment(); ?></td>
+                 <td class="td-total"><?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency(number_format($emailquote->getGrandTotal(), 2), true, false); ?></td>
+                 <td class="td-status"><?php
+                     if ($emailquote->getStatus() == '0') {
+                         $html = '<span class="status sent" >'.__("Approved").'</span>';
+                     } elseif ($emailquote->getStatus() == '1') {
+                         $html = '<div class="status clicked" >'.__("Clicked").'</div>';
+                     } elseif ($emailquote->getStatus() == '2') {
+                         $html = '<div class="status clicked" >'.__("Clicked").'</div>';
+                     } else {
+                         $html = '<div class="status orderd" >'.__("Orderd").'</div>';
+                     }
+
+                     echo $html; ?></td>
+             </tr>
+         <?php }
+     }?>
+</table>

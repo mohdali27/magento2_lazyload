@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="lowstock_notification_email_template" label="Low Stock Notification" file="lowstock_notification.html" type="html" module="Magestore_InventorySuccess" area="adminhtml"/>
+    <template id="transferstock_create" label="Notify new transfer stock is created" file="transferstock_create.html" type="html" module="Magestore_InventorySuccess" area="adminhtml"/>
+    <template id="transferstock_delivery" label="Notify new transfer stock is created" file="transferstock_create.html" type="html" module="Magestore_InventorySuccess" area="adminhtml"/>
+    <template id="transferstock_receiving" label="Notify new receiving for a transfer stock is created" file="transferstock_receiving.html" type="html" module="Magestore_InventorySuccess" area="adminhtml"/>
+    <template id="transferstock_direct_transfer" label="Notify new direct transfer for a transfer stock is created" file="transferstock_direct_transfer.html" type="html" module="Magestore_InventorySuccess" area="adminhtml"/>
+    <template id="transferstock_create_attach_file" label="Notify new transfer stock is created" file="transferstock_create_attach_file.html" type="html" module="Magestore_InventorySuccess" area="adminhtml"/>
+    <template id="transferstock_return" label="Notify new return stock is created" file="transferstock_return.html" type="html" module="Magestore_InventorySuccess" area="adminhtml"/>
+</config>

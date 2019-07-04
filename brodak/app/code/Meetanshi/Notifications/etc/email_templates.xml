@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <template id="admin_notifications_general_order_email_template" label="New Order Notification" file="neworder.html"
+              type="html" module="Meetanshi_Notifications" area="frontend"/>
+    <template id="admin_notifications_general_order_status_email_template" label="Order Status Notification" file="orderstatus.html"
+              type="html" module="Meetanshi_Notifications" area="frontend"/>
+    <template id="admin_notifications_general_cart_email_template" label="Cart Abandoned Notification" file="cart.html"
+              type="html" module="Meetanshi_Notifications" area="frontend"/>
+    <template id="admin_notifications_general_stock_email_template" label="Product Law Stock Notification" file="stock.html"
+              type="html" module="Meetanshi_Notifications" area="frontend"/>
+    <template id="admin_notifications_general_review_email_template" label="New Review Notification" file="review.html"
+              type="html" module="Meetanshi_Notifications" area="frontend"/>
+    <template id="admin_notifications_general_registration_email_template" label="Customer Registration Notification" file="registration.html"
+              type="html" module="Meetanshi_Notifications" area="frontend"/>
+    <template id="admin_notifications_general_newsletter_email_template" label="Newsletter Subscription Notification" file="subscription.html"
+              type="html" module="Meetanshi_Notifications" area="frontend"/>
+    <template id="admin_notifications_general_unsubscription_email_template" label="Newsletter Unubscription Notification" file="unubscription.html"
+              type="html" module="Meetanshi_Notifications" area="frontend"/>
+    <template id="admin_notifications_general_wishlist_email_template" label="Wishlist Notification" file="wishlist.html"
+              type="html" module="Meetanshi_Notifications" area="frontend"/>
+</config>

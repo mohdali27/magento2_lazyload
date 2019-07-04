@@ -1,0 +1,74 @@
+<div id="warehouse_dashboard_header" class="admin__collapsible-block-wrapper fieldset-wrapper" 
+     style="display: flex; padding-bottom: 15px;">
+    <div style="width: 100%;">
+        <div style="width: 35%; float: left;">
+            <div class="admin__page-section-item-title">
+                <span class="title"><?php echo __('Last 30 days Sales') ?></span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <table class="admin__table-secondary order-account-information-table">
+                    <tbody>
+                        <tr>
+                            <th><?php echo __('Total Sales: ') ?></th>
+                            <td><b><?php echo $block->getTotalOrderQty30days() ?></b></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo __('Total Qty Ordered: ') ?></th>
+                            <td><b><?php echo $block->getTotalItemQty30days() ?></b></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo __('Total Revenue: ') ?></th>
+                            <td><b><?php echo $block->getTotalRevenue30days() ?></b></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div style="width: 35%; float: right;">
+            <div class="admin__page-section-item-title">
+                <span class="title"><?php echo __('Stock On-Hand') ?></span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <table class="admin__table-secondary order-account-information-table">
+                    <tbody>
+                        <tr>
+                            <th><?php echo __('Total Qty: ') ?></th>
+                            <td><b><?php echo $block->getSumTotalQty() ?></b></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo __('Total Qty To Ship: ') ?></th>
+                            <td><b><?php echo $block->getSumQtyToShip() ?></b></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo __('Total Available Qty: ') ?></th>
+                            <td><b><?php echo $block->getSumAvailableQty() ?></b></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="admin__collapsible-block-wrapper fieldset-wrapper" style="display: flex; margin-top: 15px; padding-bottom: 15px;">
+    <div id="sales_chart_container" style="min-width: 300px; width: 47% ;height: 400px; margin: 0 auto; float:left"></div>
+    <div id="best_seller_container" style="min-width: 300px; width: 47% ; height: 400px; margin: 0 auto; float:right"></div>
+</div>
+<div style="display: flex; margin-top: 15px">
+    <div id="stock_on_hand_container" style="min-width: 300px; width: 100% ;height: 400px; margin: 0 auto; float:left"></div>
+</div>
+<?php
+    echo $block->getChartHtml(
+        'Magestore\InventorySuccess\Block\Adminhtml\Warehouse\Edit\Tab\Dashboard\StockOnHand',
+        'warehouse.stock.onhand'
+    );
+
+    echo $block->getChartHtml(
+        'Magestore\InventorySuccess\Block\Adminhtml\Warehouse\Edit\Tab\Dashboard\BestSeller',
+        'warehouse.best.seller'
+    );
+
+    echo $block->getChartHtml(
+        'Magestore\InventorySuccess\Block\Adminhtml\Warehouse\Edit\Tab\Dashboard\Sales',
+        'warehouse.sales.chart'
+    );
+?>

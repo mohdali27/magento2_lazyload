@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magecomp" translate="label" sortOrder="100">
+            <label>
+                <![CDATA[<img src="https://www.magecomp.com/media/images/magecomp--extension.png" alt="MAGECOMP" height="25" style="vertical-align:middle;"/>]]></label>
+        </tab>
+        <section id="emailquote" sortOrder="150" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Email Quote Pro</label>
+            <tab>magecomp</tab>
+            <resource>Magecomp_Emailquotepro::config_emailquote</resource>
+            <group id="general" translate="label" sortOrder="10" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Configuration</label>
+                <field id="enable" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Email Quote Pro</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="heading" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Email Quote Label</label>
+                    <comment>Label of button for customers to request quotes</comment>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+                <field id="adminmailreceiver" translate="label" sortOrder="30" type="text" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email ID of Admin</label>
+                    <comment>Email ID on which you want to receive quotes</comment>
+                    <validate>required-entry validate-email</validate>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+                <field id="adminemailtemplate" translate="label" sortOrder="40" type="select" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Admin Email Template</label>
+                    <comment>Template for Email which Admin Receives</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+                <field id="customerFeedbacktemplate" translate="label" sortOrder="50" type="select" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Customer Email Template</label>
+                    <comment>Thank you Template for which Customer will Receives</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+                <field id="adminemailsender" translate="label" sortOrder="60" type="select" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="adminsettings" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Email Quote For Admin Configuration</label>
+                <field id="enable" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Email Quote</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="customertemplate" translate="label" sortOrder="20" type="select" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Customer Email Template</label>
+                    <comment>Template for Email which customers receive</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="*/adminsettings/enable">1</field>
+                    </depends>
+                </field>
+                <field id="customeremailsender" translate="label" sortOrder="30" type="select" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    <depends>
+                        <field id="*/adminsettings/enable">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="pdfconfig" translate="label" sortOrder="30" type="text" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>PDF Attachement Configuration</label>
+                <field id="enable" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Email Quote PDF</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="pdffootertext" translate="label" sortOrder="50" type="text" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>PDF Footer Text</label>
+                    <comment>Footer Text In PDF</comment>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="*/pdfconfig/enable">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

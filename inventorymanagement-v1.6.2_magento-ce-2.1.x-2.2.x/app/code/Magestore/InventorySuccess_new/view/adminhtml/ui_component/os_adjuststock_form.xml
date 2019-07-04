@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">os_adjuststock_form.os_adjuststock_form_data_source
+            </item>
+            <item name="deps" xsi:type="string">os_adjuststock_form.os_adjuststock_form_data_source</item>
+            <item name="namespace" xsi:type="string">os_adjuststock_form</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Magestore\InventorySuccess\Block\Adminhtml\AdjustStock\Edit\Button\Back</item>
+            <item name="start" xsi:type="string">Magestore\InventorySuccess\Block\Adminhtml\AdjustStock\Edit\Button\Save</item>
+            <item name="adjust" xsi:type="string">Magestore\InventorySuccess\Block\Adminhtml\AdjustStock\Edit\Button\Adjust</item>
+        </item>
+        <item name="config" xsi:type="array">
+            <item name="component" xsi:type="string">Magestore_InventorySuccess/js/adjuststock/adjust-products</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="childrenFromMeta" xsi:type="boolean">true</item>
+    </argument>
+    <dataSource name="os_adjuststock_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\AdjustStock\Form\AdjustStock</argument>
+            <argument name="name" xsi:type="string">os_adjuststock_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="*/*/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magestore_InventorySuccess/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+</form>

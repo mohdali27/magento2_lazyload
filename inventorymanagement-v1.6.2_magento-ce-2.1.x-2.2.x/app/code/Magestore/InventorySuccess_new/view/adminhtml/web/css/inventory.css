@@ -1,0 +1,71 @@
+/*
+ * Copyright © 2016 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+    /* S: General */
+    .clear{clear:both}
+    .hide{display: none;}
+    .text-center{text-align: center}
+    .text-left{text-align: left}
+    .text-right{text-align: right}
+/* E: General */
+
+/* S: Panel */
+    .os_panel{
+        border: 1px #ccc solid;
+        margin: 10px;
+        border-radius: 10px;
+    }
+
+    .os_panel .header{
+        border-bottom: 1px #ccc solid;
+        padding: 10px;
+        background: #373330;
+        color: #fff;
+        border-radius: 10px 10px 0px 0px;
+    }
+
+    .os_panel .content{
+        list-style: none;
+        margin: 10px;
+    }
+
+    .os_panel .content .item{
+        padding: 10px 30px;
+        text-align: left;
+    }
+
+    .os_panel .header label{
+        line-height: 32px;
+    }
+
+    .os_panel .content .item label,
+    .os_panel .header label{
+        font-weight: 600;
+    }
+
+    .mage-error {
+        color: red;
+    }
+
+    .inventorysuccess-stocktaking-edit .steps-wizard  {
+        width: 45%;
+        float: left;
+        margin-left: -32px;
+    }
+
+    .inventorysuccess-stocktaking-edit .steps-wizard .steps-wizard-navigation {
+         border-bottom: none;
+         border-top: none;
+         margin: 0;
+         padding: 0;
+    }
+    .inventorysuccess-stocktaking-edit .page-content .page-main-actions .page-actions {
+        margin-top: 10px;
+    }
+    .import-product .admin__field-control{
+        margin-top: 5px;
+    }
+
+/* E: Panel */

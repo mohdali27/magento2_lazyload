@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magestore" translate="label" sortOrder="100">
+            <label>magestore</label>
+        </tab>
+        <section id="inventorysuccess" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Inventory Management Configuration</label>
+            <tab>magestore</tab>
+            <resource>Magestore_InventorySuccess::configuration</resource>
+            <group id="stock_control" translate="label" sortOrder="1" type="text" showInDefault="1" showInWebsite="0">
+                <label>Stock Control Configuration</label>
+                <field id="link_warehouse_store_view" translate="label comment" sortOrder="1" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link stocks in Location to Front Store View</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>
+                        <![CDATA[
+                            Yes: that means you can link the stocks in a location to a front store view.<br/>
+                            No: that means all stocks will be shown in front store view.
+                        ]]>
+                    </comment>
+                </field>                
+                <field id="adjust_stock_change" translate="label comment" sortOrder="10" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Adjust Stock by entering the change qty</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>
+                        <![CDATA[
+                            Yes: that means you can enter the change qty of products while making stock adjustment <br/>
+                            No: that means you must enter the correct qty of products while making stock adjustment
+                        ]]>
+                    </comment>
+                </field>
+                <field id="duplicate_stock_data" translate="label comment" sortOrder="20" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Duplicate stock of product when duplicate location</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>
+                        <![CDATA[
+                            Yes: that means stock of product will be duplicated when you duplicate location <br/>
+                            No: that means stock of product will NOT be duplicated when you duplicate location
+                        ]]>
+                    </comment>
+                </field>
+            </group>
+            <group id="interface" translate="label" sortOrder="2" type="text" showInDefault="1" showInWebsite="0">
+                <label>View Configuration</label>
+                <field id="show_thumbnail_product" translate="label comment" sortOrder="1" type="select" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Show thumbnail on grid</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

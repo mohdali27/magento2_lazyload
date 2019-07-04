@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="sales_order_item_price"/>
+    <body>
+        <referenceBlock name="order_items">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magestore_InventorySuccess::order/creditmemo/create/items.phtml</argument>
+            </action>
+            <block class="Magestore\InventorySuccess\Block\Adminhtml\Order\Creditmemo\Create\Items\DefaultRenderer" as="inventorysuccess_default" template="Magestore_InventorySuccess::order/creditmemo/create/items/default.phtml"/>
+            <block class="Magestore\InventorySuccess\Block\Adminhtml\Order\Creditmemo\Create\Items\BundleRenderer" as="inventorysuccess_bundle" template="Magestore_InventorySuccess::order/creditmemo/create/items/bundle.phtml"/>
+            <block class="Magestore\InventorySuccess\Block\Adminhtml\Order\Creditmemo\Create\Items\Column\Warehouse" name="column_warehouse" template="Magestore_InventorySuccess::order/creditmemo/create/items/column/warehouse.phtml" group="column"/>
+        </referenceBlock>             
+    </body>
+</page>

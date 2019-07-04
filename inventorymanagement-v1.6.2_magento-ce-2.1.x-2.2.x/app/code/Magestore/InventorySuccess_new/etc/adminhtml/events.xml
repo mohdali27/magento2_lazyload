@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="view_block_abstract_to_html_before">
+        <observer name="staff_add_permission_view_block_abstract_to_html_before" instance="Magestore\InventorySuccess\Observer\Permission\Staff\ViewBlockAbstractToHtmlBefore" />
+    </event>
+    <event name="admin_user_save_after">
+        <observer name="staff_add_permission_admin_user_save_after" instance="Magestore\InventorySuccess\Observer\Permission\Staff\AdminUserSaveAfter" />
+    </event>
+    <!-- Integrate webpos -->
+    <event name="webpos_location_edit_form">
+        <observer name="webpos_location_edit_form" instance="Magestore\InventorySuccess\Observer\Webpos\Location\WebposLocationEditForm" />
+    </event>
+    <event name="webpos_location_save_after">
+        <observer name="webpos_location_save_after" instance="Magestore\InventorySuccess\Observer\Webpos\Location\WebposLocationSaveAfter" />
+    </event>
+    <event name="webpos_location_delete_after">
+        <observer name="webpos_location_delete_after" instance="Magestore\InventorySuccess\Observer\Webpos\Location\WebposLocationDeleteAfter" />
+    </event>
+    <event name="inventorysuccess_warehouse_edit_form">
+        <observer name="inventorysuccess_warehouse_edit_form" instance="Magestore\InventorySuccess\Observer\Webpos\Location\InventorysuccessWarehouseEditForm" />
+    </event>
+    <event name="inventorysuccess_warehouse_save_after">
+        <observer name="inventorysuccess_warehouse_save_after" instance="Magestore\InventorySuccess\Observer\Webpos\Location\InventorysuccessWarehouseSaveAfter" />
+    </event>
+    <!-- End Integrate webpos -->
+    <!-- event after login success, check rule to notification -->
+    <event name="backend_auth_user_login_success">
+        <observer name="inventorysuccess_lowstock_notification_check_rule" instance="Magestore\InventorySuccess\Observer\LowStockNotification\Notification" />
+    </event>
+    <event name="controller_action_predispatch_inventorysuccess_lowstocknotification_notification_notify">
+        <observer name="inventorysuccess_lowstock_notification_redirect_to_notification" instance="Magestore\InventorySuccess\Observer\LowStockNotification\Redirect" />
+    </event>
+    <event name="controller_action_postdispatch_adminhtml_import_download">
+        <observer name="inventorysuccess_download_example_import_product" instance="Magestore\InventorySuccess\Observer\Catalog\Downloadimport" />
+    </event>
+    <!--refresh secret key -->
+    <event name="controller_action_predispatch_inventorysuccess_transferstock_send_edit">
+        <observer name="inventorysuccess_predispatch_adminhtml_inventorysuccess_transferstock_send_edit" instance="Magestore\InventorySuccess\Observer\TransferStock\Predispatch" />
+    </event>
+    <event name="controller_action_predispatch_inventorysuccess_transferstock_request_edit">
+        <observer name="inventorysuccess_predispatch_adminhtml_inventorysuccess_transferstock_request_edit" instance="Magestore\InventorySuccess\Observer\TransferStock\Predispatch" />
+    </event>
+    <event name="controller_action_predispatch_inventorysuccess_transferstock_external_edit">
+        <observer name="inventorysuccess_predispatch_adminhtml_inventorysuccess_transferstock_external_edit" instance="Magestore\InventorySuccess\Observer\TransferStock\Predispatch" />
+    </event>
+
+    <event name="core_collection_abstract_load_before">
+        <observer name="inventorysuccess_collection_abstract_load_before" instance="Magestore\InventorySuccess\Observer\Sales\Order\Grid\CollectionLoadBefore" />
+    </event>
+
+    <event name="adminhtml_block_html_before">
+        <observer name="inventorysuccess_adminhtml_block_html_before" instance="Magestore\InventorySuccess\Observer\Sales\Order\View\BeforeToHtml" />
+    </event>
+</config>

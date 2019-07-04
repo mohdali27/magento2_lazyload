@@ -1,0 +1,144 @@
+//
+//  Amasty Steps Component
+//  ____________________________________________
+
+//
+//  Variables
+//  _____________________________________________
+
+@amsteps-count-of-steps: 3;
+@amsteps-active-step__color: #1e79c2;
+@amsteps-active-step__size: 30px;
+@amsteps-inactive-step__color: #c2c2c2;
+@amsteps-inactive-step__size: 20px;
+@amsteps-done-step__background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMSA0bDMuNSAzTDkgMSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+) center no-repeat;
+@amsteps-error-step__background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0uMjkzIDEuNzA3QTEgMSAwIDAgMSAxLjcwNy4yOTNMNiA0LjU4NiAxMC4yOTMuMjkzYTEgMSAwIDEgMSAxLjQxNCAxLjQxNEw3LjQxNCA2bDQuMjkzIDQuMjkzYTEgMSAwIDAgMS0xLjQxNCAxLjQxNEw2IDcuNDE0bC00LjI5MyA0LjI5M2ExIDEgMCAwIDEtMS40MTQtMS40MTRMNC41ODYgNiAuMjkzIDEuNzA3eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==) center no-repeat;
+@amsteps-error__color: #d80f33;
+@amsteps-line-between-steps__height: 2px;
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amsteps-icons-wrapper {
+        & {
+            .lib-vendor-prefix-display(flex);
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            .lib-vendor-box-align(center);
+            width: 100%;
+            margin-bottom: 5px;
+            list-style: none;
+            color: #fff;;
+            counter-reset: step;
+        }
+
+        .amsteps-icon {
+            & {
+                position: relative;
+            }
+
+            &:after {
+                content: '';
+                position: relative;
+                z-index: 2;
+                display: block;
+                .lib-css(width, @amsteps-inactive-step__size);
+                .lib-css(height, @amsteps-inactive-step__size);
+                margin: auto;
+                text-align: center;
+                .lib-css(background, @amsteps-inactive-step__color);
+                border-radius: 20px;
+                counter-increment: step;
+            }
+        }
+
+        .amsteps-icon:not(:nth-of-type(1)) {
+            &:before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                right: 50%;
+                z-index: 1;
+                display: block;
+                width: 100%;
+                .lib-css(height, @amsteps-line-between-steps__height);
+                .lib-css(background, @amsteps-inactive-step__color);
+                .lib-css(transform, translateY(-50%), 1);
+            }
+        }
+
+        .amsteps-icon.-active:after {
+            content: counter(step);
+            z-index: 3;
+            .lib-vendor-prefix-display(flex);
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            .lib-vendor-box-align(center);
+            .lib-css(width, @amsteps-active-step__size);
+            .lib-css(height, @amsteps-active-step__size);
+            font-weight: 600;
+            font-size: 14px;
+            .lib-css(background, @amsteps-active-step__color);
+        }
+
+        .amsteps-icon.-active:not(:nth-of-type(1)),
+        .amsteps-icon.-done:not(:nth-of-type(1)) {
+            &:before {
+                .lib-css(background, @amsteps-active-step__color);
+            }
+        }
+
+        .amsteps-icon.-done:after {
+            content: '';
+            z-index: 4;
+            display: block;
+            .lib-css(background, @amsteps-active-step__color @amsteps-done-step__background-image);
+            background-size: 60%;
+        }
+
+        .amsteps-icon.-error:after {
+            content: '';
+            .lib-css(background, @amsteps-error__color @amsteps-error-step__background-image);
+            background-size: 40%;
+        }
+    }
+
+    .amsteps-titles-wrapper {
+        & {
+            .lib-vendor-prefix-display(flex);
+            width: 100%;
+            margin: 0;
+            list-style: none;
+            font-weight: 600;
+            .lib-css(color, @amsteps-active-step__color);
+        }
+
+        .amsteps-title {
+            position: relative;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            .lib-css(color, @amsteps-active-step__color);
+            word-break: break-word;
+            word-wrap: break-word;
+            visibility: hidden;
+        }
+
+        .amsteps-title.-active {
+            visibility: visible;
+        }
+
+        .amsteps-title.-error {
+            .lib-css(color, @amsteps-error__color);
+        }
+    }
+
+    .amsteps-icon,
+    .amsteps-title {
+        .lib-css(width, 100% / @amsteps-count-of-steps);
+    }
+}

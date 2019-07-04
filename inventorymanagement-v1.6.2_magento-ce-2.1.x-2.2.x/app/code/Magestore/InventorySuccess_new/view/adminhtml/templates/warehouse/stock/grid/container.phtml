@@ -1,0 +1,38 @@
+<?php
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magestore\InventorySuccess\Block\Adminhtml\Warehouse\Edit\Tab\Stock $block */
+
+/** @var \Magestore\InventorySuccess\Block\Adminhtml\Warehouse\Edit\Tab\Stock\Grid $blockGrid */
+$blockGrid = $block->getBlockGrid();
+$gridJsObjectName = $blockGrid->getJsObjectName();
+$hiddenInputField = $blockGrid->getHiddenInputField();
+?>
+<button id="save_warehouse_product" style="float:right"><?php echo __('Update Stock') ?></button>
+
+<div style="float: none;clear: both;height: 10px;"></div>
+
+<?php echo $block->getGridHtml(); ?>
+<input type="hidden" name="<?php echo $hiddenInputField ?>" id="<?php echo $hiddenInputField ?>"  
+    data-form-part="category_form" value="" />
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magestore_InventorySuccess/js/warehouse/product/selected-product": {
+                "selectedProducts": <?php /* @escapeNotVerified */ echo $blockGrid->getSelectedProduct(); ?>,
+                "gridJsObjectName": <?php /* @escapeNotVerified */ echo '"' . $gridJsObjectName . '"' ?: '{}'; ?>,
+                "hiddenInputField": <?php /* @escapeNotVerified */ echo '"'.$hiddenInputField.'"' ?>,
+                "checkboxOnly": false,
+                "saveBtn": "save_warehouse_product",
+                "saveUrl": <?php /* @escapeNotVerified */ echo '"' . $blockGrid->getSaveUrl() . '"' ?: '""'; ?>
+            }
+        }
+    }
+</script>
+<!-- @todo remove when "UI components" will support such initialization -->
+<script>
+    require('mage/apply/main').apply();
+</script>

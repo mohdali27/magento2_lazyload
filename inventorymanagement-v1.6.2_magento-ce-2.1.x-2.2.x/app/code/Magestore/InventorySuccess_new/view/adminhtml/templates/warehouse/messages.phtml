@@ -1,0 +1,23 @@
+<div class="messages">
+<?php if($block->getSuccessMesssages()!=''): ?>    
+    <div class="message message-success success">
+        <div data-ui-id="messages-message-success">
+            <?php echo $block->getSuccessMesssages(); ?>
+        </div>
+    </div>
+<?php endif; ?>
+<?php if($block->getErrorMessages()!=''): ?>
+    <div class="message message-error error">
+        <div data-ui-id="messages-message-error">
+            <?php echo $block->getErrorMessages(); ?>
+        </div>
+    </div>
+<?php endif; ?>
+<?php if($block->getWarningMessages()!=''): ?>
+    <div class="message message-warning warning">
+        <div data-ui-id="messages-message-warning">
+            <?php echo $block->getWarningMessages(); ?>
+        </div>
+    </div>
+<?php endif; ?>
+</div>

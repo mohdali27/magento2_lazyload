@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Feed
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\Feed\Api\ValidProductsRepositoryInterface" type="Amasty\Feed\Model\ValidProductsRepository" />
+    <preference for="Amasty\Feed\Api\Data\ValidProductsInterface" type="Amasty\Feed\Model\ValidProducts" />
+    <preference for="Amasty\Feed\Api\CustomFieldsRepositoryInterface" type="Amasty\Feed\Model\CustomFieldsRepository" />
+    <preference for="Amasty\Feed\Api\Data\FeedInterface" type="Amasty\Feed\Model\Feed" />
+    <preference for="Amasty\Feed\Api\FeedRepositoryInterface" type="Amasty\Feed\Model\FeedRepository" />
+    <preference for="Amasty\Feed\Api\ScheduleRepositoryInterface" type="Amasty\Feed\Model\ScheduleRepository" />
+
+    <type name="Amasty\Feed\Model\Export\RowCustomizer\Composite">
+        <arguments>
+            <argument name="customizers" xsi:type="array">
+                <item name="imagesData" xsi:type="string">Amasty\Feed\Model\Export\RowCustomizer\Image</item>
+                <item name="galleryData" xsi:type="string">Amasty\Feed\Model\Export\RowCustomizer\Gallery</item>
+                <item name="categoryData" xsi:type="string">Amasty\Feed\Model\Export\RowCustomizer\Category</item>
+                <item name="urlData" xsi:type="string">Amasty\Feed\Model\Export\RowCustomizer\Url</item>
+                <item name="priceData" xsi:type="string">Amasty\Feed\Model\Export\RowCustomizer\Price</item>
+                <item name="relationData" xsi:type="string">Amasty\Feed\Model\Export\RowCustomizer\Relation</item>
+                <item name="effectiveData" xsi:type="string">Amasty\Feed\Model\Export\RowCustomizer\Effectivedate</item>
+                <item name="taxpercentsData" xsi:type="string">Amasty\Feed\Model\Export\RowCustomizer\Taxpercents</item>
+                <item name="customFieldData" xsi:type="string">Amasty\Feed\Model\Export\RowCustomizer\CustomField</item>
+                <item name="advancedData" xsi:type="string">Amasty\Feed\Model\Export\RowCustomizer\Advanced</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Feed\Model\Rule">
+        <arguments>
+            <argument name="combineFactory" xsi:type="object">Amasty\Feed\Model\Rule\Condition\CombineFactory</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Feed\Model\Rule\Condition\CombineFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">\Amasty\Feed\Model\Rule\Condition\Combine</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Feed\Model\Rule\Condition\ProductFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">\Amasty\Feed\Model\Rule\Condition\Product</argument>
+        </arguments>
+    </type>
+    <type name="\Magento\SalesRule\Setup\UpgradeData">
+        <plugin name="Amasty_Feed::SetupUpgradeData" type="Amasty\Feed\Plugin\Setup\UpgradeData" />
+    </type>
+</config>

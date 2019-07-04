@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <head>
+        <title>My Quote</title>
+		<css src="Magecomp_Emailquotepro::css/emailquote.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magecomp\Emailquotepro\Block\Account\Dashboard\Custquotelist" name="emailquote_customer"
+                   template="Magecomp_Emailquotepro::customerquote.phtml" cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>

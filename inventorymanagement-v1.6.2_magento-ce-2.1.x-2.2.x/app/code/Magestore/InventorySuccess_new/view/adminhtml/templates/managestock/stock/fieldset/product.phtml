@@ -1,0 +1,57 @@
+<?php
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magestore\InventorySuccess\Block\Adminhtml\Warehouse\Edit\Tab\Stock $block */
+
+/** @var \Magestore\InventorySuccess\Block\Adminhtml\Warehouse\Edit\Tab\Stock\Grid $blockGrid */
+
+$blockGrid = $block->getBlockGrid();
+$inforGrid = $block->getInforGrid();
+$gridJsObjectName = $blockGrid->getJsObjectName();
+$gridJsInforName = $inforGrid->getJsObjectName();
+$hiddenInputField = $blockGrid->getHiddenInputField();
+?>
+<button id="save_warehouse_product" style="float:right; min-width: 200px; min-height:30px">
+    <?php echo __('Update Stock') ?>
+</button>
+<?php echo $block->getGridHtml(); ?>
+<div id="product_infor_grid_container" class="modal-slide">
+    <div class="modal-inner-wrap">
+        <header class="modal-header">
+            <h1 class="modal-title"  id="product_infor_grid_name" data-role="subTitle">
+            </h1>
+            <button id="product_infor_grid_close" class="action-close" type="button">
+                <span><?php echo __('Close'); ?></span>
+            </button>
+        </header>
+        <div class="modal-content" data-role="content">
+            <?php echo $block->getInforHtml(); ?>
+        </div>
+    </div>
+</div>
+<div class="modals-overlay" style="z-index: 899; position: relative;"></div>
+<input type="hidden" name="selected_products" id="selected_products" data-form-part="category_form" value="" />
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magestore_InventorySuccess/js/warehouse/product/selected-product": {
+                "selectedProducts": <?php /* @escapeNotVerified */ echo $blockGrid->getSelectedProduct(); ?>,
+                "gridJsObjectName": <?php /* @escapeNotVerified */ echo '"' . $gridJsObjectName . '"' ?: '{}'; ?>,
+                "gridJsInforName": <?php /* @escapeNotVerified */ echo '"' . $gridJsInforName . '"' ?: '{}'; ?>,
+                "hiddenInputField": <?php /* @escapeNotVerified */ echo '"'.$hiddenInputField.'"' ?>,
+                "checkboxOnly": false,
+                "saveBtn": "save_warehouse_product",
+                "saveUrl": <?php /* @escapeNotVerified */ echo '"' . $blockGrid->getSaveUrl() . '"' ?: '""'; ?>,
+                "popupUrl": <?php /* @escapeNotVerified */ echo '"' . $inforGrid->getGridUrl() . '"' ?: '""'; ?>,
+                "changeWarehouseBtn": "select_warehouse_option" 
+            }
+        }
+    }
+</script>
+<!-- @todo remove when "UI components" will support such initialization -->
+<script>
+    require('mage/apply/main').apply();
+</script>

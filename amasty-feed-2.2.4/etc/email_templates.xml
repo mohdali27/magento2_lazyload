@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Feed
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Magento/Email/etc/email_templates.xsd">
+    <template id="amasty_feed_notifications_success_template" label="Amasty Succsessfull Feed Generation" file="amasty_feed_notifications_success_template.html" type="html" module="Amasty_Feed" area="frontend"/>
+    <template id="amasty_feed_notifications_unsuccess_template" label="Amasty Unsuccsessfull Feed Generation" file="amasty_feed_notifications_unsuccess_template.html" type="html" module="Amasty_Feed" area="frontend"/>
+</config>

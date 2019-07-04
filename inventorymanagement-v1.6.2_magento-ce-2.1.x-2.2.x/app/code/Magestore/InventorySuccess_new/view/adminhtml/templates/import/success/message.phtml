@@ -1,0 +1,29 @@
+<?php
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+$numberSkuInvalid = $block->getNumberSkuInvalid();
+if (!$numberSkuInvalid) {
+    $numberSkuInvalid = 0;
+}
+?>
+<?php if ($block->isHasError()) :?>
+<div class="messages">
+    <div class="message message-error message-in-rating-edit">
+        <div>
+            <b><?php /* @escapeNotVerified */echo __('Invalid data'); ?></b>
+        </div>
+        <div>
+            <?php /* @escapeNotVerified */
+            if ($numberSkuInvalid) {
+                echo __('There are %1 invalid rows. You must download', $numberSkuInvalid);
+            }
+            ?>
+            <a href="<?php echo $block->getInvalidFileCsvUrl();?>"><?php echo __('this file');?></a>
+            <?php echo __(' to modify and try to import them again.'); ?>
+        </div>
+    </div>
+</div>
+<?php endif;?>

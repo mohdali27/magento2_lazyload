@@ -1,0 +1,6 @@
+<!--@subject Low Stock Alert for {{trans "%name" name=$name}} @-->
+{{template config_path="design/email/header_template"}}
+
+<p>There are only {{trans "%stock" stock=$stock}} units available for the {{trans "%name" name=$name}}. If the stock item drops to zero, users will no longer able to purchase it. Please add the stock items as soon as possible.</p>
+
+{{template config_path="design/email/footer_template"}}

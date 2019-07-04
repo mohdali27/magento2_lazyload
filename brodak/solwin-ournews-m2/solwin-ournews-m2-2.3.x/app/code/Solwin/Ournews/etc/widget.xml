@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+Solwin Infotech
+Solwin Ournews Extension
+
+@category   Solwin
+@package    Solwin_Ournews
+@copyright  Copyright © 2006-2016 Solwin (https://www.solwininfotech.com)
+@license    https://www.solwininfotech.com/magento-extension-license/ 
+
+--> 
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="ournewswidget" class="Solwin\Ournews\Block\Widget\OurnewsWidget">
+        <label translate="true">Our News widget</label>
+        <description>Our News widget</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" visible="true" required="true" sort_order="0" >
+                <label translate="true">Title</label>
+            </parameter>
+        </parameters>
+    </widget> 
+</widgets>

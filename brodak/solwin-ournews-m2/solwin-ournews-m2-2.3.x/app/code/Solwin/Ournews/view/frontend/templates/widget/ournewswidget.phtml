@@ -1,0 +1,108 @@
+<?php
+/**
+ * Solwin Infotech
+ * Solwin Ournews Extension
+ *
+ * @category   Solwin
+ * @package    Solwin_Ournews
+ * @copyright  Copyright © 2006-2016 Solwin (https://www.solwininfotech.com)
+ * @license    https://www.solwininfotech.com/magento-extension-license/
+ */
+?>
+<?php
+$_helper = $this->helper('\Solwin\Ournews\Helper\Data');
+$enable = $_helper->getConfig('newssection/newsgroup/active');
+$newsnotfound = $_helper->getConfig('newssection/newsgroup/newsnotfound');
+if ($enable) {
+
+    $baseUrl = $this->getBaseUrlWithStoreCode();
+    $mediaPath = $this->getMediaPath();
+    $mediaUrl = $this->getBaseUrl() . 'pub/media/';
+    $imageUrl = $mediaUrl . 'solwin/ournews/news/image';
+    $defImage = $this->getDefaultImage();
+    $newsTitle = $this->getData('title');
+
+    $collection = $this->getNewsData();
+    $size = $collection->getSize();
+
+    if ($size > 0):
+        ?>
+        <div class="block block-news">
+            <div class="block-title">
+                <h2><?php echo $newsTitle; ?></h2>
+            </div>
+
+            <div class="br-side-main">
+                <ul class="br-side-inner-main">
+                    <?php foreach ($collection as $newsData): ?>
+                        <li class="br-side-item">
+                            <div class="t-item-inner">
+                                <div class="br-side-img">
+                                    <?php
+                                    $imageURL = $defImage;
+                                    $imageName = $newsData->getImage();
+                                    if ($imageName != '') {
+                                        $imagePath = $mediaPath . 'solwin/ournews/news/image' . $imageName;
+                                        if (file_exists($imagePath)) {
+                                            $imageURL = $imageUrl . $imageName;
+                                        }
+                                    }
+                                    ?>
+                                    <a title="<?php echo $newsData->getTitle(); ?>" href="<?php echo $newsData->getViewUrl(); ?>">
+                                        <img title="<?php echo $newsData->getTitle(); ?>" class="member_avatar img-resp center-b" src="<?php echo $imageURL; ?>" alt="<?php echo $newsData->getTitle(); ?>" width="190" height="190"/>
+                                    </a>
+                                </div>
+                                <div class="t-content">
+                                    <div class="t-info">
+                                        <div class="th-name">
+                                            <span>
+                                                <a href="<?php echo $newsData->getViewUrl(); ?>">
+                                                    <?php echo $newsData->getTitle(); ?>
+                                                </a>
+                                            </span>
+                                            <div class="t-bottom"></div>
+                                        </div>
+                                        <div class="th-desc">
+                                            <div class="th-desc-inner">
+                                                <?php
+                                                    $updatedDescription = $newsData->getShortdesc();
+                                                    $updatedDescription = preg_replace('/{{(.*?)}}/', '', $updatedDescription);
+                                                    if (strlen($updatedDescription) > 300) {
+                                                        echo substr($updatedDescription, 0, 300) . '...';
+                                                    } else {
+                                                        echo $updatedDescription;
+                                                    }
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+        <script>
+            require(['jquery', 'cnowlcarousel'], function () {
+                jQuery(document).ready(function () {
+                    jQuery(".br-side-inner-main").owlCarousel({
+                        items: 3,
+                        itemsDesktop: [1199, 3],
+                        itemsDesktopSmall: [979, 3],
+                        itemsTablet: [767, 2],
+                        itemsTabletSmall: [640, 2],
+                        itemsMobile: [500, 1],
+                        pagination: false,
+                        navigationText: ["<div class='lft-btn'><</div>", "<div class='rgt-btn'>></div>"],
+                        navigation: true,
+                    });
+                });
+            });
+        </script>
+    <?php else : ?>
+        <?php echo $newsnotfound; ?>
+    <?php endif; ?>
+
+<?php
+}

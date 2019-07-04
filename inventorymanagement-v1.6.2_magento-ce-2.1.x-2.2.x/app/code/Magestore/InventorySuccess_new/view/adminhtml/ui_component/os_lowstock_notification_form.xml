@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">os_lowstock_notification_form.os_lowstock_notification_form_data_source</item>
+            <item name="deps" xsi:type="string">os_lowstock_notification_form.os_lowstock_notification_form_data_source</item>
+            <item name="namespace" xsi:type="string">os_lowstock_notification_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">os_lowstock_notification_form</item>
+        </item>
+    </argument>
+    <dataSource name="os_lowstock_notification_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magestore\InventorySuccess\Ui\DataProvider\LowStockNotification\DataForm\NotificationDataProvider</argument>
+            <argument name="name" xsi:type="string">os_lowstock_notification_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">notification_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <!--<fieldset name="criteria">-->
+        <!--<argument name="data" xsi:type="array">-->
+            <!--<item name="config" xsi:type="array">-->
+                <!--<item name="label" xsi:type="string"/>-->
+                <!--<item name="collapsible" xsi:type="boolean">false</item>-->
+            <!--</item>-->
+        <!--</argument>-->
+        <!--<field name="warning_message">-->
+            <!--<argument name="data" xsi:type="array">-->
+                <!--<item name="config" xsi:type="array">-->
+                    <!--<item name="sortOrder" xsi:type="number">20</item>-->
+                    <!--<item name="formElement" xsi:type="string">input</item>-->
+                    <!--<item name="elementTmpl" xsi:type="string">Magestore_InventorySuccess/form/fieldset/label/text</item>-->
+                    <!--<item name="label" xsi:type="string" translate="true">Warning Message</item>-->
+                <!--</item>-->
+            <!--</argument>-->
+        <!--</field>-->
+        <!--<field name="created_at">-->
+            <!--<argument name="data" xsi:type="array">-->
+                <!--<item name="config" xsi:type="array">-->
+                    <!--<item name="sortOrder" xsi:type="number">30</item>-->
+                    <!--<item name="formElement" xsi:type="string">input</item>-->
+                    <!--<item name="elementTmpl" xsi:type="string">Magestore_InventorySuccess/form/fieldset/label/date</item>-->
+                    <!--<item name="label" xsi:type="string" translate="true">Created at</item>-->
+                <!--</item>-->
+            <!--</argument>-->
+        <!--</field>-->
+        <!--<field name="update_type">-->
+            <!--<argument name="data" xsi:type="array">-->
+                <!--<item name="config" xsi:type="array">-->
+                    <!--<item name="sortOrder" xsi:type="number">40</item>-->
+                    <!--<item name="formElement" xsi:type="string">input</item>-->
+                    <!--<item name="elementTmpl" xsi:type="string">Magestore_InventorySuccess/form/fieldset/label/text</item>-->
+                    <!--<item name="label" xsi:type="string" translate="true">Update Type</item>-->
+                <!--</item>-->
+            <!--</argument>-->
+        <!--</field>-->
+        <!--<field name="warehouse_name" class="Magestore\InventorySuccess\Ui\Component\Form\Field\LowStockNotification\Notification\Warehouse">-->
+            <!--<argument name="data" xsi:type="array">-->
+                <!--<item name="config" xsi:type="array">-->
+                    <!--<item name="sortOrder" xsi:type="number">50</item>-->
+                    <!--<item name="formElement" xsi:type="string">input</item>-->
+                    <!--<item name="elementTmpl" xsi:type="string">Magestore_InventorySuccess/form/fieldset/label/text</item>-->
+                    <!--<item name="label" xsi:type="string" translate="true">Warehouse Name</item>-->
+                <!--</item>-->
+            <!--</argument>-->
+        <!--</field>-->
+        <!--<field name="notifier_emails" class="Magestore\InventorySuccess\Ui\Component\Form\Field\LowStockNotification\Notification\NotifierEmails">-->
+            <!--<argument name="data" xsi:type="array">-->
+                <!--<item name="config" xsi:type="array">-->
+                    <!--<item name="sortOrder" xsi:type="number">60</item>-->
+                    <!--<item name="formElement" xsi:type="string">input</item>-->
+                    <!--<item name="elementTmpl" xsi:type="string">Magestore_InventorySuccess/form/fieldset/label/text</item>-->
+                    <!--<item name="label" xsi:type="string" translate="true">Notifier emails</item>-->
+                <!--</item>-->
+            <!--</argument>-->
+        <!--</field>-->
+        <!--<field name="lowstock_threshold">-->
+            <!--<argument name="data" xsi:type="array">-->
+                <!--<item name="config" xsi:type="array">-->
+                    <!--<item name="sortOrder" xsi:type="number">70</item>-->
+                    <!--<item name="formElement" xsi:type="string">input</item>-->
+                    <!--<item name="elementTmpl" xsi:type="string">Magestore_InventorySuccess/form/fieldset/label/text</item>-->
+                    <!--<item name="label" xsi:type="string" translate="true">Low Stock Threshold (days)</item>-->
+                <!--</item>-->
+            <!--</argument>-->
+        <!--</field>-->
+        <!--<field name="sales_period">-->
+            <!--<argument name="data" xsi:type="array">-->
+                <!--<item name="config" xsi:type="array">-->
+                    <!--<item name="sortOrder" xsi:type="number">80</item>-->
+                    <!--<item name="formElement" xsi:type="string">input</item>-->
+                    <!--<item name="elementTmpl" xsi:type="string">Magestore_InventorySuccess/form/fieldset/label/text</item>-->
+                    <!--<item name="label" xsi:type="string" translate="true">Sales Period (days)</item>-->
+                <!--</item>-->
+            <!--</argument>-->
+        <!--</field>-->
+    <!--</fieldset>-->
+</form>

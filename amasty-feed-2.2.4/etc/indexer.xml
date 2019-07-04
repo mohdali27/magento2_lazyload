@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Feed
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Indexer/etc/indexer.xsd">
+    <indexer id="amasty_feed_entity" view_id="amasty_feed_entity" class="Amasty\Feed\Model\Indexer\Feed\FeedRuleIndexer" shared_index="amasty_feed">
+        <title translate="true">Amasty Feed Rule</title>
+        <description translate="true">Indexed feed/product associations</description>
+    </indexer>
+    <indexer id="amasty_feed_product" view_id="amasty_feed_product" class="Amasty\Feed\Model\Indexer\Product\ProductFeedIndexer" shared_index="amasty_feed">
+        <title translate="true">Amasty Feed Products</title>
+        <description translate="true">Indexed product/feed association</description>
+    </indexer>
+</config>

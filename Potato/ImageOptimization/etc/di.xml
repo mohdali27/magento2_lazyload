@@ -1,0 +1,37 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Potato\ImageOptimization\Api\ImageRepositoryInterface" type="Potato\ImageOptimization\Model\ResourceModel\ImageRepository" />
+    <preference for="Potato\ImageOptimization\Api\Data\ImageInterface" type="Potato\ImageOptimization\Model\Data\Image" />
+    <preference for="Potato\ImageOptimization\Api\Data\ImageSearchResultsInterface" type="Potato\ImageOptimization\Api\SearchResults" />
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="image_listing_data_source" xsi:type="string">Potato\ImageOptimization\Model\ResourceModel\Image\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Potato\ImageOptimization\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Potato\ImageOptimization\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">po_image_optimization_log</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Potato\ImageOptimization\Logger\Handler</item>
+                <item name="debug" xsi:type="object">Magento\Framework\Logger\Handler\Debug</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="po_image_optimization_scan" xsi:type="object">Potato\ImageOptimization\Model\Command\Scan</item>
+                <item name="po_image_optimization_optimize" xsi:type="object">Potato\ImageOptimization\Model\Command\Optimize</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

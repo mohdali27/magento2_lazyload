@@ -1,0 +1,168 @@
+
+<div id="<?php /* @escapeNotVerified */ echo $block->getNameInLayout();?>"
+     class="import-product" data-modal-info="<?php /* @escapeNotVerified */ echo $block->getWidgetOptions();?>">
+    <?php if (!$block->getIsReadonly()): ?>
+        <div class="os_panel">
+            <div class="header">
+                <label><?php echo __('Instruction');?></label>
+            </div>
+            <ul class="content">
+                <li class="item">
+                    <span><?php echo __($this->getContent());?></span>
+                    <span data-role="data" data-key="form" data-type="text" class="value"></span>
+                    <div class="clear"></div>
+                </li>
+                <li class="item">
+                    <span><a href="<?php echo $block->getCsvSampleLink();?>"><?php echo __('Download'); ?></a></span>
+                </li>
+            </ul>
+        </div>
+        <div class="import-product">
+            <?php if ($block->getUseContainer()): ?>
+            <form id="import-product-form" class="admin__fieldset" action="<?php /* @escapeNotVerified */ echo $block->getImportLink() ?>" method="post" enctype="multipart/form-data">
+                <?php endif; ?>
+                <?php echo $block->getBlockHtml('formkey')?>
+                <div class="fieldset admin__field">
+                    <label for="import_product" class="admin__field-label"><span><?php /* @escapeNotVerified */ echo __('Please choose  a CSV file to import:') ?></span></label>
+                    <div class="admin__field-control">
+                        <input type="file" id="import_product_file" name="import_product" class="input-file required-entry"/>
+                    </div>
+                </div>
+                <input id="import_immediately" name="import_immediately" for="import_immediately" style="display: none;"  value="0" />
+                <?php if ($block->getUseContainer()): ?>
+            </form>
+        <?php endif; ?>
+        </div>
+
+    <?php endif; ?>
+</div>
+
+<script>
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/alert',
+        'Magento_Ui/js/modal/confirm',
+        'Magento_Ui/js/modal/modal',
+        "mage/mage",
+        "mage/validation",
+        "loadingPopup"
+    ], function($,alert,confirmation){
+        $('#import-form').modal(
+            {
+                type: 'slide',
+                modalClass: 'mage-new-video-dialog form-inline',
+                title: $.mage.__('<?php echo $this->getTitle()?>'),
+                buttons: [
+                    {
+                        text: $.mage.__('Cancel'),
+                        attr: {
+
+                        },
+
+                        /**
+                         * Default action on button click
+                         */
+                        click: function (event) {
+                            this.closeModal(event);
+                        }
+                    },
+                ],
+            }
+
+        );
+
+        var html_button = "<div class='page-actions-buttons'>"
+            + "<button id= 'cancel' class='' type='button' data-role='action'><span>Cancel</span>"
+            + "</button>"
+            + "<div class='page-actions-buttons'>"
+            + "<div id='action_modal' title='Import' class='actions-split'>"
+            + "<button id='action_default' title='Import' class='action-default primary add'>"
+            + "<span>Import</span>"
+            + "</button>"
+            + "<button title='Import' id='import-modal' class='action-toggle primary add' data-toggle='dropdown' >"
+            + "<span>Select</span>"
+            + "</button>"
+            + "<ul class='dropdown-menu' data-ui-id='products-list-add-new-product-button-dropdown-menu'>"
+            + "<li>"
+            + "<span id= 'toggle_action' title='Upload & Edit' class='item item-default'"
+            + "data-ui-id='products-list-add-new-product-button-item-simple'>Upload & Edit"
+            + "</span>"
+            + "</li>"
+            + "</ul>"
+            + "</div>"
+            + "</div>"
+            + "</div>";
+
+        $$(".page-actions")[1].innerHTML = html_button;
+        $(document).on("click","#import-modal",function(event) {
+            if (!$(event.target).is('[data-toggle=dropdown].active')) {
+                var element = document.getElementById("import-modal");
+                element.addClassName('active');
+                var element = document.getElementById("action_modal");
+                element.addClassName('active');
+            }else{
+                var element = document.getElementById("import-modal");
+                element.removeClassName('active');
+                var element = document.getElementById("action_modal");
+                element.removeClassName('active');
+            }
+        });
+
+        $(document).on("click","#action_default",function(event) {
+            document.getElementById("import_immediately").value = 1;
+            if(document.getElementById("import_immediately").value == 1) {
+                confirmation({
+                    title: '',
+                    content: 'Stock data will be updated immediately. You are sure to import? ',
+                    actions: {
+                        confirm: function () {
+                            var form = $('#import-product-form');
+                            if (form.validation() && form.validation('isValid')) {
+                                if ($(':input[name="import_product"]').val()) {
+                                    $('body').loadingPopup({
+                                        timeout: false
+                                    });
+                                    form.submit();
+                                }
+                                $('#import-form').modal('closeModal');
+                            }
+                        },
+                        cancel: function () {
+
+                        },
+                        always: function () {
+
+                        }
+                    }
+                });
+            }
+        });
+
+        $(document).on("click","#import-modal",function(event) {
+            document.getElementById("import_immediately").value = 0;
+        });
+
+
+        $(document).on("click","#toggle_action",function(event) {
+            if(document.getElementById("import_immediately").value == 0){
+                var form = $('#import-product-form');
+                if (form.validation() && form.validation('isValid')) {
+                    if ($(':input[name="import_product"]').val()) {
+                        $('body').loadingPopup({
+                            timeout: false
+                        });
+                        form.submit();
+                    }
+                    $('#import-form').modal('closeModal');
+                }
+            }
+        });
+
+        $(document).on("click","#cancel",function(event) {
+            $('#import-form').modal('closeModal');
+        });
+
+    });
+
+
+</script>

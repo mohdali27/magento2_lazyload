@@ -1,0 +1,45 @@
+<?php
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magestore\InventorySuccess\Block\Adminhtml\Warehouse\Edit\Tab\Stock $block */
+
+/** @var \Magestore\InventorySuccess\Block\Adminhtml\Warehouse\Edit\Tab\Stock\Grid $blockGrid */
+$blockGrid = $block->getBlockGrid();
+$gridJsObjectName = $blockGrid->getJsObjectName();
+$hiddenInputField = $blockGrid->getHiddenInputField();
+?>
+<div class="page-main-actions">
+    <div class="page-actions">
+        <div class="page-actions-buttons">
+            <button class="action-secondary" type="button" data-role="action" id="delete-product-button">
+                <span><?php echo __('Delete Product'); ?></span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<?php echo $block->getGridHtml(); ?>
+<input type="hidden" name="<?php echo $hiddenInputField ?>" id="<?php echo $hiddenInputField ?>"  
+    data-form-part="category_form" value="" />
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magestore_InventorySuccess/js/warehouse/product/selected-product": {
+                "selectedProducts": <?php /* @escapeNotVerified */ echo $blockGrid->getSelectedProduct(); ?>,
+                "gridJsObjectName": <?php /* @escapeNotVerified */ echo '"' . $gridJsObjectName . '"' ?: '{}'; ?>,
+                "hiddenInputField": <?php /* @escapeNotVerified */ echo '"'. $hiddenInputField .'"' ?>,
+                "checkboxOnly": true,
+                "deleteProductBtn": "delete-product-button",
+                "deleteProductUrl": <?php echo '"'. $blockGrid->getDeleteProductUrl() .'"'; ?>,
+                "gridJsObjectParent": <?php echo '"'. $blockGrid->getJsObjectParent() .'"'; ?> 
+            }
+        }
+    }
+</script>
+<!-- @todo remove when "UI components" will support such initialization -->
+<script>
+    require('mage/apply/main').apply();
+</script>

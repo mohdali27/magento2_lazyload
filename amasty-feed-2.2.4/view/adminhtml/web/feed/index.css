@@ -1,0 +1,14 @@
+.col-is_active,
+.col-entity_id {
+    width: 5rem;
+}
+
+.col-filename {
+    width: 10rem;
+}
+
+.amasty-copy-on-clipboard-button.button {
+    display: block;
+    margin: 5px auto 0;
+    width: 100px;
+}

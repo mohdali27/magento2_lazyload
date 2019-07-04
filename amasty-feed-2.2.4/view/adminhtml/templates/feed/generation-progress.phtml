@@ -1,0 +1,46 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Feed
+ */
+?>
+<?php
+$countOfSteps = 3;
+?>
+
+<div class="amfeed-generation-steps">
+    <?= $block->getChildHtml('amasty_feed_generation_steps'); ?>
+</div>
+
+<div class="amfeed-progress-content" data-amfeed-js="progress-content">
+    <div class="amfeed-step-content" data-amfeed-js="progress-step-content-1">
+        <?= $block->getChildHtml('amasty_feed_generation_loader'); ?>
+    </div>
+    <div class="amfeed-step-content" data-amfeed-js="progress-step-content-2">
+        <?= $block->getChildHtml('amasty_feed_generation_progressbar'); ?>
+    </div>
+    <div class="amfeed-step-content" data-amfeed-js="progress-step-content-3">
+        <div class="amfeed-download-container">
+            <input class="amfeed-input" type="text" data-amfeed-js="download-link"/>
+            <button class="amfeed-button" data-amfeed-js="copy-link" title="<?= $block->escapeHtml(__('Copy Link')); ?>">
+                <?= $block->escapeHtml(__('Copy Link')); ?>
+            </button>
+        </div>
+
+        <div class="amfeed-generation-info">
+            <span class="amfeed-duration">
+                <?= $block->escapeHtml(__('Generation Time: ')); ?>
+                <strong data-amfeed-js="generation-duration"></strong>
+            </span>
+            <span class="amfeed-count">
+                <?= $block->escapeHtml(__('Products Count: ')); ?>
+                <strong data-amfeed-js="generation-count"></strong>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="amfeed-generation-error" data-amfeed-js="generation-error-wrapper">
+    <p class="amfeed-error" data-amfeed-js="generation-error"></p>
+</div>

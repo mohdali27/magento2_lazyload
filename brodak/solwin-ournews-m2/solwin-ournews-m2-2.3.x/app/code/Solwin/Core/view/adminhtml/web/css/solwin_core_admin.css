@@ -1,0 +1,16 @@
+.admin__menu #menu-solwin-extensions-extensions > a::before {
+    content: '' !important;
+    background: url('../images/solwin_admin_logo.png') no-repeat -10px -10px;
+    margin: 0 auto .5rem;
+    width: 22px;
+    height: 22px;
+}
+.admin__menu #menu-solwin-extensions-extensions > a:hover:before {
+    background: url('../images/solwin_admin_logo.png') no-repeat -42px -10px;
+}
+.solwin_solwin_logo {
+    background-image: url('../images/solwin-solwin-logo.png');
+    font-size: 21px;
+    background-repeat: no-repeat;
+    margin-bottom: 0;
+}

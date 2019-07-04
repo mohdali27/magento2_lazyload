@@ -1,0 +1,63 @@
+<script type="text/javascript">
+require(['prototype'], function ($) {
+    window.PO_COMPRESSOR_LAZY_LOAD_IS_ON_SCROLL = <?php echo Zend_Json::encode($this->isOnScrollLoad());?>;
+    var loadImgListFn = function(imgList){
+        imgList.each(function(el){
+            var src = el.getAttribute('data-po-cmp-src');
+            el.removeAttribute('data-po-cmp-src');
+            if (null === src) {
+                return;
+            }
+            el.src = src;
+        });
+    };
+    if (window.PO_COMPRESSOR_LAZY_LOAD_IS_ON_SCROLL) {
+        var runInScrollListener = function(){
+            var getImgListFn = function(){
+                return $$('img').filter(function(el){
+                    return el.hasAttribute('data-po-cmp-src');
+                });
+            };
+            var onResizeFn = function(){
+                var imgListToLoad = [];
+                var indexListToRemove = [];
+                getImgListFn().each(function(el, index){
+                    var elTop = el.viewportOffset().top;
+                    var elHeight = el.getBoundingClientRect().height;
+                    if ((elTop + elHeight) >= 0 && elTop <= document.viewport.getHeight()) {
+                        imgListToLoad.push(el);
+                        indexListToRemove.push(index);
+                    }
+                });
+                loadImgListFn(imgListToLoad);
+            };
+            var fn = function(){
+                onResizeFn();
+                if (getImgListFn().length === 0) {
+                    Event.stopObserving(window, 'scroll', fn);
+                }
+            };
+            Event.observe(window, 'scroll', fn);
+
+            //run on page load
+            onResizeFn();
+        };
+        Event.observe(window, 'po_compressor:lazyload_start', function(){
+            runInScrollListener();
+        });
+        Event.observe(document, 'dom:loaded', function(){
+            runInScrollListener();
+        });
+        if (document.readyState !== 'loading') {
+            runInScrollListener();
+        }
+    } else {
+        Event.observe(document, 'dom:loaded', function(e){
+            loadImgListFn($$('img'));
+        });
+        if (document.readyState !== 'loading') {
+            runInScrollListener();
+        }
+    }
+});
+</script>

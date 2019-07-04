@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Feed
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <amasty_feed>
+            <general>
+                <batch_size>500</batch_size>
+                <preview_items>10</preview_items>
+            </general>
+            <notifications>
+                <success_template>amasty_feed_notifications_success_template</success_template>
+                <unsuccess_template>amasty_feed_notifications_unsuccess_template</unsuccess_template>
+            </notifications>
+        </amasty_feed>
+    </default>
+</config>

@@ -1,0 +1,11 @@
+<!--@subject New Review Received for {{trans "%name" name=$name}} @-->
+{{template config_path="design/email/header_template"}}
+
+<p>A new review has been submitted for the <a href="{{trans "%url" url=$url}}" target="_blank">{{trans "%name" name=$name}}</a> with below details:</p>
+
+<p>Customer Name : {{trans "%nickname" nickname=$nickname}}</p>
+<p>Review Title : {{trans "%title" title=$title}}</p>
+<p>Review Summary : {{trans "%detail" detail=$detail}}</p>
+
+
+{{template config_path="design/email/footer_template"}}

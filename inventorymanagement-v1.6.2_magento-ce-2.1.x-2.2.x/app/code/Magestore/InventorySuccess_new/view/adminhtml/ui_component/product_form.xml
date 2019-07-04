@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">   
+    <modal name="advanced_inventory_modal">       
+        <fieldset name="warehouse_stock">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Location Stocks</item>
+                    <item name="dataScope" xsi:type="string"/>
+                    <item name="sortOrder" xsi:type="number">0</item>
+                    <item name="collapsible" xsi:type="boolean">true</item>
+                    <item name="opened" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+            <container name="global_stock">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataScope" xsi:type="string">global_stock</item>
+                        <item name="sortOrder" xsi:type="number">0</item>
+                    </item>
+                </argument>
+                <field name="global_available_qty">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="elementTmpl" xsi:type="string">Magestore_InventorySuccess/form/element/text</item>
+                            <item name="dataScope" xsi:type="string">global_available_qty</item>
+                            <item name="label" xsi:type="string" translate="true">Available Qty</item>
+                            <item name="sortOrder" xsi:type="number">0</item>
+                            <item name="disabled" xsi:type="boolean">false</item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="global_qty_to_ship">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="elementTmpl" xsi:type="string">Magestore_InventorySuccess/dynamic-rows/cells/html</item>
+                            <item name="dataScope" xsi:type="string">global_qty_to_ship</item>
+                            <item name="label" xsi:type="string" translate="true">Qty to Ship</item>
+                            <item name="sortOrder" xsi:type="number">10</item>
+                            <item name="disabled" xsi:type="boolean">false</item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="global_total_qty">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="elementTmpl" xsi:type="string">Magestore_InventorySuccess/form/element/text</item>
+                            <item name="dataScope" xsi:type="string">global_total_qty</item>
+                            <item name="label" xsi:type="string" translate="true">Qty In Location</item>
+                            <item name="sortOrder" xsi:type="number">20</item>
+                            <item name="disabled" xsi:type="boolean">false</item>
+                        </item>
+                    </argument>
+                </field>
+            </container>
+            <container name="warehouse_stock_list">
+                <dynamicRows name="warehouse_stock_row">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataScope" xsi:type="string">warehouse_stock</item>
+                            <item name="itemTemplate" xsi:type="string">record</item>
+                            <item name="label" xsi:type="string" translate="true">Stocks Listing</item>
+                            <item name="dndConfig" xsi:type="boolean">false</item>
+                            <!--
+                            <item name="addButton" xsi:type="boolean">false</item>
+                            -->
+                            <item name="template" xsi:type="string">ui/dynamic-rows/templates/default</item>
+                        </item>
+                    </argument>
+                    <container name="record">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="isTemplate" xsi:type="boolean">true</item>
+                                <item name="is_collection" xsi:type="boolean">true</item>
+                                <item name="component" xsi:type="string">Magento_Ui/js/lib/core/collection</item>
+                            </item>
+                        </argument>
+                        <field name="warehouse_select">
+                            <argument name="data" xsi:type="array">
+                                <item name="options" xsi:type="object">Magestore\InventorySuccess\Model\Warehouse\Options</item>
+                                <item name="config" xsi:type="array">
+                                    <item name="dataType" xsi:type="string">text</item>
+                                    <item name="formElement" xsi:type="string">select</item>
+                                    <item name="dataScope" xsi:type="string">warehouse_select</item>
+                                    <item name="label" xsi:type="string" translate="true">Location</item>
+                                </item>
+                            </argument>
+                        </field>
+                        <field name="warehouse">
+                            <argument name="data" xsi:type="array">
+                                <item name="config" xsi:type="array">
+                                    <item name="dataType" xsi:type="string">text</item>
+                                    <item name="formElement" xsi:type="string">input</item>
+                                    <item name="elementTmpl" xsi:type="string">Magestore_InventorySuccess/dynamic-rows/cells/html</item>
+                                    <item name="dataScope" xsi:type="string">warehouse</item>
+                                    <item name="label" xsi:type="string" translate="true">Location</item>
+                                </item>
+                            </argument>
+                        </field>
+
+                        <field name="available_qty">
+                            <argument name="data" xsi:type="array">
+                                <item name="config" xsi:type="array">
+                                    <item name="component" xsi:type="string">Magento_CatalogInventory/js/components/qty-validator-changer</item>
+                                    <item name="dataType" xsi:type="string">text</item>
+                                    <item name="formElement" xsi:type="string">input</item>
+                                    <!--<item name="elementTmpl" xsi:type="string">ui/dynamic-rows/cells/text</item>-->
+                                    <item name="dataScope" xsi:type="string">available_qty</item>
+                                    <item name="label" xsi:type="string" translate="true">Available Qty</item>
+                                    <item name="validation" xsi:type="array">
+                                        <item name="validate-number" xsi:type="boolean">true</item>
+                                        <item name="validate-digits" xsi:type="boolean">true</item>
+                                        <item name="less-than-equals-to" xsi:type="number">99999999</item>
+                                    </item>
+                                    <item name="scopeLabel" xsi:type="string">[GLOBAL]</item>
+                                    <item name="imports" xsi:type="array">
+                                        <item name="handleChanges" xsi:type="string">${$.provider}:data.product.stock_data.is_qty_decimal</item>
+                                    </item>
+                                </item>
+                            </argument>
+                        </field>
+
+                        <field name="use_config_available_qty">
+                            <argument name="data" xsi:type="array">
+                                <item name="config" xsi:type="array">
+                                    <item name="dataScope" xsi:type="string">use_config_available_qty</item>
+                                    <item name="label" xsi:type="string" translate="true">Force edit</item>
+                                    <item name="formElement" xsi:type="string">checkbox</item>
+                                </item>
+                            </argument>
+                        </field>
+
+                        <field name="qty_to_ship">
+                            <argument name="data" xsi:type="array">
+                                <item name="config" xsi:type="array">
+                                    <item name="dataType" xsi:type="string">text</item>
+                                    <item name="formElement" xsi:type="string">input</item>
+                                    <item name="elementTmpl" xsi:type="string">ui/dynamic-rows/cells/text</item>
+                                    <item name="dataScope" xsi:type="string">qty_to_ship</item>
+                                    <item name="label" xsi:type="string" translate="true">Qty to Ship</item>
+                                </item>
+                            </argument>
+                        </field>
+
+                        <field name="total_qty">
+                            <argument name="data" xsi:type="array">
+                                <item name="config" xsi:type="array">
+                                    <item name="component" xsi:type="string">Magento_CatalogInventory/js/components/qty-validator-changer</item>
+                                    <item name="dataType" xsi:type="string">text</item>
+                                    <item name="formElement" xsi:type="string">input</item>
+                                    <item name="dataScope" xsi:type="string">total_qty</item>
+                                    <item name="label" xsi:type="string" translate="true">Qty In Location</item>
+                                    <item name="validation" xsi:type="array">
+                                        <item name="validate-number" xsi:type="boolean">true</item>
+                                        <item name="validate-digits" xsi:type="boolean">true</item>
+                                        <item name="less-than-equals-to" xsi:type="number">99999999</item>
+                                    </item>
+                                    <item name="scopeLabel" xsi:type="string">[GLOBAL]</item>
+                                    <item name="imports" xsi:type="array">
+                                        <item name="visible" xsi:type="string">${$.provider}:data.product.stock_data.manage_stock</item>
+                                        <item name="handleChanges" xsi:type="string">${$.provider}:data.product.stock_data.is_qty_decimal</item>
+                                        <item name="disabled" xsi:type="string">${$.parentName}.use_config_available_qty:checked</item>
+                                    </item>
+                                </item>
+                             </argument>
+                        </field>
+
+                        <field name="shelf_location">
+                            <argument name="data" xsi:type="array">
+                                <item name="config" xsi:type="array">
+                                    <item name="dataType" xsi:type="string">text</item>
+                                    <item name="formElement" xsi:type="string">input</item>
+                                    <item name="dataScope" xsi:type="string">shelf_location</item>
+                                    <item name="label" xsi:type="string" translate="true">Shelf Location</item>
+                                </item>
+                            </argument>
+                        </field>
+                        <field name="action_delete">
+                            <argument name="data" xsi:type="array">
+                                <item name="config" xsi:type="array">
+                                    <item name="dataType" xsi:type="string">text</item>
+                                    <item name="formElement" xsi:type="string">input</item>
+                                    <item name="component" xsi:type="string">Magestore_InventorySuccess/js/dynamic-rows/action-delete</item>
+                                    <item name="elementTmpl" xsi:type="string">Magestore_InventorySuccess/dynamic-rows/cells/action-delete</item>
+                                    <item name="dataScope" xsi:type="string"/>
+                                    <item name="label" xsi:type="string" translate="true">Remove</item>
+                                </item>
+                            </argument>
+                        </field>
+                    </container>
+                </dynamicRows>
+            </container>
+
+
+
+            <container name="warehouse_stock_list_edit">
+            <dynamicRows name="warehouse_stock_row">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataScope" xsi:type="string">warehouse_stock_edit</item>
+                    <item name="itemTemplate" xsi:type="string">record</item>
+                    <item name="label" xsi:type="string" translate="true"> Add to other Locations </item>
+                    <item name="dndConfig" xsi:type="boolean">false</item>
+                    <item name="template" xsi:type="string">ui/dynamic-rows/templates/default</item>
+                </item>
+            </argument>
+            <container name="record">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="isTemplate" xsi:type="boolean">true</item>
+                        <item name="is_collection" xsi:type="boolean">true</item>
+                        <item name="component" xsi:type="string">Magento_Ui/js/lib/core/collection</item>
+                    </item>
+                </argument>
+                <field name="warehouse_select">
+                    <argument name="data" xsi:type="array">
+                        <item name="options" xsi:type="object">Magestore\InventorySuccess\Model\Warehouse\Options</item>
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="formElement" xsi:type="string">select</item>
+                            <item name="dataScope" xsi:type="string">warehouse_select</item>
+                            <item name="label" xsi:type="string" translate="true">Location</item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="total_qty">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="component" xsi:type="string">Magento_CatalogInventory/js/components/qty-validator-changer</item>
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="dataScope" xsi:type="string">total_qty</item>
+                            <item name="label" xsi:type="string" translate="true">Qty In Location</item>
+                            <item name="validation" xsi:type="array">
+                                <item name="validate-number" xsi:type="boolean">true</item>
+                                <item name="validate-digits" xsi:type="boolean">true</item>
+                                <item name="less-than-equals-to" xsi:type="number">99999999</item>
+                            </item>
+                            <item name="scopeLabel" xsi:type="string">[GLOBAL]</item>
+                            <item name="imports" xsi:type="array">
+                                <item name="visible" xsi:type="string">${$.provider}:data.product.stock_data.manage_stock</item>
+                                <item name="handleChanges" xsi:type="string">${$.provider}:data.product.stock_data.is_qty_decimal</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+
+                <field name="use_config_available_qty">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataScope" xsi:type="string">use_config_available_qty</item>
+                            <item name="label" xsi:type="string" translate="true"></item>
+                            <item name="formElement" xsi:type="string">checkbox</item>
+                        </item>
+                    </argument>
+                </field>
+
+                <field name="shelf_location">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="dataScope" xsi:type="string">shelf_location</item>
+                            <item name="label" xsi:type="string" translate="true">Shelf Location</item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="action_delete">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="component" xsi:type="string">Magestore_InventorySuccess/js/dynamic-rows/action-delete</item>
+                            <item name="elementTmpl" xsi:type="string">Magestore_InventorySuccess/dynamic-rows/cells/action-delete</item>
+                            <item name="dataScope" xsi:type="string"/>
+                            <item name="label" xsi:type="string" translate="true">Remove</item>
+                        </item>
+                    </argument>
+                </field>
+            </container>
+            </dynamicRows>
+            </container>
+        </fieldset>
+
+        <fieldset name="stock_data">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Global Stock Configuration</item>
+                    <item name="dataScope" xsi:type="string"/>
+                    <item name="sortOrder" xsi:type="number">100</item>
+                    <item name="collapsible" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </fieldset>        
+    </modal>
+</form>
